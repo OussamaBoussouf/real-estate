@@ -1,0 +1,97 @@
+@use '../style_settings' as s;
+
+.h-100 {
+  height: 100%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+
+.d-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.d-flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.d-flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+}
+
+.d-flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.d-flex-inline {
+  display: inline-flex;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+// BUTTON
+.btn {
+  padding: 1em 1.5em;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+
+  &:active {
+    scale: 0.95;
+  }
+}
+
+.btn__primary {
+  @extend .btn;
+  background-color: s.$primary;
+  color: white;
+}
+
+.btn__secondary {
+  @extend .btn;
+  background-color: s.$secondary;
+  color: white;
+}
+
+.btn__danger {
+  @extend .btn;
+  background-color: s.$color-danger;
+  color: white;
+}
+
+.btn__success {
+  @extend .btn;
+  background-color: s.$color-success;
+  color: white;
+}
+
+.btn__warning {
+  @extend .btn;
+  background-color: s.$color-warning;
+  color: black;
+}

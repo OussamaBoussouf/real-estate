@@ -1,0 +1,50 @@
+@use '../style_settings' as *;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'ReadHatDisplay';
+  src: url('/src/assets/fonts/RedHatDisplay-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ReadHatDisplay';
+  src: url('/src/assets/fonts/RedHatDisplay-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+body {
+  font-family: 'ReadHatDisplay', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'ReadHatDisplay', sans-serif;
+  font-weight: bold;
+  color: $primary;
+}
+
+p {
+  color: $secondary;
+}
+
+a {
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: blue;
+}
