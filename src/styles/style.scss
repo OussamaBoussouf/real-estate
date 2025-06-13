@@ -2,4 +2,7 @@
 @use './style_elements';
 
 //UTILS
-@use './style_utils/utils';
+@use './style_utils';
+
+//LAYOUTS
+@use './style_layouts/header';
