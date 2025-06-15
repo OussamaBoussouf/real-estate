@@ -1,6 +1,6 @@
 interface OverlayProps {
   isVisible: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 function Overlay({ isVisible, onClick }: OverlayProps) {

@@ -1,12 +1,13 @@
-import type { ReactNode } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 
-type ButtonProps = {
-  children: ReactNode;
-  className: string;
-};
+type ButtonProps = ComponentPropsWithoutRef<'button'>;
 
-function Button({ children, className }: ButtonProps) {
-  return <button className={className}>{children}</button>;
+function Button({ children, className, type }: ButtonProps) {
+  return (
+    <button className={className} type={type}>
+      {children}
+    </button>
+  );
 }
 
 export default Button;

@@ -68,6 +68,14 @@
   text-align: left;
 }
 
+.text-danger {
+  color: $color-danger;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 //PADDING
 $p-sizes: (
   xs: $size-xs,
@@ -104,18 +112,49 @@ $m-sizes: (
   xl: $size-xl,
 );
 
+//MARGIN ALL SIDES
 @each $key, $value in $p-sizes {
   .m-#{$key} {
     margin: $value;
   }
 }
 
+//MARGIN LEFT SIDE
+@each $key, $value in $p-sizes {
+  .ms-#{$key} {
+    margin-left: $value;
+  }
+}
+
+//MARGIN RIGHT SIDE
+@each $key, $value in $p-sizes {
+  .ms-#{$key} {
+    margin-left: $value;
+  }
+}
+
+//MARGIN TOP SIDE
+@each $key, $value in $p-sizes {
+  .mt-#{$key} {
+    margin-top: $value;
+  }
+}
+
+//MARGIN BOTTOM SIDE
+@each $key, $value in $p-sizes {
+  .mb-#{$key} {
+    margin-bottom: $value;
+  }
+}
+
+//MARGIN LEFT AND RIGHT SIDE
 @each $key, $value in $m-sizes {
   .m-x-#{$key} {
     margin-inline: $value;
   }
 }
 
+//MARGIN TOP AND BOTTOM SIDE
 @each $key, $value in $m-sizes {
   .m-y-#{$key} {
     margin-block: $value;
@@ -141,16 +180,18 @@ $gap-sizes: (
 .btn {
   padding: 1em 1.5em;
   border: none;
-  cursor: pointer;
-  font-weight: bold;
 
-  &:active {
-    scale: 0.95;
+  &:hover {
+    filter: brightness(98%);
   }
 }
 
 .btn--pill {
   border-radius: 5rem;
+}
+
+.btn--rounded {
+  border-radius: 0.5rem;
 }
 
 .btn--primary {

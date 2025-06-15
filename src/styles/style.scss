@@ -4,5 +4,11 @@
 //UTILS
 @use './style_utils';
 
+//FEATURE
+@use './style_features';
+
 //LAYOUTS
 @use './style_layouts/header';
+
+//PAGES
+@use './style_pages/home';

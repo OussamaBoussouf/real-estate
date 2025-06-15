@@ -50,8 +50,10 @@ function Navbar() {
           </ul>
         </nav>
         <div className="navigation__auth-group grow-1">
-          <Button className="btn btn--pill btn--primary m-x-sm">Login</Button>
-          <Button className="btn btn--pill m-x-sm">Sign in</Button>
+          <Button className="btn btn--rounded btn--primary m-x-sm">
+            Login
+          </Button>
+          <Button className="btn btn--rounded m-x-sm">Sign in</Button>
         </div>
         {/* mobile */}
         {isMobile && (
