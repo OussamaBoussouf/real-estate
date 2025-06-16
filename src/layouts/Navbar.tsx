@@ -81,12 +81,12 @@ function Navbar() {
                 </li>
               ))}
               <li>
-                <Button className="btn btn--primary btn--pill w-100">
+                <Button className="btn btn--primary btn--rounded w-100">
                   Login
                 </Button>
               </li>
               <li>
-                <Button className="btn btn--pill w-100">Sign in</Button>
+                <Button className="btn btn--rounded w-100">Sign in</Button>
               </li>
             </ul>
             <Overlay isVisible={isOpen} onClick={handleToggle} />

@@ -2,6 +2,7 @@ import Button from '../../../shared/components/Button';
 import CustomSelect from '../../../shared/components/CustomSelect';
 import { Label } from 'radix-ui';
 import { useFormik } from 'formik';
+import api from '../../../app/axios';
 import * as Yup from 'yup';
 
 const cities = [
@@ -19,7 +20,7 @@ const type = [
 const category = [
   { value: 'apartment', label: 'Apartment' },
   { value: 'house', label: 'House' },
-  { value: 'office', label: 'Office' },
+  { value: 'condo', label: 'Condo' },
 ];
 
 function SearchForm() {
@@ -35,7 +36,7 @@ function SearchForm() {
       category: Yup.string().required('field is required'),
     }),
     onSubmit: values => {
-      console.log('Form submitted:', values);
+      console.log(values);
     },
   });
 
