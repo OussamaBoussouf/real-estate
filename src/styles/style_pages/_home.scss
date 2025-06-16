@@ -1,0 +1,59 @@
+@use '../style_settings/' as *;
+@use '../style_utils/' as *;
+
+.hero-section {
+  padding-inline: $size-lg;
+  min-height: calc(100dvh - 4rem);
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('/src/assets/hero_image.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include tablet {
+    padding-inline: $size-xxl;
+  }
+}
+
+.hero-section__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-block: $size-xl;
+
+  @include desktop {
+    flex-direction: row;
+    align-items: flex-end;
+    padding-block: 0;
+  }
+}
+
+.hero-section__text {
+  @include desktop {
+    width: 50%;
+  }
+}
+
+.hero-section__title {
+  color: white;
+  margin-bottom: 1rem;
+
+  @include tablet {
+    font-size: $size-xxl;
+  }
+}
+
+.hero-section__description {
+  color: white;
+}
+
+.hero-section__search-form {
+  width: 100%;
+  @include desktop {
+    width: 50%;
+  }
+}

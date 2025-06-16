@@ -37,6 +37,7 @@ h6 {
 
 p {
   color: $secondary;
+  line-height: 1.6rem;
 }
 
 a {
@@ -45,6 +46,19 @@ a {
   color: black;
 }
 
+a.active {
+  color: $blue;
+}
+
 a:hover {
-  color: blue;
+  color: $blue;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: 'ReadHatDisplay', sans-serif;
 }
