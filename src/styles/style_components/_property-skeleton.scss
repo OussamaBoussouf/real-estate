@@ -1,0 +1,35 @@
+.skeleton {
+  &__image {
+    aspect-ratio: 7 / 5;
+  }
+
+  &__title {
+    margin-top: .5rem;
+    height: 25px;
+    width: 80%;
+  }
+
+  &__text {
+    margin-top: .5rem;
+    height: 15px;
+    width: 50%;
+  }
+}
+
+.pulsate {
+  background: linear-gradient(-45deg, #dddddd, #f0f0f0, #dddddd, #f0f0f0);
+  background-size: 400% 400%;
+  animation: Gradient 2.25s ease infinite;
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

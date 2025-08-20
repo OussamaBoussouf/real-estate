@@ -11,4 +11,7 @@
 @use './style_layouts/header';
 
 //PAGES
-@use './style_pages/home';
+@use './style_pages';
+
+//COMPONENTS
+@use './style_components';

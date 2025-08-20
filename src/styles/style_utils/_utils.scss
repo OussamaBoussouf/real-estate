@@ -76,6 +76,13 @@
   cursor: pointer;
 }
 
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  row-gap: 4rem;
+  column-gap: 1rem;
+}
+
 //PADDING
 $p-sizes: (
   xs: $size-xs,
@@ -92,13 +99,13 @@ $p-sizes: (
 }
 
 @each $key, $value in $p-sizes {
-  .p-x-#{$key} {
+  .px-#{$key} {
     padding-inline: $value;
   }
 }
 
 @each $key, $value in $p-sizes {
-  .p-y-#{$key} {
+  .py-#{$key} {
     padding-block: $value;
   }
 }
@@ -149,14 +156,14 @@ $m-sizes: (
 
 //MARGIN LEFT AND RIGHT SIDE
 @each $key, $value in $m-sizes {
-  .m-x-#{$key} {
+  .mx-#{$key} {
     margin-inline: $value;
   }
 }
 
 //MARGIN TOP AND BOTTOM SIDE
 @each $key, $value in $m-sizes {
-  .m-y-#{$key} {
+  .my-#{$key} {
     margin-block: $value;
   }
 }

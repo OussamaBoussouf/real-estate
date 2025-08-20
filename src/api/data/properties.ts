@@ -6,6 +6,7 @@ export const properties = [
       'A spacious 2-bedroom apartment with a beautiful city view and close access to public transport.',
     price: 1200,
     type: 'Buy',
+    size: 112,
     location: {
       city: 'Kenitra',
       address: '123 Main St, Manhattan, NY',
@@ -25,6 +26,7 @@ export const properties = [
       'Perfect for a family, this 3-bedroom house offers a private backyard and garage.',
     price: 2400,
     type: 'Rent',
+    size: 150,
     location: {
       city: 'Sale',
       address: '456 Oak Dr, Sunset District, SF',
@@ -44,6 +46,7 @@ export const properties = [
       'A high-end 2-bedroom condo featuring floor-to-ceiling windows, concierge, and pool access.',
     price: 3500,
     type: 'Buy',
+    size: 210,
     location: {
       city: 'Casablanca',
       address: '789 Ocean Ave, Miami Beach, FL',
@@ -63,6 +66,7 @@ export const properties = [
       'A charming 3-bedroom townhouse in a quiet suburb with a private patio and modern kitchen.',
     price: 1800,
     type: 'Rent',
+    size: 210,
     location: {
       city: 'Rabat',
       address: '101 Elm St, Austin, TX',
@@ -82,6 +86,7 @@ export const properties = [
       'Affordable and compact studio apartment, ideal for students or singles near the university.',
     price: 850,
     type: 'Buy',
+    size: 210,
     location: {
       city: 'Rabat',
       address: '202 College St, Boston, MA',
@@ -101,6 +106,7 @@ export const properties = [
       'Elegant penthouse loft with panoramic city views, open floor plan, and premium finishes.',
     price: 4800,
     type: 'Rent',
+    size: 210,
     location: {
       city: 'Casablanca',
       address: '303 Skyline Blvd, Chicago, IL',
@@ -120,6 +126,7 @@ export const properties = [
       'Spacious beach house with private dock access, perfect for water sports and family getaways.',
     price: 4200,
     type: 'Buy',
+    size: 210,
     location: {
       city: 'Kenitra',
       address: '404 Shoreline Dr, San Diego, CA',
@@ -139,6 +146,7 @@ export const properties = [
       'Clean and efficient studio located in the heart of Silicon Valley, ideal for young professionals.',
     price: 950,
     type: 'Buy',
+    size: 210,
     location: {
       city: 'Sale',
       address: '505 Innovation Way, Palo Alto, CA',
@@ -158,6 +166,7 @@ export const properties = [
       'A cozy getaway in nature, featuring wood interiors, fireplace, and lots of natural light.',
     price: 1600,
     type: 'Rent',
+    size: 210,
     location: {
       city: 'Rabat',
       address: '606 Pine Forest Rd, Denver, CO',
@@ -177,6 +186,7 @@ export const properties = [
       'Tech-integrated smart apartment in a secure building downtown, close to all amenities.',
     price: 2100,
     type: 'Buy',
+    size: 210,
     location: {
       city: 'Kenitra',
       address: '707 Tech Ave, Seattle, WA',
