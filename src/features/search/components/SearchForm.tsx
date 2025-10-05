@@ -25,7 +25,6 @@ const category = [
 ];
 
 function SearchForm() {
-
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -45,6 +44,12 @@ function SearchForm() {
     },
   });
 
+  const handleValueChange = (obj: Record<string, string>) => {
+
+    const [name, value] = Object.entries(obj)[0];
+    formik.setFieldValue(name, value);
+  };
+
   return (
     <div className="search-form__container">
       <h2 className="search-form__title">Search Properties</h2>
@@ -52,7 +57,7 @@ function SearchForm() {
         <div className="search-form__control">
           <Label.Root htmlFor="city">City</Label.Root>
           <CustomSelect
-            setFieldValue={formik.setFieldValue}
+            onChange={handleValueChange}
             value={formik.values.city}
             name="city"
             id="city"
@@ -66,7 +71,7 @@ function SearchForm() {
         <div className="search-form__control">
           <Label.Root htmlFor="type">Type</Label.Root>
           <CustomSelect
-            setFieldValue={formik.setFieldValue}
+            onChange={handleValueChange}
             value={formik.values.type}
             name="type"
             id="type"
@@ -80,7 +85,7 @@ function SearchForm() {
         <div className="search-form__control">
           <Label.Root htmlFor="category">Category</Label.Root>
           <CustomSelect
-            setFieldValue={formik.setFieldValue}
+            onChange={handleValueChange}
             value={formik.values.category}
             name="category"
             id="category"

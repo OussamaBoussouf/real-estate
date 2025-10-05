@@ -1,0 +1,22 @@
+@use '../style_settings' as *;
+
+.toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  &__item {
+    width: 50%;
+    height: 2.5rem;
+    background-color: $secondary;
+    border-radius: 0.4rem;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+
+    &--active {
+      background-color: $blue;
+    }
+  }
+}

@@ -16,20 +16,3 @@
   }
 }
 
-.pulsate {
-  background: linear-gradient(-45deg, #dddddd, #f0f0f0, #dddddd, #f0f0f0);
-  background-size: 400% 400%;
-  animation: Gradient 2.25s ease infinite;
-}
-
-@keyframes Gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}

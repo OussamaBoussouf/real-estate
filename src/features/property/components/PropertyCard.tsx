@@ -1,4 +1,4 @@
-import { Bath, Bed} from 'lucide-react';
+import { BedDouble, MapPin, ShowerHead } from 'lucide-react';
 import FavoriteButton from './FavoriteButton';
 
 type PropertyCardProps = {
@@ -32,15 +32,24 @@ function PropertyCard({
       </div>
       <div className="property-card__content">
         <div className="property-card__header">
-          <h4>{title}</h4>
-          <p>${price}</p>
+          <p className="property-card__header-price">${price}</p>
+          <p className="property-card__header-title">{title}</p>
+          <p className="property-card__header-city">
+            {' '}
+            <MapPin size="20" color="blue" />
+            {city}
+          </p>
         </div>
         <div className="property-card__details">
-          <p>{city}</p>
           <ul>
-            <li>{bathrooms} <Bath size={22}/> </li>
-            <li>{bedrooms} <Bed size={22}/> </li>
-            <li>{size} m²</li>
+            <li>
+              {' '}
+              <ShowerHead size="20" /> {bathrooms} bath(s){' '}
+            </li>
+            <li>
+              {' '}
+              <BedDouble size="20" /> {bedrooms} bed(s)
+            </li>
           </ul>
         </div>
       </div>

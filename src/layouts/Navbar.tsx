@@ -30,8 +30,8 @@ function Navbar() {
   };
 
   return (
-    <header>
-      <div className="container navigation">
+    <header className='navigation'>
+      <div className="container navigation__wrapper">
         <div className="logo grow-1">
           <img src={logo} alt="logo" />
         </div>

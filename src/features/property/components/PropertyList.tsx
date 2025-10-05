@@ -2,16 +2,24 @@ import PropertyCard from './PropertyCard';
 import type { Property } from '../../../types/property';
 import { useProperties } from '../hooks/useProperties';
 import { useSearchParams } from 'react-router';
-import { getQueryParams } from '../../../shared/utils/utils';
 import Pagination from './Pagination';
 import { usePagination } from '../../../shared/hooks/usePagination';
-import { useMemo } from 'react';
 import { useScrollTop } from '../../../shared/hooks/useScrollTop';
 import PropertySkeleton from './PropertySkeleton';
+import NotFoundImg from '../../../assets/not_found.svg';
 
 function PropertyList() {
   const [searchParams] = useSearchParams();
-  const filter = useMemo(() => getQueryParams(searchParams), [searchParams]); // return query string as a key value pair object
+
+  const filter = {
+    type: searchParams.get('type') || '',
+    category: searchParams.getAll('category') || [],
+    city: searchParams.get('city') || '',
+    bathrooms: searchParams.get('bathrooms') || '',
+    bedrooms: searchParams.get('bedrooms') || '',
+    low_price: searchParams.get('low_price') || '',
+    high_price: searchParams.get('high_price') || '',
+  };
 
   const { currentPage, handlePageChange } = usePagination();
   const { data, isPending, isError, error } = useProperties({
@@ -27,19 +35,32 @@ function PropertyList() {
   if (isPending)
     return (
       <div className="grid-layout">
-        <PropertySkeleton />
-        <PropertySkeleton />
-        <PropertySkeleton />
-        <PropertySkeleton />
-        <PropertySkeleton />
-        <PropertySkeleton />
+        {Array(9)
+          .fill(0)
+          .map((_, index) => (
+            <PropertySkeleton key={index} />
+          ))}
       </div>
     );
 
   if (isError)
     return <span>Error : {error?.message || 'Failed to load properties'}</span>;
 
-  if (!hasProperties) return <span>No result found</span>;
+  if (!hasProperties)
+    return (
+      <div className="text-center d-flex-center h-full w-full min-h-md">
+        <div>
+          <img
+            src={NotFoundImg}
+            alt="search"
+            width="350"
+            style={{ width: '350px' }}
+          />
+          <h2 className="fs-xl mb-sm">OOPs!</h2>
+          <p className="fs-sm">We couldn't find a match</p>
+        </div>
+      </div>
+    );
 
   return (
     <>

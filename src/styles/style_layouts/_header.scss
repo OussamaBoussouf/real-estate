@@ -1,7 +1,14 @@
 @use '../style_settings' as *;
 @use '../style_utils' as *;
 
+
+
 .navigation {
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.navigation__wrapper {
   display: flex;
   align-items: center;
   height: 4rem;

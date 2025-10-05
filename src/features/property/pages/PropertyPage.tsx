@@ -1,4 +1,5 @@
 import PropertyList from '../components/PropertyList';
+import SidebarFilter from '../components/SidebarFilter';
 
 function PropertyPage() {
   return (
@@ -6,9 +7,11 @@ function PropertyPage() {
       <div className="container px-md">
         <div className="property-page__layout">
           {/* Sidebar */}
-          <div className="property-page__sidebar">Side bar</div>
+          <div className="property-page__layout-sidebar">
+            <SidebarFilter />
+          </div>
           {/* Content */}
-          <div className="property-page__main">
+          <div className="property-page__layout-main">
             <PropertyList />
           </div>
         </div>

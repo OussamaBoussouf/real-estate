@@ -92,7 +92,7 @@ export const properties = [
       address: '202 College St, Boston, MA',
     },
     propertyType: 'Studio',
-    bedrooms: 0,
+    bedrooms: 5,
     bathrooms: 1,
     images: ['studio1.jpg'],
     amenities: ['Wi-Fi', 'Furnished', 'Security System'],
