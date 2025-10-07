@@ -1,0 +1,37 @@
+@use '../style_utils/mixins' as *;
+@use '../style_settings/sizes' as *;
+
+.property-page__layout {
+
+  @include desktop {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  &-sidebar {
+    & > form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      background-color: white;
+      padding: $size-md;
+      border: 1.5px solid #e0e0e0;
+      border-radius: $size-md;
+      margin-bottom: 2rem;
+
+      @include desktop {
+        margin-bottom: 0;
+      }
+    }
+
+    @include desktop {
+      width: 25%;
+    }
+  }
+
+  &-main {
+    @include desktop {
+      width: 75%;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+.skeleton {
+  &__image {
+    aspect-ratio: 7 / 5;
+  }
+
+  &__title {
+    margin-top: .5rem;
+    height: 25px;
+    width: 80%;
+  }
+
+  &__text {
+    margin-top: .5rem;
+    height: 15px;
+    width: 50%;
+  }
+}
+

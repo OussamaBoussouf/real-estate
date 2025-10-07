@@ -11,12 +11,8 @@ type SelectItemRef = React.ElementRef<typeof Select.Item>;
 type CustomSelectProps = {
   options: { value: string; label: string }[];
   placeholder?: string;
-  setFieldValue: (
-    field: string,
-    value: React.SetStateAction<any>,
-    shouldValidate?: boolean
-  ) => Promise<any>;
   id: string;
+  onChange: (arg: Record<string, string>) => void;
   name: string;
   value: string;
 };
@@ -24,14 +20,14 @@ type CustomSelectProps = {
 function CustomSelect({
   options,
   placeholder,
-  setFieldValue,
+  onChange,
   value,
   id,
   name,
   ...props
 }: CustomSelectProps) {
   const handleValueChange = (val: string) => {
-    setFieldValue(name, val);
+    onChange({[name]: val});
   };
 
   return (

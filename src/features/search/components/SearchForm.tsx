@@ -2,8 +2,9 @@ import Button from '../../../shared/components/Button';
 import CustomSelect from '../../../shared/components/CustomSelect';
 import { Label } from 'radix-ui';
 import { useFormik } from 'formik';
-import api from '../../../app/axios';
 import * as Yup from 'yup';
+import { createQueryParams } from '../../../shared/utils/utils';
+import { useNavigate } from 'react-router';
 
 const cities = [
   { value: 'kenitra', label: 'Kenitra' },
@@ -24,6 +25,8 @@ const category = [
 ];
 
 function SearchForm() {
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       city: '',
@@ -36,9 +39,16 @@ function SearchForm() {
       category: Yup.string().required('field is required'),
     }),
     onSubmit: values => {
-      console.log(values);
+      const query = createQueryParams(values);
+      navigate(`properties?${query}`);
     },
   });
+
+  const handleValueChange = (obj: Record<string, string>) => {
+
+    const [name, value] = Object.entries(obj)[0];
+    formik.setFieldValue(name, value);
+  };
 
   return (
     <div className="search-form__container">
@@ -47,7 +57,7 @@ function SearchForm() {
         <div className="search-form__control">
           <Label.Root htmlFor="city">City</Label.Root>
           <CustomSelect
-            setFieldValue={formik.setFieldValue}
+            onChange={handleValueChange}
             value={formik.values.city}
             name="city"
             id="city"
@@ -61,7 +71,7 @@ function SearchForm() {
         <div className="search-form__control">
           <Label.Root htmlFor="type">Type</Label.Root>
           <CustomSelect
-            setFieldValue={formik.setFieldValue}
+            onChange={handleValueChange}
             value={formik.values.type}
             name="type"
             id="type"
@@ -75,7 +85,7 @@ function SearchForm() {
         <div className="search-form__control">
           <Label.Root htmlFor="category">Category</Label.Root>
           <CustomSelect
-            setFieldValue={formik.setFieldValue}
+            onChange={handleValueChange}
             value={formik.values.category}
             name="category"
             id="category"

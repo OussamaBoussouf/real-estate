@@ -1,4 +1,5 @@
 @use '../style_settings' as *;
+@use '../style_utils/mixins' as *;
 
 .h-100 {
   height: 100%;
@@ -48,8 +49,15 @@
 }
 
 .container {
-  max-width: 1440px;
   margin-inline: auto;
+  
+  @include tablet {
+    max-width: 920px;
+  }
+
+  @include desktop {
+    max-width: 1440px;
+  }
 }
 
 .grow-1 {
@@ -76,6 +84,47 @@
   cursor: pointer;
 }
 
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  row-gap: 1.5rem;
+  column-gap: 1.5rem;
+}
+
+//WIDTH
+$w-sizes: (
+  xxs: 1rem,
+  xs: 1.75rem,
+  sm: 2.75rem,
+  md: 6rem,
+  lg: 8rem,
+  xl: 12rem,
+  full: 100%,
+);
+
+@each $key, $value in $w-sizes {
+  .w-#{$key} {
+    width: $value;
+  }
+}
+
+//HEIGHT
+$h-sizes: (
+  xxs: 1rem,
+  xs: 1.75rem,
+  sm: 2.75rem,
+  md: 6rem,
+  lg: 8rem,
+  xl: 12rem,
+  full: 100%,
+);
+
+@each $key, $value in $h-sizes {
+  .h-#{$key} {
+    height: $value;
+  }
+}
+
 //PADDING
 $p-sizes: (
   xs: $size-xs,
@@ -92,16 +141,47 @@ $p-sizes: (
 }
 
 @each $key, $value in $p-sizes {
-  .p-x-#{$key} {
+  .px-#{$key} {
     padding-inline: $value;
   }
 }
 
 @each $key, $value in $p-sizes {
-  .p-y-#{$key} {
+  .py-#{$key} {
     padding-block: $value;
   }
 }
+
+//MIN HEIGHT
+$min-height-sizes: (
+  xs: 10rem,
+  sm: 20rem,
+  md: 30rem,
+  lg: 40rem,
+  xl: 50rem,
+  full: 100%,
+);
+
+@each $key, $value in $min-height-sizes {
+  .min-h-#{$key} {
+    min-height: $value;
+  }
+}
+
+//FONT SIZES
+$font-sizes: (
+  xs: 1rem,
+  sm: 1.25rem,
+  md: 1.75rem,
+  lg: 2.25rem,
+  xl: 2.75rem,
+);
+
+@each $key, $value in $font-sizes {
+  .fs-#{$key} {
+    font-size: $value;
+  }
+};
 
 //MARGIN
 $m-sizes: (
@@ -149,14 +229,14 @@ $m-sizes: (
 
 //MARGIN LEFT AND RIGHT SIDE
 @each $key, $value in $m-sizes {
-  .m-x-#{$key} {
+  .mx-#{$key} {
     margin-inline: $value;
   }
 }
 
 //MARGIN TOP AND BOTTOM SIDE
 @each $key, $value in $m-sizes {
-  .m-y-#{$key} {
+  .my-#{$key} {
     margin-block: $value;
   }
 }
@@ -226,4 +306,35 @@ $gap-sizes: (
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  &-legend {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+
+.pulsate {
+  background: linear-gradient(-45deg, #dddddd, #f0f0f0, #dddddd, #f0f0f0);
+  background-size: 400% 400%;
+  animation: Gradient 2.25s ease infinite;
+}
+
 //ANIMATION
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
