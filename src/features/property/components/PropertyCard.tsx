@@ -1,5 +1,5 @@
 import { BedDouble, MapPin, ShowerHead } from 'lucide-react';
-import FavoriteButton from './FavoriteButton';
+import Badge from '../../../shared/components/Badge';
 
 type PropertyCardProps = {
   price: number;
@@ -7,20 +7,21 @@ type PropertyCardProps = {
   city: string;
   bedrooms: number;
   bathrooms: number;
-  size: number;
+  propertyType: string;
 };
 
 function PropertyCard({
   price,
   title,
   city,
-  size,
   bedrooms,
   bathrooms,
+  propertyType,
 }: PropertyCardProps) {
   return (
     <div className="property-card">
       <div className="property-card__image-wrapper">
+        <Badge> {propertyType} </Badge>
         <img
           className="property-card__image"
           width="300"
@@ -28,7 +29,6 @@ function PropertyCard({
           src="https://rockwellcustom.com/wp-content/uploads/2019/07/new-construction-homes-1024x698.jpg"
           alt="big house"
         />
-        <FavoriteButton />
       </div>
       <div className="property-card__content">
         <div className="property-card__header">

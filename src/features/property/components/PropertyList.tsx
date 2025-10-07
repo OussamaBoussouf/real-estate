@@ -74,7 +74,7 @@ function PropertyList() {
               title={propertie.title}
               bedrooms={propertie.bedrooms}
               bathrooms={propertie.bathrooms}
-              size={propertie.size}
+              propertyType={propertie.propertyType}
             />
           ))}
       </div>

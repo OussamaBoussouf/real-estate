@@ -20,7 +20,7 @@ export async function getProperties(
   }
 }
 
-export async function getPrpertyPriceRange(
+export async function getPropertyPriceRange(
   filter: Record<string, string | number | string[]>
 ): Promise<[number, number]> {
   try {

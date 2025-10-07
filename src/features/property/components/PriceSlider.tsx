@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from '../../../shared/hooks/useDebounce';
-import { getPrpertyPriceRange } from '../services/PropertyService';
+import { getPropertyPriceRange } from '../services/PropertyService';
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router';
 import CustomDoubleThumbSlider from '../../../shared/components/CustomDoubleThumbSlider';
@@ -25,7 +25,7 @@ function PriceSlider({ onChange }: PriceSliderProps) {
 
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['price-range', filter],
-    queryFn: () => getPrpertyPriceRange(filter),
+    queryFn: () => getPropertyPriceRange(filter),
   });
 
   const debouncedPrice = useDebounce(currentPrice, 500);
