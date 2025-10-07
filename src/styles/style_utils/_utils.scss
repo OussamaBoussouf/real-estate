@@ -168,6 +168,19 @@ $min-height-sizes: (
   }
 }
 
+
+//FONT WEIGHT
+$font-weights: (
+  thin: 300,
+  bold: 800,
+);
+
+@each $key, $value in $font-weights {
+  .fw-#{$key} {
+    font-weight: $value;
+  }
+};
+
 //FONT SIZES
 $font-sizes: (
   xs: 1rem,
