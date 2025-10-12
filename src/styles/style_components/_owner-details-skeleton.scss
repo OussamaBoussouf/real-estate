@@ -1,0 +1,36 @@
+@use '../style_utils/mixins' as *;
+@use '../style_settings/colors' as *;
+
+.owner-details__skeleton {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.75em;
+  border: 1px solid $border-color;
+  margin-bottom: 1.75rem;
+
+  @include desktop {
+    width: 30%;
+  }
+
+  &-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &-avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+
+  &-info {
+    width: 150px;
+    height: 30px;
+  }
+
+   &-text {
+    width: 100%;
+    height: 20px;
+  }
+}

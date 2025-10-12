@@ -14,7 +14,12 @@ export const properties = [
     propertyType: 'Apartment',
     bedrooms: 2,
     bathrooms: 1,
-    images: ['apartment1.jpg', 'apartment1-living.jpg'],
+    images: [
+      'https://plus.unsplash.com/premium_photo-1686090449192-4ab1d00cb735?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1676321688612-4451a8721435?q=80&w=807&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1684348962314-64fa628992f0?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1711464867469-b45e19a09996?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    ],
     amenities: ['Gym', 'Elevator', 'Balcony', 'Air Conditioning'],
     available: true,
     listedDate: '2025-06-01',
@@ -34,7 +39,13 @@ export const properties = [
     propertyType: 'House',
     bedrooms: 3,
     bathrooms: 2,
-    images: ['house1.jpg', 'house1-garden.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870',
+      'https://images.unsplash.com/photo-1593696140826-c58b021acf8b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870',
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1475',
+      'https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870'
+
+    ],
     amenities: ['Garage', 'Backyard', 'Fireplace', 'Washer/Dryer'],
     available: true,
     listedDate: '2025-06-10',

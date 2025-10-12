@@ -42,7 +42,7 @@ adapter.onGet('/properties').reply(config => {
     });
   }
 
-   if (bathrooms) {
+  if (bathrooms) {
     filteredProperties = filteredProperties.filter(properties => {
       if (bathrooms === '3') {
         return properties.bathrooms >= 3;
@@ -130,4 +130,16 @@ adapter.onGet('/properties/price-range').reply(config => {
   if (minPrice === Infinity) minPrice = 0;
 
   return [200, [minPrice, maxPrice]];
+});
+
+adapter.onGet(/\/properties\/\d+/).reply(config => {
+  const id = config.url?.split('/')[2];
+
+  const property = properties.find(prop => prop.id === id);
+
+  if (!property) {
+    return [404, { message: 'Property not found' }];
+  }
+
+  return [200, property];
 });

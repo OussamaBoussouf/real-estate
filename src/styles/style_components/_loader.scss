@@ -1,0 +1,14 @@
+@use '../style_settings/sizes' as *;
+
+.loader {
+    width: 100%;
+}
+
+.loader--centered {
+    display: grid;
+    place-content: center;
+}
+
+.loader--fullscreen {
+      height: calc(100vh - $navbar-height);
+}

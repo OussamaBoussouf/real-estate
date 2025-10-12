@@ -20,6 +20,17 @@ export async function getProperties(
   }
 }
 
+export async function getPropertyById(id: string): Promise<any> {
+  try {
+    const { data } = await api.get(`/properties/${id}`);
+    return data;
+  } catch (error) {
+    throw new Error(
+      (error as AxiosError).message || 'Failed to fetch properties'
+    );
+  }
+}
+
 export async function getPropertyPriceRange(
   filter: Record<string, string | number | string[]>
 ): Promise<[number, number]> {
