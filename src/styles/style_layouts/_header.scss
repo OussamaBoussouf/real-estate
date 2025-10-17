@@ -11,13 +11,14 @@
 .navigation__wrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 4rem;
   padding: $size-md;
   position: relative;
 }
 
 .logo {
-  z-index: 15;
+  font-size: 1.75rem;
 }
 
 .navigation__links {

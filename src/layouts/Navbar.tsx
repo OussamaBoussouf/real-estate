@@ -30,12 +30,13 @@ function Navbar() {
   };
 
   return (
-    <header className='navigation'>
+    <header className="navigation">
       <div className="container navigation__wrapper">
-        <div className="logo grow-1">
-          <img src={logo} alt="logo" />
+        <div className="logo">
+          {/* <img src={logo} alt="logo" /> */}
+          <NavLink to="/">DOORZA</NavLink>
         </div>
-        <nav className="grow-1">
+        {/* <nav className="grow-1">
           <ul className="navigation__links">
             {links.map((link, i) => (
               <li key={i}>
@@ -48,12 +49,14 @@ function Navbar() {
               </li>
             ))}
           </ul>
-        </nav>
-        <div className="navigation__auth-group grow-1">
+        </nav> */}
+        <div className="navigation__auth-group">
           <Button className="btn btn--rounded btn--primary mx-sm">
-            Login
+            Log in
           </Button>
-          <Button className="btn btn--rounded mx-sm">Sign in</Button>
+          <Button className="btn btn--rounded btn--secondary mx-sm">
+            Sign up
+          </Button>
         </div>
         {/* mobile */}
         {isMobile && (
