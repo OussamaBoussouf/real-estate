@@ -50,7 +50,7 @@
 
 .container {
   margin-inline: auto;
-  
+
   @include tablet {
     max-width: 920px;
   }
@@ -168,7 +168,6 @@ $min-height-sizes: (
   }
 }
 
-
 //FONT WEIGHT
 $font-weights: (
   thin: 300,
@@ -179,10 +178,11 @@ $font-weights: (
   .fw-#{$key} {
     font-weight: $value;
   }
-};
+}
 
 //FONT SIZES
 $font-sizes: (
+  xxs: 0.875rem,
   xs: 1rem,
   sm: 1.25rem,
   md: 1.75rem,
@@ -194,7 +194,7 @@ $font-sizes: (
   .fs-#{$key} {
     font-size: $value;
   }
-};
+}
 
 //MARGIN
 $m-sizes: (
@@ -271,11 +271,12 @@ $gap-sizes: (
 
 //BUTTON
 .btn {
-  padding: 1em 1.5em;
+  padding: .85em 1.75em;
   border: none;
+  font-weight: bold;
 
   &:hover {
-    filter: brightness(98%);
+    filter: brightness(95%);  
   }
 }
 
@@ -284,17 +285,22 @@ $gap-sizes: (
 }
 
 .btn--rounded {
-  border-radius: 0.5rem;
+  border-radius: 0.625rem;
 }
 
 .btn--primary {
-  background-color: $blue;
+  background-color: $primary;
   color: white;
 }
 
 .btn--secondary {
-  background-color: $secondary;
-  color: white;
+  background-color: transparent;
+  border: 1.75px solid $border-color;
+  color: black;
+
+  &:hover {
+    background-color: $border-color;  
+  }
 }
 
 .btn--danger {
@@ -316,7 +322,7 @@ $gap-sizes: (
   position: fixed;
   z-index: 5;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .fieldset {
@@ -330,7 +336,6 @@ $gap-sizes: (
     margin-bottom: 1rem;
   }
 }
-
 
 .pulsate {
   background: linear-gradient(-45deg, #dddddd, #f0f0f0, #dddddd, #f0f0f0);

@@ -8,6 +8,7 @@ import PropertyDetails from '../components/PropertyDetails';
 import PropertyDetailsSkeleton from '../components/PropertyDetailsSkeleton';
 import OwnerDetailsSkeleton from '../components/OwnerDetailsSkeleton';
 
+
 function SinglePropertyPage() {
   const { id } = useParams();
 
@@ -15,7 +16,6 @@ function SinglePropertyPage() {
     queryKey: ['property'],
     queryFn: () => getPropertyById(id as string),
   });
-
 
   if (isError) return <div>Error: {(error as Error).message}</div>;
 
