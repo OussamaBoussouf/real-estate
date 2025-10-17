@@ -1,4 +1,10 @@
-@forward './property-card.scss';
-@forward './pagination.scss';
+@forward './property-card';
+@forward './pagination';
 @forward './price-slider';
 @forward './property-skeleton';
+@forward './property-image-gallery';
+@forward './property-image-gallery-skeleton';
+@forward './property-details-skeleton';
+@forward './owner-details-skeleton';
+@forward './modal';
+@forward './loader';

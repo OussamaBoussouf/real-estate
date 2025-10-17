@@ -3,6 +3,7 @@ import RootLayout from '../layouts/RootLayout';
 
 import { Homepage, AboutPage, ContactPage} from '../pages';
 import PropertyPage from '../features/property/pages/PropertyPage';
+import SinglePropertyPage from '../features/property/pages/SinglePropertyPage';
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +14,7 @@ export const router = createBrowserRouter([
       { path: '/about', Component: AboutPage },
       { path: '/contact', Component: ContactPage },
       { path: '/properties', Component: PropertyPage },
+      { path: '/properties/:id', Component: SinglePropertyPage }
     ],
   },
 ]);

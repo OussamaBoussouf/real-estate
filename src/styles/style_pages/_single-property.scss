@@ -1,0 +1,130 @@
+@use '../style_utils/mixins' as *;
+@use '../style_settings/colors' as *;
+
+.details {
+  @include desktop {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+.property-details {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.75em;
+  border: 1px solid $border-color;
+  margin-bottom: 1.75rem;
+
+  @include desktop {
+    width: 70%;
+    margin-bottom: 0;
+  }
+
+  &__address {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $secondary;
+    font-size: 1rem;
+  }
+
+  &__meta-info {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+
+    & > li {
+      position: relative;
+    }
+
+    & > li:not(:first-child)::before {
+      content: "●";
+      display: block;
+      position: absolute;
+      left: -1rem;
+      
+    }
+  }
+
+  &__location-price {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @include tablet {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__amenities {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    row-gap: 1.5rem;
+    column-gap: 1.5rem;
+
+    & > li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    &-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background-color: #f2f4f5;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.owner-details {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.75em;
+  border: 1px solid $border-color;
+
+  @include desktop {
+    width: 30%;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__avatar {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__contact {
+    & > li {
+      padding-block: 1em;
+      border-bottom: 1px solid $border-color;
+    }
+
+    & > li:first-child {
+      border-top: 1px solid $border-color;
+    }
+
+    &-phone,
+    &-email {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
