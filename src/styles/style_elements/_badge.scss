@@ -1,11 +1,26 @@
+@use '../style_settings/colors' as *;
+
 .badge{
-    background-color: #2b7fff;
     color: white;
     padding: 0.25rem 0.5rem;
     border-radius: 0.5rem;
     position: absolute;
     font-weight: bold;
-    font-size: .9rem;
     top: 1rem;
     right: 1rem;
+}
+
+.badge--primary {
+    background-color: $primary;
+}
+
+.badge--success {
+    background-color: $color-success;
+}
+.badge--danger {
+    background-color: $color-danger;
+}
+
+.badge--warning {
+    background-color: $color-warning;
 }

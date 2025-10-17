@@ -1,4 +1,5 @@
 @use '../style_settings' as *;
+@use '../style_settings/colors' as *;
 
 * {
   padding: 0;
@@ -57,9 +58,13 @@ a {
   color: black;
 }
 
-
 ul {
-   list-style: none;
+  list-style: none;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  accent-color: $primary;
 }
 
 button {
