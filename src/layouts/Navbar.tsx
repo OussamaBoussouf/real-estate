@@ -36,20 +36,6 @@ function Navbar() {
           {/* <img src={logo} alt="logo" /> */}
           <NavLink to="/">DOORZA</NavLink>
         </div>
-        {/* <nav className="grow-1">
-          <ul className="navigation__links">
-            {links.map((link, i) => (
-              <li key={i}>
-                <NavLink
-                  to={link.path}
-                  className={({ isActive }) => (isActive ? 'active' : '')}
-                >
-                  {link.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav> */}
         <div className="navigation__auth-group">
           <Button className="btn btn--rounded btn--primary mx-sm">
             Log in
