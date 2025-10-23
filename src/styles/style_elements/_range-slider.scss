@@ -1,3 +1,5 @@
+@use '../style_settings/colors' as *;
+
 .slider {
 	position: relative;
 	display: flex;
@@ -18,7 +20,7 @@
 
 .slider__range {
 	position: absolute;
-	background-color: blue;
+	background-color: $primary;
 	border-radius: 9999px;
 	height: 100%;
 }

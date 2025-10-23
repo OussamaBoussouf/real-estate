@@ -1,4 +1,5 @@
 @use '../style_settings' as *;
+@use '../style_settings/colors' as *;
 
 * {
   padding: 0;
@@ -7,21 +8,31 @@
 }
 
 @font-face {
-  font-family: 'ReadHatDisplay';
-  src: url('/src/assets/fonts/RedHatDisplay-Regular.ttf');
-  font-weight: normal;
+  font-family: 'Poppins';
+  src: url('/src/assets/fonts/Poppins-Light.ttf');
+  font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'ReadHatDisplay';
-  src: url('/src/assets/fonts/RedHatDisplay-Bold.ttf');
+  font-family: 'Poppins';
+  src: url('/src/assets/fonts/Poppins-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/src/assets/fonts/Poppins-Bold.ttf');
   font-weight: bold;
   font-style: normal;
+  font-display: swap;
 }
 
 body {
-  font-family: 'ReadHatDisplay', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: #f7f7f7;
 }
 
@@ -31,7 +42,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'ReadHatDisplay', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: bold;
   color: $primary;
 }
@@ -47,19 +58,16 @@ a {
   color: black;
 }
 
-a.active {
-  color: $blue;
-}
-
-a:hover {
-  color: $blue;
-}
-
 ul {
   list-style: none;
 }
 
+input[type='checkbox'],
+input[type='radio'] {
+  accent-color: $primary;
+}
+
 button {
   cursor: pointer;
-  font-family: 'ReadHatDisplay', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }

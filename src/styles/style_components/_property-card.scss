@@ -2,7 +2,7 @@
 @use '../style_settings/colors' as *;
 
 .property-card {
-  border-radius: $size-md;
+  border-radius: $size-sm;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   overflow: hidden;
 }

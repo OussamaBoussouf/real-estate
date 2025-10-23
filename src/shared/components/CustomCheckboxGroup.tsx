@@ -3,14 +3,12 @@ import { capitalizeWord } from '../utils/utils';
 
 type CustomCheckboxGroupProps = {
   checkboxValues: string[];
-  legend: string;
   name: string;
   values: string[];
   onChange: (val: Record<string, any>) => void;
 };
 
 function CustomCheckboxGroup({
-  legend,
   checkboxValues,
   values = [],
   name,

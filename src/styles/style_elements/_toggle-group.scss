@@ -1,22 +1,41 @@
 @use '../style_settings' as *;
+@use '../style_settings/colors' as *;
 
 .toggle-group {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  // gap: 0.5rem;
+  border: 1.75px solid $border-color;
+  border-radius: .75rem;
 
   &__item {
     width: 50%;
     height: 2.5rem;
-    background-color: $secondary;
-    border-radius: 0.4rem;
-    color: white;
+    background-color: transparent;
+    color: black;
     border: none;
     font-weight: bold;
     font-size: 1rem;
+    border-right: 1px solid $border-color;
+
+    &:nth-child(1) {
+      border-top-left-radius: .4rem;
+      border-bottom-left-radius:.4rem;
+    }
+
+    &:last-child {
+      border-top-right-radius: .4rem;
+      border-bottom-right-radius:.4rem;
+      border-right: unset;
+    }
+
+    &:hover:not(&--active) {
+      background-color: $light-gray;
+    }
 
     &--active {
-      background-color: $blue;
+      background-color: $primary;
+      color: white;
     }
   }
 }
