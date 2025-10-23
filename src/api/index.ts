@@ -6,7 +6,7 @@ const adapter = new MockAdapter(api, { delayResponse: 1000 });
 
 // Get all properties listing with or without params
 adapter.onGet('/properties').reply(config => {
-  const limit = 6;
+  const limit = 9;
 
   const params = config.params;
 
