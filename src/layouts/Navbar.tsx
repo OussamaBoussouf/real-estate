@@ -1,21 +1,21 @@
-import { NavLink, useLocation } from 'react-router';
-import Button from '../shared/components/Button';
-import { useToggle } from '../shared/hooks/useToggle';
-import { useEffect } from 'react';
+import { NavLink } from 'react-router';
+import { Login } from '../features/auth';
+import SignUp from '../features/auth/components/Signup';
+import { useState } from 'react';
 
 function Navbar() {
-  const { isOpen, toggleOpen } = useToggle();
-  const { pathname } = useLocation();
+  const [mode, setMode] = useState<'login' | 'signup'>('login');
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (isOpen) {
-      handleToggle();
-    }
-  }, [pathname]);
-
-  const handleToggle = () => {
-    toggleOpen();
+  const handleModeChange = (newMode: 'login' | 'signup') => {
+    setMode(newMode);
   };
+
+  const handleDialogChange = (mode: 'login' | 'signup') => {
+    setMode(mode);
+    setOpen(!open);
+  };
+
 
   return (
     <header className="navigation">
@@ -24,12 +24,33 @@ function Navbar() {
           <NavLink to="/">DOORZA</NavLink>
         </div>
         <div className="navigation__auth-group">
-          <Button className="btn btn--rounded btn--primary mx-sm">
-            Log in
-          </Button>
-          <Button className="btn btn--rounded btn--secondary mx-sm">
+          <button
+            onClick={() => handleDialogChange('login')}
+            type="button"
+            className="btn btn--rounded btn--primary mx-sm"
+          >
+            Login
+          </button>
+          <button
+            onClick={() => handleDialogChange('signup')}
+            type="button"
+            className="btn btn--rounded btn--secondary mx-sm"
+          >
             Sign up
-          </Button>
+          </button>
+          {mode === 'login' ? (
+            <Login
+              open={open}
+              onDialogChange={handleDialogChange}
+              onModeChange={handleModeChange}
+            />
+          ) : (
+            <SignUp
+              open={open}
+              onDialogChange={handleDialogChange}
+              onModeChange={handleModeChange}
+            />
+          )}
         </div>
       </div>
     </header>
