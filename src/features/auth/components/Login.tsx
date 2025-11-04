@@ -3,7 +3,8 @@ import { Dialog } from 'radix-ui';
 import * as Yup from 'yup';
 import api from '../../../app/axios';
 import { AxiosError } from 'axios';
-import { useState } from 'react';
+import CustomPasswordInput from '../../../shared/components/CustomPasswordInput';
+import { toast } from 'react-toastify';
 
 type LoginProps = {
   open: boolean;
@@ -12,8 +13,6 @@ type LoginProps = {
 };
 
 function Login({ open, onDialogChange, onModeChange }: LoginProps) {
-  const [serverError, setServerError] = useState<string | null>(null);
-
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -33,13 +32,13 @@ function Login({ open, onDialogChange, onModeChange }: LoginProps) {
         console.log(response.data);
       } catch (err) {
         const { response } = err as AxiosError;
-        actions.setStatus({
-          serverError: (response?.data as { message: string }).message,
-        });
-        console.log(
-          'Error occured:',
-          (response?.data as { message: string }).message
-        );
+        const errorMessage = (response?.data as { message: string }).message;
+
+        if (errorMessage) {
+          toast.error(errorMessage);
+          console.log('Error occured:', errorMessage);
+        }
+
       } finally {
         actions.setSubmitting(false);
       }
@@ -86,15 +85,12 @@ function Login({ open, onDialogChange, onModeChange }: LoginProps) {
             <fieldset className="modal__fieldset">
               <label
                 className="modal__fieldset_label mb-sm fw-bold fs-xxs"
-                htmlFor="name"
+                htmlFor="password"
               >
                 Password
               </label>
-              <input
-                type="password"
-                className="modal__fieldset__input"
+              <CustomPasswordInput
                 id="password"
-                placeholder="*********"
                 value={formik.values.password}
                 onChange={formik.handleChange}
               />
@@ -104,11 +100,6 @@ function Login({ open, onDialogChange, onModeChange }: LoginProps) {
                 </span>
               ) : null}
             </fieldset>
-            {formik.status?.serverError && (
-              <p className="text-danger fs-xxs">
-                {formik.status.serverError}
-              </p>
-            )}
             <button
               disabled={formik.isSubmitting}
               type="submit"

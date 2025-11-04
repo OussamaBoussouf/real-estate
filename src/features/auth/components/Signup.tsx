@@ -3,6 +3,8 @@ import { useFormik } from 'formik';
 import { Dialog } from 'radix-ui';
 import * as Yup from 'yup';
 import api from '../../../app/axios';
+import CustomPasswordInput from '../../../shared/components/CustomPasswordInput';
+import { toast } from 'react-toastify';
 
 type SignUpProps = {
   open: boolean;
@@ -34,16 +36,16 @@ function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
     onSubmit: async (values, actions) => {
       try {
         const response = await api.post('/auth/sign-up', values);
-        console.log(response.data);
+        formik.resetForm();
+        toast.success(response.data.message);
       } catch (err) {
         const { response } = err as AxiosError;
-        actions.setStatus({
-          serverError: (response?.data as { message: string }).message,
-        });
-        console.log(
-          'Error occured:',
-          (response?.data as { message: string }).message
-        );
+        const errorMessage = (response?.data as { message: string }).message;
+
+        if (errorMessage) {
+          toast.error(errorMessage);
+          console.log('Error occured:', errorMessage);
+        }
       } finally {
         actions.setSubmitting(false);
       }
@@ -137,11 +139,8 @@ function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
               >
                 Password
               </label>
-              <input
-                type="password"
-                className="modal__fieldset__input"
+              <CustomPasswordInput
                 id="password"
-                placeholder="Pedro Duarte"
                 value={formik.values.password}
                 onChange={formik.handleChange}
               />
@@ -151,9 +150,6 @@ function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
                 </span>
               ) : null}
             </fieldset>
-            {formik.status?.serverError && (
-              <p className="text-danger fs-xxs">{formik.status.serverError}</p>
-            )}
             <button
               type="submit"
               disabled={formik.isSubmitting}
