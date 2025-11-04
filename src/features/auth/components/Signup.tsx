@@ -1,6 +1,8 @@
+import type { AxiosError } from 'axios';
 import { useFormik } from 'formik';
 import { Dialog } from 'radix-ui';
 import * as Yup from 'yup';
+import api from '../../../app/axios';
 
 type SignUpProps = {
   open: boolean;
@@ -11,13 +13,13 @@ type SignUpProps = {
 function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
   const formik = useFormik({
     initialValues: {
-      name: '',
+      fullName: '',
       email: '',
       phone: '',
       password: '',
     },
     validationSchema: Yup.object({
-      name: Yup.string().required('full name is required'),
+      fullName: Yup.string().required('full name is required'),
       email: Yup.string()
         .email('invalid email address')
         .required('email is required'),
@@ -29,8 +31,22 @@ function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
         .min(8, 'password should contain at least 8 characters')
         .required('password is required'),
     }),
-    onSubmit: values => {
-      console.log(values);
+    onSubmit: async (values, actions) => {
+      try {
+        const response = await api.post('/auth/sign-up', values);
+        console.log(response.data);
+      } catch (err) {
+        const { response } = err as AxiosError;
+        actions.setStatus({
+          serverError: (response?.data as { message: string }).message,
+        });
+        console.log(
+          'Error occured:',
+          (response?.data as { message: string }).message
+        );
+      } finally {
+        actions.setSubmitting(false);
+      }
     },
   });
 
@@ -54,20 +70,22 @@ function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
             <fieldset className="modal__fieldset">
               <label
                 className="modal__fieldset_label mb-sm fw-bold fs-xxs"
-                htmlFor="name"
+                htmlFor="fullName"
               >
                 Full Name
               </label>
               <input
                 type="text"
-                id="name"
+                id="fullName"
                 className="modal__fieldset__input"
                 placeholder="Pedro Duarte"
-                value={formik.values.name}
+                value={formik.values.fullName}
                 onChange={formik.handleChange}
               />
-              {formik.touched.name && formik.errors.name ? (
-                <span className="text-danger fs-xxs">{formik.errors.name}</span>
+              {formik.touched.fullName && formik.errors.fullName ? (
+                <span className="text-danger fs-xxs">
+                  {formik.errors.fullName}
+                </span>
               ) : null}
             </fieldset>
             <fieldset className="modal__fieldset">
@@ -133,15 +151,25 @@ function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
                 </span>
               ) : null}
             </fieldset>
+            {formik.status?.serverError && (
+              <p className="text-danger fs-xxs">{formik.status.serverError}</p>
+            )}
             <button
               type="submit"
-              className="modal__submit-btn btn btn--primary btn--rounded"
+              disabled={formik.isSubmitting}
+              className={`modal__submit-btn btn btn--primary btn--rounded ${
+                formik.isSubmitting && 'btn--disabled'
+              }`}
             >
-              Create an account
+              {formik.isSubmitting ? 'Processing...' : 'Create an account'}
             </button>
             <p className="fs-xxs text-center">
               Have an account?{' '}
-              <button className='fw-bold' type="button" onClick={() => onModeChange('login')}>
+              <button
+                className="fw-bold"
+                type="button"
+                onClick={() => onModeChange('login')}
+              >
                 Sign in
               </button>
             </p>

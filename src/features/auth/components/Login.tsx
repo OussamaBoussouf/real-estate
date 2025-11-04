@@ -1,6 +1,9 @@
 import { useFormik } from 'formik';
 import { Dialog } from 'radix-ui';
 import * as Yup from 'yup';
+import api from '../../../app/axios';
+import { AxiosError } from 'axios';
+import { useState } from 'react';
 
 type LoginProps = {
   open: boolean;
@@ -9,6 +12,8 @@ type LoginProps = {
 };
 
 function Login({ open, onDialogChange, onModeChange }: LoginProps) {
+  const [serverError, setServerError] = useState<string | null>(null);
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -22,8 +27,22 @@ function Login({ open, onDialogChange, onModeChange }: LoginProps) {
         .min(8, 'password should contain at least 8 characters')
         .required('password is required'),
     }),
-    onSubmit: values => {
-      console.log(values);
+    onSubmit: async (values, actions) => {
+      try {
+        const response = await api.post('/auth/login', values);
+        console.log(response.data);
+      } catch (err) {
+        const { response } = err as AxiosError;
+        actions.setStatus({
+          serverError: (response?.data as { message: string }).message,
+        });
+        console.log(
+          'Error occured:',
+          (response?.data as { message: string }).message
+        );
+      } finally {
+        actions.setSubmitting(false);
+      }
     },
   });
 
@@ -85,13 +104,27 @@ function Login({ open, onDialogChange, onModeChange }: LoginProps) {
                 </span>
               ) : null}
             </fieldset>
-
-            <button type="submit" className="btn btn--primary btn--rounded">
-              Sign in
+            {formik.status?.serverError && (
+              <p className="text-danger fs-xxs">
+                {formik.status.serverError}
+              </p>
+            )}
+            <button
+              disabled={formik.isSubmitting}
+              type="submit"
+              className={`btn btn--primary btn--rounded ${
+                formik.isSubmitting && 'btn--disabled'
+              }`}
+            >
+              {formik.isSubmitting ? 'Processing...' : 'Sign up'}
             </button>
             <p className="fs-xxs text-center">
-              Don't have an account? {' '}
-              <button className='fw-bold' type="button" onClick={() => onModeChange('signup')}>
+              Don't have an account?{' '}
+              <button
+                className="fw-bold"
+                type="button"
+                onClick={() => onModeChange('signup')}
+              >
                 Sign up
               </button>
             </p>
