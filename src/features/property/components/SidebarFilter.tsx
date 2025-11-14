@@ -54,7 +54,6 @@ function SidebarFilter() {
           <legend className="fieldset-legend">Real estate type</legend>
           <CustomCheckboxGroup
               values={searchParams.getAll('category')}
-              legend="Real estate type"
               name="category"
               checkboxValues={['house', 'apartment', 'condo', 'loft', 'studio', 'cabin']}
               onChange={handleUrlParamChange}

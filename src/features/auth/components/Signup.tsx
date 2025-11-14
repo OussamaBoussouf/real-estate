@@ -2,9 +2,9 @@ import type { AxiosError } from 'axios';
 import { useFormik } from 'formik';
 import { Dialog } from 'radix-ui';
 import * as Yup from 'yup';
-import api from '../../../app/axios';
 import CustomPasswordInput from '../../../shared/components/CustomPasswordInput';
 import { toast } from 'react-toastify';
+import { useAuthContext } from '../../../context/AuthContext';
 
 type SignUpProps = {
   open: boolean;
@@ -13,6 +13,8 @@ type SignUpProps = {
 };
 
 function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
+  const { signup } = useAuthContext();
+
   const formik = useFormik({
     initialValues: {
       fullName: '',
@@ -35,17 +37,12 @@ function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
     }),
     onSubmit: async (values, actions) => {
       try {
-        const response = await api.post('/auth/sign-up', values);
+        const response = await signup(values);
         formik.resetForm();
         toast.success(response.data.message);
       } catch (err) {
-        const { response } = err as AxiosError;
-        const errorMessage = (response?.data as { message: string }).message;
-
-        if (errorMessage) {
-          toast.error(errorMessage);
-          console.log('Error occured:', errorMessage);
-        }
+        const { message: errorMessage } = err as AxiosError;
+        toast.error(errorMessage);
       } finally {
         actions.setSubmitting(false);
       }

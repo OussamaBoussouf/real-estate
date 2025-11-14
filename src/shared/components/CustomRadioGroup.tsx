@@ -36,10 +36,10 @@ function CustomRadioGroup({
             onChange={handleRadioChange}
             checked={selectedValue === values[index]}
             name={name}
-            id={values[index]}
+            id={`${name}-${values[index]}`}
             value={values[index]}
           />
-          <label htmlFor={values[index]}>{capitalizeWord(val)}</label>
+          <label htmlFor={`${name}-${values[index]}`}>{capitalizeWord(val)}</label>
         </div>
       ))}
     </div>

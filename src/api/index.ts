@@ -156,14 +156,21 @@ adapter.onPost('/auth/login').reply(config => {
   const user = users.find(user => user.email === email);
 
   if (!user) {
-    return [404, { message: 'invalid credentials' }];
+    return [400, { message: 'invalid credentials' }];
   }
 
   if (user.password !== password) {
-    return [404, { message: 'invalid credentials' }];
+    return [400, { message: 'invalid credentials' }];
   }
 
-  return [200, user];
+  const userInfo = {
+    fullName: user.fullName,
+    email: user.email,
+    profileImage: user.profileImage,
+    role: user.role,
+  };
+
+  return [200, userInfo];
 });
 
 adapter.onPost('/auth/sign-up').reply(config => {

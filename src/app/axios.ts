@@ -8,4 +8,17 @@ const api = axios.create({
   },
 });
 
+//Add a response interceptor
+api.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response && error.response.data) {
+      error.message = error.response.data.message || 'Unknown error';
+      error.status = error.response.status;
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 export default api;
