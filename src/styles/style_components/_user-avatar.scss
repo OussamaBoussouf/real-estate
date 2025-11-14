@@ -1,0 +1,36 @@
+.avatar {
+  &__trigger {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+  }
+
+  &__image {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__menu-content {
+    background-color: white;
+    padding: 0.25em 0.15em;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+      rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+
+  &__menu-item {
+    padding-block: 0.25rem;
+    padding-inline: 0.75em;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #988ad0;
+      color: white;
+    }
+  }
+}

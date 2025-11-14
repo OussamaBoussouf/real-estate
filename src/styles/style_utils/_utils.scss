@@ -318,6 +318,11 @@ $gap-sizes: (
   color: black;
 }
 
+.btn--disabled {
+  background-color: $border-color;
+  cursor: not-allowed;
+};
+
 .overlay {
   position: fixed;
   z-index: 5;
