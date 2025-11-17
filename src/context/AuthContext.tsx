@@ -2,6 +2,7 @@ import { createContext, useContext, useState, type ReactNode } from 'react';
 import type { UserInfo, UserLogin, UserSignup } from '../types/user';
 import api from '../app/axios';
 import type { AxiosResponse } from 'axios';
+import { redirect } from 'react-router';
 
 type AuthContextType = {
   user: UserInfo | null;
