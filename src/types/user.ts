@@ -1,6 +1,8 @@
+export type Role = 'tenant' | 'admin';
+
 export type User = {
   id: string;
-  role: string;
+  role: Role;
   fullName: string;
   email: string;
   phone: string;

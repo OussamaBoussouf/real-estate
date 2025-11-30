@@ -1,9 +1,14 @@
 import { DropdownMenu } from 'radix-ui';
-import { useAuthContext } from '../../../context/AuthContext';
 import { Link } from 'react-router';
+import { UserInfo } from '../../../types/user';
 
-function UserMenuAvatar({ profileImage }: { profileImage: string }) {
-  const { logout } = useAuthContext();
+type UserMenuAvatarProps = {
+  user: UserInfo;
+  onLogout: () => void;
+};
+
+function UserMenuAvatar({ user, onLogout }: UserMenuAvatarProps) {
+  
 
   return (
     <DropdownMenu.Root modal={false}>
@@ -14,7 +19,7 @@ function UserMenuAvatar({ profileImage }: { profileImage: string }) {
           className="avatar__trigger"
         >
           <img
-            src={profileImage}
+            src={user.profileImage}
             alt="profile image"
             width="50"
             height="50"
@@ -30,10 +35,14 @@ function UserMenuAvatar({ profileImage }: { profileImage: string }) {
           className="avatar__menu-content"
         >
           <DropdownMenu.Item className="avatar__menu-item">
-            <Link to="dashboard">Go to Dashboard</Link>
+            {user.role === 'admin' ? (
+              <Link to="/dashboard/properties">Go to Dashboard</Link>
+            ) : (
+              <Link to="/dashboard/add-property">Go to Dashboard</Link>
+            )}
           </DropdownMenu.Item>
 
-          <DropdownMenu.Item onClick={logout} className="avatar__menu-item">
+          <DropdownMenu.Item onClick={onLogout} className="avatar__menu-item">
             Logout
           </DropdownMenu.Item>
         </DropdownMenu.Content>

@@ -41,7 +41,7 @@
   &__nav-link {
     @extend .u-link;
 
-    &:hover {
+    &:hover, &.active {
       background-color: black;
       color: white;
     }

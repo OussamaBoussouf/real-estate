@@ -1,38 +1,11 @@
-import {
-  CirclePlus,
-  House,
-  LogOut,
-  MessageCircleMore,
-  UserPen,
-} from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import { Link, NavLink } from 'react-router';
 import { useAuthContext } from '../context/AuthContext';
-
-const links = [
-  {
-    label: 'Add Property',
-    path: '/dashboard/add-property',
-    icon: <CirclePlus />,
-  },
-  {
-    label: 'My Properties',
-    path: '/dashboard/my-properties',
-    icon: <House />,
-  },
-  {
-    label: 'Messages',
-    path: '/dashboard/messages',
-    icon: <MessageCircleMore />,
-  },
-  {
-    label: 'Profile',
-    path: '/dashboard/profile',
-    icon: <UserPen />,
-  },
-];
+import { ReactNode } from 'react';
+import { sidebarLinks } from '../constants/dashboardLinks';
 
 function DashboardSidebar() {
-  const { logout } = useAuthContext();
+  const { user, logout } = useAuthContext();
 
   return (
     <aside className="dashboard__sidebar">
@@ -41,13 +14,15 @@ function DashboardSidebar() {
       </Link>
       <nav className="dashboard__nav">
         <ul className="dashboard__nav-list">
-          {links.map(link => (
-            <li key={link.label}>
-              <NavLink to={link.path} className="dashboard__nav-link">
-                {link.icon} {link.label}
-              </NavLink>
-            </li>
-          ))}
+          {sidebarLinks[user!.role].map(
+            (link: { label: string; path: string; icon: ReactNode }) => (
+              <li key={link.label}>
+                <NavLink to={link.path} className="dashboard__nav-link">
+                  {link.icon} {link.label}
+                </NavLink>
+              </li>
+            )
+          )}
         </ul>
       </nav>
       <button onClick={logout} type="button" className="dashboard__logout">

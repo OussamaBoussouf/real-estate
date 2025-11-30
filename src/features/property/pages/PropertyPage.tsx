@@ -1,7 +1,8 @@
 import PropertyList from '../components/PropertyList';
 import SidebarFilter from '../components/SidebarFilter';
 
-function PropertyPage() {
+function PropertyPage() {  
+
   return (
     <main className="property-page my-xl">
       <div className="container px-md">
