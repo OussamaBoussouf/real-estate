@@ -8,7 +8,7 @@ import UserMenuAvatar from '../features/auth/components/UserMenuAvatar';
 function Navbar() {
   const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [open, setOpen] = useState(false);
-  const { user } = useAuthContext();
+  const { user, logout} = useAuthContext();
 
   const handleModeChange = (newMode: 'login' | 'signup') => {
     setMode(newMode);
@@ -26,7 +26,7 @@ function Navbar() {
           <NavLink to="/">DOORZA</NavLink>
         </div>
         <div className="navigation__auth-group">
-          {user && <UserMenuAvatar profileImage={user.profileImage} />}
+          {user && <UserMenuAvatar user={user} onLogout={logout} />}
           {!user && (
             <>
               <button

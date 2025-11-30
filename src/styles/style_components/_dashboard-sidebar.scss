@@ -1,0 +1,55 @@
+@use '../style_settings/colors' as *;
+
+.u-link {
+  width: 100%;
+  padding: 0.75em 0.5em;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  column-gap: 0.75rem;
+}
+
+.dashboard {
+  &__sidebar {
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height: 100vh;
+    width: 250px;
+    padding: 1.5em 1em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-left: 0.5em;
+  }
+
+  &__nav {
+    margin-top: 2rem;
+  }
+
+  &__nav-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+
+  &__nav-link {
+    @extend .u-link;
+
+    &:hover, &.active {
+      background-color: black;
+      color: white;
+    }
+  }
+
+  &__logout {
+    @extend .u-link;
+    color: red;
+    margin-top: auto;
+  }
+}
