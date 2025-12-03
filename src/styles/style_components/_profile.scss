@@ -1,0 +1,50 @@
+@use '../style_settings/colors' as *;
+@use '../style_utils/mixins' as *;
+
+.profile {
+  &__image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__personal-info,
+  &__password {
+    margin-top: 1.5rem;
+    border: 1px solid $border-color;
+    background-color: white;
+    padding: 1em;
+    border-radius: 10px;
+    
+    @include desktop {
+      display: flex;
+      gap: 1.5rem;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+  }
+
+  &__input {
+    width: 100%;
+  }
+
+  &__form-group {
+    width: 100%;
+  }
+
+  &__save-btn{
+    float: right;
+  }
+}
+
+.cols-2 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

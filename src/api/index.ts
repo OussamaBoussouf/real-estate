@@ -165,9 +165,11 @@ adapter.onPost('/auth/login').reply(config => {
 
   const userInfo = {
     fullName: user.fullName,
-    email: user.email,
     profileImage: user.profileImage,
+    email: user.email,
+    address: user.address,
     role: user.role,
+    phone: user.phone,
   };
 
   return [200, userInfo];
@@ -189,10 +191,11 @@ adapter.onPost('/auth/sign-up').reply(config => {
   const newUser = {
     fullName,
     email,
+    address: 'Hay chabab 2, 32',
     phone,
     password,
     id: String(users.length + 1),
-    role: 'seller',
+    role: 'tenant',
     profileImage:
       'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80',
   };

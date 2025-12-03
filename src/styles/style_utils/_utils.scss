@@ -182,7 +182,7 @@ $font-weights: (
 
 //FONT SIZES
 $font-sizes: (
-  xxs: 0.875rem,
+  xxs: 0.75rem,
   xs: 1rem,
   sm: 1.25rem,
   md: 1.75rem,
@@ -214,15 +214,15 @@ $m-sizes: (
 
 //MARGIN LEFT SIDE
 @each $key, $value in $p-sizes {
-  .ms-#{$key} {
+  .ml-#{$key} {
     margin-left: $value;
   }
 }
 
 //MARGIN RIGHT SIDE
 @each $key, $value in $p-sizes {
-  .ms-#{$key} {
-    margin-left: $value;
+  .mr-#{$key} {
+    margin-right: $value;
   }
 }
 
@@ -301,6 +301,11 @@ $gap-sizes: (
   &:hover {
     background-color: #f2f2f259;  
   }
+}
+
+.btn--info {
+  background-color: #238df7;
+  color: white;
 }
 
 .btn--danger {

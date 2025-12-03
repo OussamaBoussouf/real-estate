@@ -4,6 +4,7 @@ export const users = [
     role: 'tenant',
     fullName: 'Jack Marrow',
     email: 'jackmarrow@gmail.com',
+    address: 'Hay chabab 90, 23',
     phone: '06 66 66 66 66',
     password: '123456789',
     profileImage:
@@ -14,6 +15,7 @@ export const users = [
     role: 'admin',
     fullName: 'Tom Hanks',
     email: 'tomhanks@gmail.com',
+    address: 'Hay chabab 90, 23',
     phone: '06 66 66 66 66',
     password: '123456789',
     profileImage:
