@@ -1,6 +1,6 @@
 
 
-function ProfileImage() {
+function PersonalInfoForm() {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function ProfileImage() {
     );
 }
 
-export default ProfileImage;
+export default PersonalInfoForm;
