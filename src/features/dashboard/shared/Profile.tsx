@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { useAuthContext } from '../../../context/AuthContext';
 import ProfileImageForm from './ProfileImageForm';
+import PersonalInfoForm from './PersonalInfoForm';
 
 function Profile() {
   const { user } = useAuthContext();
@@ -39,7 +40,8 @@ function Profile() {
       {/* Profile image component */}
       <ProfileImageForm profileImage={user?.profileImage} />
       {/* Email, Full Name, Phone and Adderss */}
-      <div className="profile__personal-info">
+      <PersonalInfoForm user={user}/>
+      {/* <div className="profile__personal-info">
         <div>
           <h2 className="fs-xs">Personal information</h2>
           <p className="fs-xxs">update your personal info here</p>
@@ -118,7 +120,7 @@ function Profile() {
             ) : null}
           </div>
         </div>
-      </div>
+      </div> */}
       {/* Password */}
       <div className="profile__password">
         <div>

@@ -63,7 +63,7 @@ function ProfileImageForm({ profileImage }: { profileImage?: string }) {
           src={imageUrl || DefaultProfileImg}
           alt="profile image"
         />
-        {error && <p className="text-danger fs-xxs">{error}</p>}
+        {error && <p className="text-danger fs-xxs mb-sm">{error}</p>}
         <p className="fs-xxs mb-sm">
           Recommanded photo size: 126 <span>x</span> 126px
         </p>

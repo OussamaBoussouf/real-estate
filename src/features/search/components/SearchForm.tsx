@@ -45,7 +45,6 @@ function SearchForm() {
   });
 
   const handleValueChange = (obj: Record<string, string>) => {
-
     const [name, value] = Object.entries(obj)[0];
     formik.setFieldValue(name, value);
   };
@@ -64,9 +63,7 @@ function SearchForm() {
             placeholder="Select a city..."
             options={cities}
           />
-          {formik.touched.city && formik.errors.city ? (
-            <span className="text-danger">{formik.errors.city}</span>
-          ) : null}
+          <span className="text-danger fs-xxs">{formik.errors.city}</span>
         </div>
         <div className="search-form__control">
           <Label.Root htmlFor="type">Type</Label.Root>
@@ -78,9 +75,7 @@ function SearchForm() {
             placeholder="Select a type..."
             options={type}
           />
-          {formik.touched.type && formik.errors.type ? (
-            <span className="text-danger">{formik.errors.type}</span>
-          ) : null}
+          <span className="text-danger fs-xxs">{formik.errors.type}</span>
         </div>
         <div className="search-form__control">
           <Label.Root htmlFor="category">Category</Label.Root>
@@ -92,11 +87,9 @@ function SearchForm() {
             placeholder="Select a category..."
             options={category}
           />
-          {formik.touched.category && formik.errors.category ? (
-            <span className="text-danger">{formik.errors.category}</span>
-          ) : null}
+          <span className="text-danger fs-xxs">{formik.errors.category}</span>
         </div>
-        <Button type="submit" className="btn btn--rounded btn--primary">
+        <Button type="submit" className="btn btn--rounded btn--primary mt-sm">
           Search
         </Button>
       </form>
