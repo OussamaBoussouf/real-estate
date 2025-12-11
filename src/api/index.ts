@@ -204,3 +204,5 @@ adapter.onPost('/auth/sign-up').reply(config => {
 
   return [201, { message: 'User has been created successfully' }];
 });
+
+//Update user profile
