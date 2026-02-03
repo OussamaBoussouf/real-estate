@@ -1,29 +1,33 @@
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { UserInfo } from '../../../types/user';
+import { UserInfo } from '../../../../types/user';
+import api from '../../../../app/axios';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
+import { PERSONAL_IMAGE_FORM_SCHEMA } from '../../validators/profile.schema';
 
-function PersonalInfoForm({ user }: { user: UserInfo | null }) {
+function PersonalInfoForm({ user }: { user: UserInfo }) {
   const formik = useFormik({
     initialValues: {
-      fullName: user?.fullName || '',
-      email: user?.email || '',
-      phone: user?.phone || '',
-      address: user?.address || '',
+      fullName: user.fullName,
+      email: user.email,
+      phone: user.phone,
+      address: user.address,
     },
-    validationSchema: Yup.object({
-      fullName: Yup.string().required('full name is required'),
-      email: Yup.string()
-        .email('invalid email address')
-        .required('email is required'),
-      phone: Yup.string()
-        .matches(/[0-9]/, 'enter a valid phone number')
-        .min(10, 'phone number should be at least 10 digits')
-        .required('phone is required'),
-      address: Yup.string().required('address is required'),
-    }),
-    onSubmit: (values, actions) => {
-      alert(JSON.stringify(values, null, 2));
-      actions.setSubmitting(false);
+    validationSchema: PERSONAL_IMAGE_FORM_SCHEMA,
+    onSubmit: async (values, actions) => {
+      try {
+        const response = await api.put('/users/me/personal-info', values, {
+          headers: {
+            Authorization: `Bearer jackmarrow@gmail.com`,
+          },
+        });
+        toast.success(response.data.message);
+      } catch (error) {
+        const { message: errorMessage } = error as AxiosError;
+        toast.error(errorMessage);
+      } finally {
+        actions.setSubmitting(false);
+      }
     },
   });
 
@@ -47,7 +51,9 @@ function PersonalInfoForm({ user }: { user: UserInfo | null }) {
               id="fullName"
               className="profile__input"
             />
-            <p className="text-danger fs-xxs">{formik.errors.fullName}</p>
+            <p className="text-danger fs-xxs">
+              {formik.touched.fullName && formik.errors.fullName}
+            </p>
           </div>
           <div className="profile__form-group">
             <label className="fs-xxs" htmlFor="email">
@@ -61,7 +67,9 @@ function PersonalInfoForm({ user }: { user: UserInfo | null }) {
               id="email"
               className="profile__input"
             />
-            <p className="text-danger fs-xxs">{formik.errors.email}</p>
+            <p className="text-danger fs-xxs">
+              {formik.touched.email && formik.errors.email}
+            </p>
           </div>
         </div>
         <div className="profile__form-group">
@@ -76,7 +84,9 @@ function PersonalInfoForm({ user }: { user: UserInfo | null }) {
             id="phone"
             className="profile__input"
           />
-          <p className="text-danger fs-xxs">{formik.errors.phone}</p>
+          <p className="text-danger fs-xxs">
+            {formik.touched.phone && formik.errors.phone}
+          </p>
         </div>
         <div className="profile__form-group">
           <label className="fs-xxs" htmlFor="address">
@@ -90,7 +100,9 @@ function PersonalInfoForm({ user }: { user: UserInfo | null }) {
             id="address"
             className="profile__input"
           />
-          <p className="text-danger fs-xxs">{formik.errors.address}</p>
+          <p className="text-danger fs-xxs">
+            {formik.touched.address && formik.errors.address}
+          </p>
         </div>
         <button
           disabled={formik.isSubmitting}
@@ -99,7 +111,7 @@ function PersonalInfoForm({ user }: { user: UserInfo | null }) {
             formik.isSubmitting && 'btn--disabled'
           }`}
         >
-          Save changes
+          {formik.isSubmitting ? 'Saving...' : 'Save changes'}
         </button>
       </form>
     </div>

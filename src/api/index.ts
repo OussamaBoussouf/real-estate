@@ -206,3 +206,62 @@ adapter.onPost('/auth/sign-up').reply(config => {
 });
 
 //Update user profile
+
+// Update user profile image
+adapter.onPut('/users/me/avatar').reply(config => {
+  const auth = config.headers?.Authorization;
+
+  const email = auth?.split(' ')[1];
+
+  const user = users.find(u => u.email === email);
+
+  if (!user) {
+    return [404, { message: 'This user does not exist' }];
+  }
+
+  return [201, { message: 'Profile image has been updated successfully' }];
+});
+
+// Update user profile info
+adapter.onPut('/users/me/personal-info').reply(config => {
+  const auth = config.headers?.Authorization;
+  const userEmail = auth?.split(' ')[1];
+
+  const user = users.find(u => u.email === userEmail);
+
+  if (!user) {
+    return [404, { message: 'This user does not exist' }];
+  }
+
+  const data = config.data;
+
+  const { fullName, email, phone, address } = JSON.parse(data);
+
+  user.fullName = fullName;
+  user.email = email;
+  user.phone = phone;
+  user.address = address;
+
+
+  return [201, { message: 'Profile info has been updated successfully' }];
+});
+
+// Update user password
+adapter.onPut('/users/me/password').reply(config => {
+  const auth = config.headers?.Authorization;
+  const userEmail = auth?.split(' ')[1];
+
+  const user = users.find(u => u.email === userEmail);
+
+  if (!user) {
+    return [404, { message: 'This user does not exist' }];
+  }
+
+  const data = config.data;
+
+  const { password } = JSON.parse(data);
+
+  user.password = password;
+
+  return [201, { message: 'Password has been updated successfuly' }];
+});

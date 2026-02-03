@@ -1,5 +1,8 @@
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import api from '../../../../app/axios';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
+import { PASSWORD_FORM_SCHEMA } from '../../validators/profile.schema';
 
 function PasswordForm() {
   const formik = useFormik({
@@ -7,18 +10,22 @@ function PasswordForm() {
       password: '',
       confirmPassword: '',
     },
-    validateOnBlur: true,
-    validationSchema: Yup.object({
-      password: Yup.string()
-        .required('password is required')
-        .min(8, 'password should contain at least 8 characters'),
-      confirmPassword: Yup.string()
-        .required('password is required')
-        .oneOf([Yup.ref('password')], 'passwords must match'),
-    }),
-    onSubmit: (values, actions) => {
-      alert(JSON.stringify(values));
-      actions.setSubmitting(false);
+    validationSchema: PASSWORD_FORM_SCHEMA,
+    onSubmit: async(values, actions) => {
+       try {
+        const response = await api.put('/users/me/password', values, {
+          headers: {
+            Authorization: `Bearer jackmarrow@gmail.com`,
+          },
+        });
+        toast.success(response.data.message);
+        formik.resetForm();
+      } catch (error) {
+        const { message: errorMessage } = error as AxiosError;
+        toast.error(errorMessage);
+      } finally {
+        actions.setSubmitting(false);
+      }
     },
   });
 

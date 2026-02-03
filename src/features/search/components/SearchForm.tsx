@@ -63,7 +63,9 @@ function SearchForm() {
             placeholder="Select a city..."
             options={cities}
           />
-          <span className="text-danger fs-xxs">{formik.errors.city}</span>
+          <span className="text-danger fs-xxs">
+            {formik.touched.city && formik.errors.city}
+          </span>
         </div>
         <div className="search-form__control">
           <Label.Root htmlFor="type">Type</Label.Root>
@@ -75,7 +77,9 @@ function SearchForm() {
             placeholder="Select a type..."
             options={type}
           />
-          <span className="text-danger fs-xxs">{formik.errors.type}</span>
+          <span className="text-danger fs-xxs">
+            {formik.touched.type && formik.errors.type}
+          </span>
         </div>
         <div className="search-form__control">
           <Label.Root htmlFor="category">Category</Label.Root>
@@ -87,7 +91,9 @@ function SearchForm() {
             placeholder="Select a category..."
             options={category}
           />
-          <span className="text-danger fs-xxs">{formik.errors.category}</span>
+          <span className="text-danger fs-xxs">
+            {formik.touched.category && formik.errors.category}
+          </span>
         </div>
         <Button type="submit" className="btn btn--rounded btn--primary mt-sm">
           Search
