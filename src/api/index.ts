@@ -165,9 +165,11 @@ adapter.onPost('/auth/login').reply(config => {
 
   const userInfo = {
     fullName: user.fullName,
-    email: user.email,
     profileImage: user.profileImage,
+    email: user.email,
+    address: user.address,
     role: user.role,
+    phone: user.phone,
   };
 
   return [200, userInfo];
@@ -189,10 +191,11 @@ adapter.onPost('/auth/sign-up').reply(config => {
   const newUser = {
     fullName,
     email,
+    address: 'Hay chabab 2, 32',
     phone,
     password,
     id: String(users.length + 1),
-    role: 'seller',
+    role: 'tenant',
     profileImage:
       'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80',
   };
@@ -200,4 +203,65 @@ adapter.onPost('/auth/sign-up').reply(config => {
   users.push(newUser);
 
   return [201, { message: 'User has been created successfully' }];
+});
+
+//Update user profile
+
+// Update user profile image
+adapter.onPut('/users/me/avatar').reply(config => {
+  const auth = config.headers?.Authorization;
+
+  const email = auth?.split(' ')[1];
+
+  const user = users.find(u => u.email === email);
+
+  if (!user) {
+    return [404, { message: 'This user does not exist' }];
+  }
+
+  return [201, { message: 'Profile image has been updated successfully' }];
+});
+
+// Update user profile info
+adapter.onPut('/users/me/personal-info').reply(config => {
+  const auth = config.headers?.Authorization;
+  const userEmail = auth?.split(' ')[1];
+
+  const user = users.find(u => u.email === userEmail);
+
+  if (!user) {
+    return [404, { message: 'This user does not exist' }];
+  }
+
+  const data = config.data;
+
+  const { fullName, email, phone, address } = JSON.parse(data);
+
+  user.fullName = fullName;
+  user.email = email;
+  user.phone = phone;
+  user.address = address;
+
+
+  return [201, { message: 'Profile info has been updated successfully' }];
+});
+
+// Update user password
+adapter.onPut('/users/me/password').reply(config => {
+  const auth = config.headers?.Authorization;
+  const userEmail = auth?.split(' ')[1];
+
+  const user = users.find(u => u.email === userEmail);
+
+  if (!user) {
+    return [404, { message: 'This user does not exist' }];
+  }
+
+  const data = config.data;
+
+  const { password } = JSON.parse(data);
+
+  user.password = password;
+
+  return [201, { message: 'Password has been updated successfuly' }];
 });

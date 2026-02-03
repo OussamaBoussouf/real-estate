@@ -67,6 +67,12 @@ input[type='radio'] {
   accent-color: $primary;
 }
 
+input {
+  padding: 0.5em 0.75em;
+  border-radius: 10px;
+  border: 1px solid $border-color;
+}
+
 button {
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
