@@ -1,8 +1,13 @@
-.dashboard {
-  display: flex;
+@use '../style_utils/mixins' as *;
 
+.dashboard {
   &__content {
     padding: 20px;
-    width: 100%;
+    margin-left: 60px;
+
+    @include tablet {
+      margin-left: 250px;
+    }
+
   }
 }

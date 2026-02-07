@@ -329,6 +329,12 @@ $gap-sizes: (
   cursor: not-allowed;
 };
 
+.seprater {
+  height: 1px;
+  width: 100%;
+  background-color: $border-color;
+}
+
 .overlay {
   position: fixed;
   z-index: 5;
