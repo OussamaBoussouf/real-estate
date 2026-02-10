@@ -21,8 +21,9 @@
     padding: 1.5em 1em;
     display: flex;
     flex-direction: column;
-    position: sticky;
+    position: fixed;
     top: 0;
+    bottom: 0;
   }
 
   &__logo {
@@ -43,9 +44,12 @@
 
   &__nav-link {
     @extend .u-link;
+    border: 1px solid transparent;
 
-    &:hover, &.active {
-      background-color: black;
+    &:hover,
+    &.active {
+      background: $black-gray-gradient;
+      border: 1px solid $neutral;
       color: white;
     }
   }
@@ -54,5 +58,62 @@
     @extend .u-link;
     color: red;
     margin-top: auto;
+
+    &:hover {
+      background-color: red;
+      color: white;
+    }
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  padding-block: 0.875rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid $border-color;
+
+  &__logo-wrapper {
+    width: 40px;
+    height: 40px;
+    font-size: 1.175rem;
+    border-radius: 0.375rem;
+    background: linear-gradient(to top, $primary, gray 70%);
+    margin-bottom: 0.753rem;
+  }
+
+  &__logo {
+    color: white;
+  }
+
+  &__nav-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  &__list {
+    li {
+      margin-top: 1rem;
+    }
+  }
+
+  &__link {
+    color: $primary;
+    width: 35px;
+    height: 35px;
+
+    &.active {
+      background: $black-gray-gradient;
+      border: 1px solid $neutral;
+      color: white;
+      border-radius: 0.475rem;
+    }
   }
 }
