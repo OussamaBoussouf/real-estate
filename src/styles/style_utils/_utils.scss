@@ -329,6 +329,24 @@ $gap-sizes: (
   cursor: not-allowed;
 }
 
+.grid {
+  display: grid;
+  gap: 1.275rem;
+
+  @include tablet {
+    @for $i from 1 through 3 {
+      &.col-#{$i} {
+        grid-template-columns: repeat(#{$i}, 1fr);
+      }
+    }
+
+    .span-2 {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+}
+
 .panel {
   margin-top: 1.5rem;
   border: 1px solid $border-color;
