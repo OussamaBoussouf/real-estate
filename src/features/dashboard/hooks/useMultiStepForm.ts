@@ -3,6 +3,8 @@ import { useCallback, useState } from "react";
 export const useMultiStepForm = (steps: number) => {
     const [currentStep, setCurrentStep] = useState(1);
 
+    const isFirstStep = currentStep === 1;
+
     const isLastStep = currentStep === steps;
 
     const goNext = useCallback(() => {
@@ -17,6 +19,7 @@ export const useMultiStepForm = (steps: number) => {
     return {
         currentStep,
         isLastStep,
+        isFirstStep,
         goNext,
         goBack
     };

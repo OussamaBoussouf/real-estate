@@ -6,8 +6,7 @@ import PropertyInfoStep from './steps/PropertyInfoStep';
 import UploadImageStep from './steps/UploadImageStep';
 import { PROPERTY_DETAILS_SCHEMA } from '../../validators/property-form.schema';
 import { PROPERTY_FORM_INITIAL_VALUES } from '../../constants/property-form';
-
- 
+import FormNavigation from './FormNavigation';
 
 const steps = [
   (props: any) => <PropertyInfoStep {...props} />,
@@ -16,10 +15,16 @@ const steps = [
 ];
 
 function PropertyFrom() {
-  const { goBack, goNext, currentStep, isLastStep } = useMultiStepForm(3);
+  const { goBack, goNext, currentStep, isLastStep, isFirstStep } = useMultiStepForm(3);
 
   const handleSubmit = (values: typeof PROPERTY_FORM_INITIAL_VALUES) => {
-    console.log(values);
+    if(!isLastStep) {
+      goNext();
+      return;
+    }
+    setTimeout(() => {
+      alert(JSON.stringify(values, null, 2));
+    }, 1000);
   };
 
   return (
@@ -37,9 +42,11 @@ function PropertyFrom() {
         {props => (
           <form className="mt-lg" onSubmit={props.handleSubmit}>
             {steps[currentStep - 1](props)}
-            <button type="submit" className="btn btn--info btn--rounded mt-md ">
-              Submit
-            </button>
+            <FormNavigation
+              onBack={goBack}
+              isFirstStep={isFirstStep}
+              isLastStep={isLastStep}
+            />
           </form>
         )}
       </Formik>
