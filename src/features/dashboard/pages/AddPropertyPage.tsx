@@ -1,11 +1,13 @@
+import PropertyFrom from '../components/add_property/PropertyFrom';
 
+function AddPropertyPage() { 
 
-function AddPropertyPage() {
-    return (
-        <div>
-            Add Property Page
-        </div>
-    );
+  return (
+    <>
+      <h1 className="mb-xl">Add Property</h1>
+      <PropertyFrom />
+    </>
+  );
 }
 
 export default AddPropertyPage;
