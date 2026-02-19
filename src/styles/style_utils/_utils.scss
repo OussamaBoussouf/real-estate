@@ -329,6 +329,13 @@ $gap-sizes: (
   cursor: not-allowed;
 }
 
+.reset-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+//GRID
 .grid {
   display: grid;
   gap: 1.275rem;

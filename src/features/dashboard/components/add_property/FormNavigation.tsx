@@ -10,7 +10,7 @@ function FormNavigation({
   onBack,
 }: FormNavigationProps) {
   return (
-    <div className="d-flex-end gap-md mt-md">
+    <div className="d-flex-end gap-sm mt-md">
       {!isFirstStep && (
         <button
           className="btn btn--secondary btn--rounded"

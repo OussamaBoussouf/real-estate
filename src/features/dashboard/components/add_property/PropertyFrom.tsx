@@ -1,10 +1,14 @@
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
+import * as Yup from 'yup';
 import { useMultiStepForm } from '../../hooks/useMultiStepForm';
 import FormProgress from './FormProgress';
 import PropertyDetailsStep from './steps/PropertyDetailsStep';
 import PropertyInfoStep from './steps/PropertyInfoStep';
 import UploadImageStep from './steps/UploadImageStep';
-import { PROPERTY_DETAILS_SCHEMA } from '../../validators/property-form.schema';
+import {
+  PROPERTY_DETAILS_SCHEMA,
+  PROPERTY_INFO_SCHEMA,
+} from '../../validators/property-form.schema';
 import { PROPERTY_FORM_INITIAL_VALUES } from '../../constants/property-form';
 import FormNavigation from './FormNavigation';
 
@@ -14,11 +18,22 @@ const steps = [
   (props: any) => <UploadImageStep {...props} />,
 ];
 
-function PropertyFrom() {
-  const { goBack, goNext, currentStep, isLastStep, isFirstStep } = useMultiStepForm(3);
+const formValiditionSchemas: Record<number, Yup.ObjectSchema<any>> = {
+  1: PROPERTY_INFO_SCHEMA,
+  2: PROPERTY_DETAILS_SCHEMA,
+};
 
-  const handleSubmit = (values: typeof PROPERTY_FORM_INITIAL_VALUES) => {
-    if(!isLastStep) {
+function PropertyFrom() {
+  const { goBack, goNext, currentStep, isLastStep, isFirstStep } =
+    useMultiStepForm(3);
+    
+
+  const handleSubmit = (
+    values: typeof PROPERTY_FORM_INITIAL_VALUES,
+    { setTouched }: FormikHelpers<typeof PROPERTY_FORM_INITIAL_VALUES>
+  ) => {
+    if (!isLastStep) {
+      setTouched({});
       goNext();
       return;
     }
@@ -35,7 +50,7 @@ function PropertyFrom() {
       />
       <Formik
         initialValues={PROPERTY_FORM_INITIAL_VALUES}
-        validationSchema={PROPERTY_DETAILS_SCHEMA}
+        validationSchema={formValiditionSchemas[currentStep]}
         validateOnChange={true}
         onSubmit={handleSubmit}
       >
