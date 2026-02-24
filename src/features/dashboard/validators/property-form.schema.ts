@@ -1,17 +1,41 @@
-
 import * as Yup from 'yup';
 
+const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+const MAX_FILE_SIZE = 1024 * 1024;
+
 export const PROPERTY_INFO_SCHEMA = Yup.object({
-    title: Yup.string().required('title is required'),
-    type: Yup.string().required('type is required'),
-    size: Yup.number().min(100, 'size must be at least 100').required('size is required'),
-    description: Yup.string().required('description is required'),
-    price: Yup.number().required('price is required'),
-})
+  title: Yup.string().required('title is required'),
+  type: Yup.string().required('type is required'),
+  size: Yup.number()
+    .min(100, 'size must be at least 100')
+    .required('size is required'),
+  description: Yup.string().required('description is required'),
+  price: Yup.number().required('price is required'),
+});
 
 export const PROPERTY_DETAILS_SCHEMA = Yup.object({
-    bedrooms: Yup.number().required('bedrooms is required'),
-    bathrooms: Yup.number().required('bathrooms is required'),
-    city: Yup.string().required('city is required'),
-    address: Yup.string().required('address is required'),
-})
+  bedrooms: Yup.number().required('bedrooms is required'),
+  bathrooms: Yup.number().required('bathrooms is required'),
+  city: Yup.string().required('city is required'),
+  address: Yup.string().required('address is required'),
+});
+
+export const PROPERTY_IMAGES_SCHEMA = Yup.object().shape({
+  images: Yup.array()
+    .of(
+      Yup.object({
+        file: Yup.mixed<File>()
+          .required('File is required')
+          .test('fileSize', 'File size is too large (max 1MB)', value => {
+            if (!value || !(value instanceof File)) return false;
+            return value.size <= MAX_FILE_SIZE;
+          })
+          .test('fileType', 'Unsupported file type', value => {
+            if (!value || !(value instanceof File)) return false;
+            return ALLOWED_FILE_TYPES.includes(value.type);
+          }),
+      })
+    )
+    .min(3, 'At least 3 images are required')
+    .max(10, 'Maximum 10 images allowed'),
+});

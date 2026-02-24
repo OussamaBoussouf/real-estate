@@ -7,10 +7,12 @@ import PropertyInfoStep from './steps/PropertyInfoStep';
 import UploadImageStep from './steps/UploadImageStep';
 import {
   PROPERTY_DETAILS_SCHEMA,
+  PROPERTY_IMAGES_SCHEMA,
   PROPERTY_INFO_SCHEMA,
 } from '../../validators/property-form.schema';
 import { PROPERTY_FORM_INITIAL_VALUES } from '../../constants/property-form';
 import FormNavigation from './FormNavigation';
+import { PropertyFormValues } from '../../../../types/property';
 
 const steps = [
   (props: any) => <PropertyInfoStep {...props} />,
@@ -21,16 +23,16 @@ const steps = [
 const formValiditionSchemas: Record<number, Yup.ObjectSchema<any>> = {
   1: PROPERTY_INFO_SCHEMA,
   2: PROPERTY_DETAILS_SCHEMA,
+  3: PROPERTY_IMAGES_SCHEMA,
 };
 
 function PropertyFrom() {
   const { goBack, goNext, currentStep, isLastStep, isFirstStep } =
     useMultiStepForm(3);
-    
 
   const handleSubmit = (
-    values: typeof PROPERTY_FORM_INITIAL_VALUES,
-    { setTouched }: FormikHelpers<typeof PROPERTY_FORM_INITIAL_VALUES>
+    values: PropertyFormValues,
+    { setTouched }: FormikHelpers<PropertyFormValues>
   ) => {
     if (!isLastStep) {
       setTouched({});
@@ -38,7 +40,7 @@ function PropertyFrom() {
       return;
     }
     setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
+      console.log(values);
     }, 1000);
   };
 

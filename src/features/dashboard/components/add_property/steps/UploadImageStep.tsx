@@ -1,5 +1,11 @@
+
+
 function UploadImageStep() {
-  return <div>Upload Image Step</div>;
+  return (
+    <>
+      <h1>Upload images</h1>
+    </>
+  );
 }
 
 export default UploadImageStep;
