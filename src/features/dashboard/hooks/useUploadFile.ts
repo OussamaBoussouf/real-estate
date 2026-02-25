@@ -6,10 +6,11 @@ import {
   useRef,
   useState,
 } from 'react';
+import { FileObject } from '../../../types/property';
 
 type UseUploadFileOptions = {
-  initialFiles?: { id: string; file: File }[];
-  onFileChange?: (files: { id: string; file: File }[]) => void;
+  initialFiles: FileObject[];
+  onFileChange: (files: FileObject[]) => void;
 };
 
 export const useUploadFile = ({
@@ -17,23 +18,22 @@ export const useUploadFile = ({
   onFileChange,
 }: UseUploadFileOptions) => {
   const [isDragging, setIsDragging] = useState(false);
-  const [files, setFiles] =
-    useState<{ id: string; file: File }[]>(initialFiles);
   const onFileChangeRef = useRef(onFileChange);
 
   useEffect(() => {
     onFileChangeRef.current = onFileChange;
   }, [onFileChange]);
 
-  const processFiles = useCallback((files: FileList) => {
-    const images = Array.from(files).map(file => ({
-      id: crypto.randomUUID(),
-      file,
-    }));
-
-    setFiles(prev => [...prev, ...images]);
-    onFileChangeRef.current?.(images);
-  }, []);
+  const processFiles = useCallback(
+    (files: FileList) => {
+      const images = Array.from(files).map(file => ({
+        id: crypto.randomUUID(),
+        file,
+      }));
+      onFileChangeRef.current?.([...initialFiles, ...images]);
+    },
+    [initialFiles]
+  );
 
   const handleDragEnter = useCallback((e: DragEvent) => {
     e.preventDefault();
@@ -74,17 +74,16 @@ export const useUploadFile = ({
     [processFiles]
   );
 
-  const removeFile = useCallback((id: string) => {
-    setFiles(prev => {
-      const filtered = prev.filter(f => f.id !== id);
+  const removeFile = useCallback(
+    (id: string) => {
+      const filtered = initialFiles.filter(f => f.id !== id);
       onFileChangeRef.current?.(filtered);
-      return filtered;
-    });
-  }, []);
+    },
+    [initialFiles]
+  );
 
   return {
     isDragging,
-    files,
     handleFileChange,
     removeFile,
     handleDragEnter,

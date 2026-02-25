@@ -23,6 +23,8 @@ export type PaginatedProperty = {
   totalPages: number;
 };
 
+export type FileObject = { id: string; file: File};
+
 export type PropertyFormValues = {
   title: string;
   type: string;
@@ -34,5 +36,5 @@ export type PropertyFormValues = {
   city: string;
   address: string;
   amenities: string[];
-  images: { id: string; file: File }[];
+  images: FileObject[];
 };

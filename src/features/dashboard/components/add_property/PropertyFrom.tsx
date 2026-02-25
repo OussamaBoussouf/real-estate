@@ -32,15 +32,17 @@ function PropertyFrom() {
 
   const handleSubmit = (
     values: PropertyFormValues,
-    { setTouched }: FormikHelpers<PropertyFormValues>
+    { setTouched, setSubmitting }: FormikHelpers<PropertyFormValues>
   ) => {
     if (!isLastStep) {
       setTouched({});
+      setSubmitting(false);
       goNext();
       return;
     }
     setTimeout(() => {
       console.log(values);
+      setSubmitting(false);
     }, 1000);
   };
 
@@ -60,6 +62,7 @@ function PropertyFrom() {
           <form className="mt-lg" onSubmit={props.handleSubmit}>
             {steps[currentStep - 1](props)}
             <FormNavigation
+              isSubmitting={props.isSubmitting}
               onBack={goBack}
               isFirstStep={isFirstStep}
               isLastStep={isLastStep}

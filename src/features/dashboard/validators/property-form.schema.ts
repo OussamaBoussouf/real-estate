@@ -25,17 +25,26 @@ export const PROPERTY_IMAGES_SCHEMA = Yup.object().shape({
     .of(
       Yup.object({
         file: Yup.mixed<File>()
-          .required('File is required')
-          .test('fileSize', 'File size is too large (max 1MB)', value => {
-            if (!value || !(value instanceof File)) return false;
-            return value.size <= MAX_FILE_SIZE;
+          .test('fileSize', function (value) {
+            if (!(value instanceof File)) return false;
+            if (value.size > MAX_FILE_SIZE) {
+              return this.createError({
+                message: `${value.name} exceeds 1MB limit`,
+              });
+            }
+            return true;
           })
-          .test('fileType', 'Unsupported file type', value => {
-            if (!value || !(value instanceof File)) return false;
-            return ALLOWED_FILE_TYPES.includes(value.type);
+          .test('fileType', function (value) {
+            if (!(value instanceof File)) return false;
+            if (!ALLOWED_FILE_TYPES.includes(value.type)) {
+              return this.createError({
+                message: `${value.name} must be JPG, PNG, or WebP`,
+              });
+            }
+            return true;
           }),
       })
     )
     .min(3, 'At least 3 images are required')
-    .max(10, 'Maximum 10 images allowed'),
+    .max(8, 'Maximum 8 images allowed'),
 });

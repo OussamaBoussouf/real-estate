@@ -353,6 +353,13 @@ $gap-sizes: (
   }
 }
 
+.error__container {
+  background-color: $color-danger;
+  padding: 1rem; 
+  border-radius: 0.375rem;
+  color: white;
+}
+
 .panel {
   margin-top: 1.5rem;
   border: 1px solid $border-color;
