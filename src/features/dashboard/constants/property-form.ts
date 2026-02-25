@@ -1,4 +1,6 @@
-export const PROPERTY_FORM_INITIAL_VALUES = {
+import { PropertyFormValues } from '../../../types/property';
+
+export const PROPERTY_FORM_INITIAL_VALUES: PropertyFormValues = {
   title: '',
   type: '',
   size: '',
@@ -9,6 +11,7 @@ export const PROPERTY_FORM_INITIAL_VALUES = {
   city: '',
   address: '',
   amenities: [],
+  images: [],
 };
 
 export const AMENITIES = [
