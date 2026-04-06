@@ -33,7 +33,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f7f7f7;
+  // background-color: #f7f7f7;
 }
 
 h1,
@@ -116,3 +116,19 @@ button {
   background-color: transparent;
   border: none;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 0.475rem;
+}
+
+td,
+th {
+  padding: 0.475rem;
+  text-align: start;
+}
+
+// td {
+//   border-bottom: 1px solid $border-color;
+// }

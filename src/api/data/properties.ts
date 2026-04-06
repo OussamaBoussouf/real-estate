@@ -5,7 +5,7 @@ export const properties = [
     description:
       'A spacious 2-bedroom apartment with a beautiful city view and close access to public transport.',
     price: 1200,
-    type: 'Buy',
+    type: 'buy',
     size: 112,
     location: {
       city: 'Kenitra',
@@ -30,7 +30,7 @@ export const properties = [
     description:
       'Perfect for a family, this 3-bedroom house offers a private backyard and garage.',
     price: 2400,
-    type: 'Rent',
+    type: 'rent',
     size: 150,
     location: {
       city: 'Sale',
@@ -56,7 +56,7 @@ export const properties = [
     description:
       'A high-end 2-bedroom condo featuring floor-to-ceiling windows, concierge, and pool access.',
     price: 3500,
-    type: 'Buy',
+    type: 'buy',
     size: 210,
     location: {
       city: 'Casablanca',
@@ -76,7 +76,7 @@ export const properties = [
     description:
       'A charming 3-bedroom townhouse in a quiet suburb with a private patio and modern kitchen.',
     price: 1800,
-    type: 'Rent',
+    type: 'rent',
     size: 210,
     location: {
       city: 'Rabat',
@@ -96,7 +96,7 @@ export const properties = [
     description:
       'Affordable and compact studio apartment, ideal for students or singles near the university.',
     price: 850,
-    type: 'Buy',
+    type: 'buy',
     size: 210,
     location: {
       city: 'Rabat',
@@ -116,7 +116,7 @@ export const properties = [
     description:
       'Elegant penthouse loft with panoramic city views, open floor plan, and premium finishes.',
     price: 4800,
-    type: 'Rent',
+    type: 'rent',
     size: 210,
     location: {
       city: 'Casablanca',
@@ -136,7 +136,7 @@ export const properties = [
     description:
       'Spacious beach house with private dock access, perfect for water sports and family getaways.',
     price: 4200,
-    type: 'Buy',
+    type: 'buy',
     size: 210,
     location: {
       city: 'Kenitra',
@@ -156,7 +156,7 @@ export const properties = [
     description:
       'Clean and efficient studio located in the heart of Silicon Valley, ideal for young professionals.',
     price: 950,
-    type: 'Buy',
+    type: 'buy',
     size: 210,
     location: {
       city: 'Sale',
@@ -176,7 +176,7 @@ export const properties = [
     description:
       'A cozy getaway in nature, featuring wood interiors, fireplace, and lots of natural light.',
     price: 1600,
-    type: 'Rent',
+    type: 'rent',
     size: 210,
     location: {
       city: 'Rabat',
@@ -196,7 +196,7 @@ export const properties = [
     description:
       'Tech-integrated smart apartment in a secure building downtown, close to all amenities.',
     price: 2100,
-    type: 'Buy',
+    type: 'buy',
     size: 210,
     location: {
       city: 'Kenitra',
