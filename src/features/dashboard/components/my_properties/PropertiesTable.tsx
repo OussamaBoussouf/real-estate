@@ -5,6 +5,7 @@ import { formatCurrency } from '../../../../shared/utils/formatter';
 import ClientPagination from '../../../../shared/components/ClientPagination';
 import { useClientPagination } from '../../../../shared/hooks/useClientPagination';
 import AlertDialogButton from '../../../../shared/components/AlertDialogButton';
+import { Link } from 'react-router-dom';
 
 function PropertiesTable({ title, data }: { title: string[]; data: any }) {
   const {
@@ -60,9 +61,13 @@ function PropertiesTable({ title, data }: { title: string[]; data: any }) {
                   {property.location.city}
                 </Table.Cell>
                 <Table.Cell className="d-flex-inline gap-sm">
-                  <button className="d-flex-center" type="button" title="Edit">
+                  <Link
+                    className="d-flex-center"
+                    title="Edit"
+                    to={`/dashboard/edit-property/${property.id}`}
+                  >
                     <SquarePen size="18" />
-                  </button>
+                  </Link>
                   <AlertDialogButton
                     onDelete={() => console.log('Delete')}
                     deletedElement="property"

@@ -29,29 +29,25 @@ function AlertDialogButton({
             This action cannot be undone. This will permanently delete your{' '}
             {deletedElement} and remove your data from our servers.
           </AlertDialog.Description>
-          <div className="alert-dialog__footer">
-            <form
-              onSubmit={(event) => {
-                event.preventDefault();
-                if (onDelete) {
-                  onDelete();
-                }
-                setOpen(false);
-              }}
-            >
-              <AlertDialog.Cancel asChild>
-                <button
-                  type="button"
-                  className="btn btn--secondary btn--rounded"
-                >
-                  Cancel
-                </button>
-              </AlertDialog.Cancel>
-              <button type="submit" className="btn btn--danger btn--rounded">
-                Yes, delete {deletedElement}
+          <form
+            className="alert-dialog__footer"
+            onSubmit={event => {
+              event.preventDefault();
+              if (onDelete) {
+                onDelete();
+              }
+              setOpen(false);
+            }}
+          >
+            <AlertDialog.Cancel asChild>
+              <button type="button" className="btn btn--secondary btn--rounded">
+                Cancel
               </button>
-            </form>
-          </div>
+            </AlertDialog.Cancel>
+            <button type="submit" className="btn btn--danger btn--rounded">
+              Yes, delete {deletedElement}
+            </button>
+          </form>
         </AlertDialog.Content>
       </AlertDialog.Portal>
     </AlertDialog.Root>
