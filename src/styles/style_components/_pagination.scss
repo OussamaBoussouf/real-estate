@@ -25,3 +25,24 @@
     }
   }
 }
+
+.client-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  &__btn {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+
+    &.active {
+      background-color: $primary;
+      color: white;
+    }
+  }
+}
