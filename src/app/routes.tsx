@@ -8,6 +8,7 @@ import DashboardLayout from '../layouts/DashboardLayout';
 import ProtectedRoute from '../features/auth/components/ProtectedRoute';
 import {
   AddPropertyPage,
+  EditPropertyPage,
   MyPropertiesPage,
   NotificationsPage,
   PropertiesPage,
@@ -37,8 +38,18 @@ export const router = createBrowserRouter([
             element: <ProtectedRoute roles={['tenant']} />,
             children: [
               { path: '/dashboard/add-property', element: <AddPropertyPage /> },
-              { path: '/dashboard/my-properties', element: <MyPropertiesPage /> },
-              { path: '/dashboard/notifications', element: <NotificationsPage /> },
+              {
+                path: '/dashboard/my-properties',
+                element: <MyPropertiesPage />,
+              },
+              {
+                path: '/dashboard/notifications',
+                element: <NotificationsPage />,
+              },
+              {
+                path: '/dashboard/edit-property/:id',
+                element: <EditPropertyPage />,
+              },
             ],
           },
           {

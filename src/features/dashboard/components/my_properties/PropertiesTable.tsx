@@ -4,6 +4,7 @@ import Table from '../../../../shared/components/Table';
 import { formatCurrency } from '../../../../shared/utils/formatter';
 import ClientPagination from '../../../../shared/components/ClientPagination';
 import { useClientPagination } from '../../../../shared/hooks/useClientPagination';
+import AlertDialogButton from '../../../../shared/components/AlertDialogButton';
 
 function PropertiesTable({ title, data }: { title: string[]; data: any }) {
   const {
@@ -62,13 +63,12 @@ function PropertiesTable({ title, data }: { title: string[]; data: any }) {
                   <button className="d-flex-center" type="button" title="Edit">
                     <SquarePen size="18" />
                   </button>
-                  <button
-                    className="d-flex-center"
-                    type="button"
-                    title="Delete"
+                  <AlertDialogButton
+                    onDelete={() => console.log('Delete')}
+                    deletedElement="property"
                   >
                     <Trash2 size="18" color="red" />
-                  </button>
+                  </AlertDialogButton>
                 </Table.Cell>
               </Table.Row>
             ))}

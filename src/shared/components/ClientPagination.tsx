@@ -92,7 +92,7 @@ const PreviousButton = ({ onClick, disabled, children }: PreviousButtonProps) =>
     onClick={onClick}
     disabled={disabled}
     type="button"
-    className={`btn btn--secondary btn--rounded ${disabled ? 'btn--disabled' : ''}`}
+    className={`btn btn--secondary--border btn--rounded ${disabled ? 'btn--disabled' : ''}`}
   >
     {children}
   </button>
@@ -109,7 +109,7 @@ const NextButton = ({ onClick, disabled, children }: NextButtonProps) => (
     onClick={onClick}
     disabled={disabled}
     type="button"
-    className={`btn btn--secondary btn--rounded ${disabled ? 'btn--disabled' : ''}`}
+    className={`btn btn--secondary--border btn--rounded ${disabled ? 'btn--disabled' : ''}`}
   >
     {children}
   </button>
