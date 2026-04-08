@@ -1,26 +1,39 @@
 @use '../style_settings/colors' as *;
 
-.badge{
-    color: white;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.5rem;
-    position: absolute;
-    font-weight: bold;
-    top: 1rem;
-    right: 1rem;
+.badge {
+  color: white;
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 999px;
+  // padding: 0.25rem 0.5rem;
+  // border-radius: 0.5rem;
+  // position: absolute;
+  // font-weight: bold;
+//   top: 1rem;
+//   right: 1rem;
 }
 
 .badge--primary {
-    background-color: $primary;
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.badge--secondary {
+  background-color: #f1f3f5;
+  color: #495057;
 }
 
 .badge--success {
-    background-color: $color-success;
+  background-color: #e8f5e9;
+  color: #2e7d32;
 }
 .badge--danger {
-    background-color: $color-danger;
+  background-color: #fdecea;
+  color: #d32f2f;
 }
 
 .badge--warning {
-    background-color: $color-warning;
+  background-color: $color-warning;
 }

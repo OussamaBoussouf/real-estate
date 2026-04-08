@@ -1,0 +1,23 @@
+@use '../style_settings/colors' as *;
+
+.table-wrapper {
+  border: 2px solid #f8f8f8;
+  border-radius: 0.475rem;
+  overflow-x: auto;
+  background: white;
+}
+
+.properties-table {
+  background-color: white;
+
+  &__header {
+    background-color: #f8f8f8;
+    color: black;
+  }
+
+  &__image {
+    border-radius: 0.275rem;
+    object-fit: cover;
+  }
+}
+
