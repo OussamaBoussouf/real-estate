@@ -129,6 +129,10 @@ th {
   text-align: start;
 }
 
-// td {
-//   border-bottom: 1px solid $border-color;
-// }
+th{
+  font-weight: 500;
+}
+
+tr:not(:last-child) {
+  border-bottom: 1px solid $border-color;
+}

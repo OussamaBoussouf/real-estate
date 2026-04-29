@@ -1,0 +1,46 @@
+@use '../style_settings/colors' as *;
+
+.select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border: 1px solid $neutral;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.select__content {
+  padding: 0.25rem;
+  border: 1px solid $neutral;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 0.875rem;
+}
+
+.select__viewport {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.select__item {
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-info;
+    color: white;
+  }
+
+  &:focus {
+    background-color: $color-info;
+    color: white;
+  }
+}
+
+.select__item[data-state='checked'] {
+  background-color: $color-info;
+  color: white;
+}

@@ -1,0 +1,38 @@
+export const leads = [
+  {
+    id: '1',
+    buyer: 'John Doe',
+    contact: 'john.doe@example.com',
+    phone: '06 62 56 74 39',
+    property: '123 Main St',
+    status: 'New',
+    date: '2024-06-01',
+  },
+  {
+    id: '2',
+    buyer: 'Jane Smith',
+    contact: 'jane.smith@example.com',
+    phone: '06 62 56 74 39',
+    property: '456 Oak Ave',
+    status: 'Contacted',
+    date: '2024-06-02',
+  },
+  {
+    id: '3',
+    buyer: 'Bob Johnson',
+    contact: 'bob.johnson@example.com',
+    phone: '06 62 56 74 39',
+    property: '789 Pine Rd',
+    status: 'Closed',
+    date: '2024-06-03',
+  },
+  {
+    id: '4',
+    buyer: 'Alice Williams',
+    contact: 'alice.williams@example.com',
+    phone: '06 62 56 74 39',
+    property: '456 Oak Ave',
+    status: 'Contacted',
+    date: '2024-06-02',
+  },
+];
