@@ -11,8 +11,8 @@
   // border-radius: 0.5rem;
   // position: absolute;
   // font-weight: bold;
-//   top: 1rem;
-//   right: 1rem;
+  // top: 1rem;
+  // right: 1rem;
 }
 
 .badge--primary {
@@ -35,5 +35,6 @@
 }
 
 .badge--warning {
-  background-color: $color-warning;
+  background-color: #fff4e5;
+  color: #ed6c02;
 }

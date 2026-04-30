@@ -1,24 +1,24 @@
 import Button from '../../../shared/components/Button';
-import CustomSelect from '../../../shared/components/CustomSelect';
 import { Label } from 'radix-ui';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { createQueryParams } from '../../../shared/utils/utils';
 import { useNavigate } from 'react-router';
+import CustomSelect from '../../../shared/components/CustomSelect';
 
-const cities = [
+const CITIES = [
   { value: 'kenitra', label: 'Kenitra' },
   { value: 'rabat', label: 'Rabat' },
   { value: 'salé', label: 'Sale' },
   { value: 'casablanca', label: 'Casablanca' },
 ];
 
-const type = [
+const TYPE = [
   { value: 'rent', label: 'Rent' },
   { value: 'buy', label: 'Buy' },
 ];
 
-const category = [
+const CATEGORY = [
   { value: 'apartment', label: 'Apartment' },
   { value: 'house', label: 'House' },
   { value: 'condo', label: 'Condo' },
@@ -44,11 +44,6 @@ function SearchForm() {
     },
   });
 
-  const handleValueChange = (obj: Record<string, string>) => {
-    const [name, value] = Object.entries(obj)[0];
-    formik.setFieldValue(name, value);
-  };
-
   return (
     <div className="search-form__container">
       <h2 className="search-form__title">Search Properties</h2>
@@ -56,12 +51,11 @@ function SearchForm() {
         <div className="search-form__control">
           <Label.Root htmlFor="city">City</Label.Root>
           <CustomSelect
-            onChange={handleValueChange}
-            value={formik.values.city}
-            name="city"
+            onChange={value => formik.setFieldValue('city', value)}
+            options={CITIES}
+            placeholder="Select a city"
             id="city"
-            placeholder="Select a city..."
-            options={cities}
+            value={formik.values.city}
           />
           <span className="text-danger fs-xxs">
             {formik.touched.city && formik.errors.city}
@@ -70,12 +64,11 @@ function SearchForm() {
         <div className="search-form__control">
           <Label.Root htmlFor="type">Type</Label.Root>
           <CustomSelect
-            onChange={handleValueChange}
-            value={formik.values.type}
-            name="type"
+            onChange={value => formik.setFieldValue('type', value)}
+            options={TYPE}
+            placeholder="Select a type"
             id="type"
-            placeholder="Select a type..."
-            options={type}
+            value={formik.values.type}
           />
           <span className="text-danger fs-xxs">
             {formik.touched.type && formik.errors.type}
@@ -84,12 +77,11 @@ function SearchForm() {
         <div className="search-form__control">
           <Label.Root htmlFor="category">Category</Label.Root>
           <CustomSelect
-            onChange={handleValueChange}
-            value={formik.values.category}
-            name="category"
+            onChange={value => formik.setFieldValue('category', value)}
+            options={CATEGORY}
+            placeholder="Select a category"
             id="category"
-            placeholder="Select a category..."
-            options={category}
+            value={formik.values.category}
           />
           <span className="text-danger fs-xxs">
             {formik.touched.category && formik.errors.category}

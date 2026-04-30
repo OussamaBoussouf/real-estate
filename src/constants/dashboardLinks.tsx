@@ -1,14 +1,14 @@
 import {
   CirclePlus,
   House,
-  MessageCircleMore,
+  MessageSquareMore,
   UserPen,
   UsersRound,
 } from 'lucide-react';
 import type { Role } from '../types/user';
 import { ReactNode } from 'react';
 
-export interface SidebarLink {
+export type SidebarLink = {
   label: string;
   path: string;
   icon: ReactNode;
@@ -26,9 +26,9 @@ export const tenantLinks: SidebarLink[] = [
     icon: <House />,
   },
   {
-    label: 'Notifications',
+    label: 'Lead Inbox',
     path: '/dashboard/notifications',
-    icon: <MessageCircleMore />,
+    icon:  <MessageSquareMore />,
   },
   {
     label: 'Profile',

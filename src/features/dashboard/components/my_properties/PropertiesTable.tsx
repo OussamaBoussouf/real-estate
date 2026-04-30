@@ -22,8 +22,8 @@ function PropertiesTable({ title, data }: { title: string[]; data: any }) {
   return (
     <>
       <div className="table-wrapper">
-        <Table className="properties-table">
-          <Table.Header className="properties-table__header">
+        <Table className="table">
+          <Table.Header className="table__header">
             <Table.Row>
               {title.map(title => (
                 <Table.Head key={title} className="fs-xxs">
@@ -37,7 +37,7 @@ function PropertiesTable({ title, data }: { title: string[]; data: any }) {
               <Table.Row key={property.id}>
                 <Table.Cell className="d-flex-inline gap-md">
                   <img
-                    className="properties-table__image"
+                    className="table__image"
                     src="https://plus.unsplash.com/premium_photo-1676321688612-4451a8721435?q=80&w=807&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     width={70}
                     height={55}
@@ -80,22 +80,24 @@ function PropertiesTable({ title, data }: { title: string[]; data: any }) {
           </Table.Body>
         </Table>
       </div>
-      <ClientPagination>
-        <ClientPagination.PreviousButton
-          disabled={isFirstPage}
-          onClick={prevPage}
-        >
-          Previous
-        </ClientPagination.PreviousButton>
-        <ClientPagination.Pages
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onPageChange={page => setPage(page)}
-        />
-        <ClientPagination.NextButton disabled={isLastPage} onClick={nextPage}>
-          Next
-        </ClientPagination.NextButton>
-      </ClientPagination>
+      {totalPages > 1 && (
+        <ClientPagination>
+          <ClientPagination.PreviousButton
+            disabled={isFirstPage}
+            onClick={prevPage}
+          >
+            Previous
+          </ClientPagination.PreviousButton>
+          <ClientPagination.Pages
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onPageChange={page => setPage(page)}
+          />
+          <ClientPagination.NextButton disabled={isLastPage} onClick={nextPage}>
+            Next
+          </ClientPagination.NextButton>
+        </ClientPagination>
+      )}
     </>
   );
 }
