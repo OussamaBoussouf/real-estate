@@ -11,13 +11,16 @@ function SidebarFilter() {
 
   const handleUrlParamChange = (updates: Record<string, any>) => {
     const urlParams: Record<string, any> = {};
-  
+
     for (const [key, val] of searchParams.entries()) {
-      if (!updates['low_price'] && key === 'low_price') continue; //remove low_price from query params to fetch 
+      if (!updates['low_price'] && key === 'low_price')
+        continue; //remove low_price from query params to fetch
       //new properties with new low price
-      else if (!updates['high_price'] && key === 'high_price') continue; //remove high_price from query params to fetch 
+      else if (!updates['high_price'] && key === 'high_price')
+        continue; //remove high_price from query params to fetch
       //new properties with new high price
-      else if(key === 'page') continue; //remove page from query params to reset pagination when a filter changes
+      else if (key === 'page')
+        continue; //remove page from query params to reset pagination when a filter changes
       else if (key !== 'category') urlParams[key] = val;
       else if (!urlParams[key]) urlParams[key] = [val];
       else urlParams[key].push(val);
@@ -25,8 +28,6 @@ function SidebarFilter() {
 
     setSearchParams(filterEmptyQueryParams({ ...urlParams, ...updates }));
   };
-
-
 
   return (
     <form className="sidebar__form">
@@ -38,51 +39,75 @@ function SidebarFilter() {
         name="type"
       />
       {/* Cities */}
-      <fieldset className='fieldset'>
+      <fieldset className="fieldset">
         <legend className="fieldset-legend">Cities</legend>
         <CustomSelect
+          placeholder="Select a city..."
+          value={searchParams.get('city') || ''}
+          options={[
+            { value: 'kenitra', label: 'Kenitra' },
+            { value: 'sale', label: 'Sale' },
+            { value: 'casablanca', label: 'Casablanca' },
+            { value: 'rabat', label: 'Rabat' },
+          ]}
+          onChange={(value: string) => handleUrlParamChange({ city: value })}
+          id="city"
+        />
+        {/* <CustomSelect
           value={searchParams.get('city') || ''}
           name="city"
           id="city"
-          placeholder='Select a city...'
+          placeholder="Select a city..."
           onChange={handleUrlParamChange}
-          options={[{value: 'kenitra', label: 'Kenitra'}, {value: 'sale', label: 'Sale'}, {value: 'casablanca', label: 'Casablanca'}, {value: 'rabat', label: 'Rabat'}]}
-        />
+          options={[
+            { value: 'kenitra', label: 'Kenitra' },
+            { value: 'sale', label: 'Sale' },
+            { value: 'casablanca', label: 'Casablanca' },
+            { value: 'rabat', label: 'Rabat' },
+          ]}
+        /> */}
       </fieldset>
       {/* Real Estate Type */}
       <fieldset className="fieldset">
-          <legend className="fieldset-legend">Real estate type</legend>
-          <CustomCheckboxGroup
-              values={searchParams.getAll('category')}
-              name="category"
-              checkboxValues={['house', 'apartment', 'condo', 'loft', 'studio', 'cabin']}
-              onChange={handleUrlParamChange}
-            />    
+        <legend className="fieldset-legend">Real estate type</legend>
+        <CustomCheckboxGroup
+          values={searchParams.getAll('category')}
+          name="category"
+          checkboxValues={[
+            'house',
+            'apartment',
+            'condo',
+            'loft',
+            'studio',
+            'cabin',
+          ]}
+          onChange={handleUrlParamChange}
+        />
       </fieldset>
       {/* Bedrooms */}
-       <fieldset className="fieldset">
-          <legend className="fieldset-legend">BedRooms</legend>
-          <CustomRadioGroup
-            direction="row"
-            onChange={handleUrlParamChange}
-            selectedValue={searchParams.get('bedrooms') || ''}
-            labelValues={['1', '2', '3', '4 plus']}
-            values={['1', '2', '3', '4']}
-            name="bedrooms"
-          /> 
-       </fieldset>
-       {/* Bathrooms */}
-         <fieldset className="fieldset">
-          <legend className="fieldset-legend">BathRooms</legend>
-          <CustomRadioGroup
-            direction="row"
-            onChange={handleUrlParamChange}
-            selectedValue={searchParams.get('bathrooms') || ''}
-            labelValues={['1', '2', '3 plus']}
-            values={['1', '2', '3']}
-            name="bathrooms"
-          /> 
-       </fieldset>
+      <fieldset className="fieldset">
+        <legend className="fieldset-legend">BedRooms</legend>
+        <CustomRadioGroup
+          direction="row"
+          onChange={handleUrlParamChange}
+          selectedValue={searchParams.get('bedrooms') || ''}
+          labelValues={['1', '2', '3', '4 plus']}
+          values={['1', '2', '3', '4']}
+          name="bedrooms"
+        />
+      </fieldset>
+      {/* Bathrooms */}
+      <fieldset className="fieldset">
+        <legend className="fieldset-legend">BathRooms</legend>
+        <CustomRadioGroup
+          direction="row"
+          onChange={handleUrlParamChange}
+          selectedValue={searchParams.get('bathrooms') || ''}
+          labelValues={['1', '2', '3 plus']}
+          values={['1', '2', '3']}
+          name="bathrooms"
+        />
+      </fieldset>
       {/* Range Slider */}
       <PriceSlider onChange={handleUrlParamChange} />
     </form>

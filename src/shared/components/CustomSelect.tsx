@@ -1,86 +1,56 @@
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
+import { ChevronDownIcon } from 'lucide-react';
 import { Select } from 'radix-ui';
-import React from 'react';
-
-type SelectItemProps = React.ComponentPropsWithRef<typeof Select.Item> & {
-  children: React.ReactNode;
-};
-
-type SelectItemRef = React.ElementRef<typeof Select.Item>;
+import { ReactNode, useState } from 'react';
 
 type CustomSelectProps = {
-  options: { value: string; label: string }[];
-  placeholder?: string;
-  id: string;
-  onChange: (arg: Record<string, string>) => void;
-  name: string;
-  value: string;
+  placeholder: string;
+  options: { value: string; label: string | ReactNode }[];
+  onChange?: (value: string) => void;
+  id?: string;
+  value?: string;
+  width?: string;
 };
 
 function CustomSelect({
-  options,
   placeholder,
   onChange,
-  value,
   id,
-  name,
-  ...props
+  options,
+  value,
+  width = '100%',
 }: CustomSelectProps) {
-  const handleValueChange = (val: string) => {
-    onChange({[name]: val});
-  };
+  const [selectedValue, setSelectedValue] = useState(value || '');
+
+  const handleValueChange = (value: string) => {
+    setSelectedValue(value);
+    onChange?.(value);
+  }
 
   return (
-    <Select.Root
-      {...props}
-      name={name}
-      value={value}
-      onValueChange={handleValueChange}
-    >
-      <Select.Trigger id={id} className="select__trigger" aria-labelledby={id}>
+    <Select.Root value={selectedValue} onValueChange={handleValueChange}>
+      <Select.Trigger style={{ width: width }} className="select__trigger" id={id}>
         <Select.Value placeholder={placeholder} />
         <Select.Icon className="d-flex-center">
-          <ChevronDownIcon />
+          <ChevronDownIcon size="16" />
         </Select.Icon>
       </Select.Trigger>
       <Select.Portal>
         <Select.Content className="select__content">
-          <Select.ScrollUpButton>
-            <ChevronUpIcon />
-          </Select.ScrollUpButton>
           <Select.Viewport className="select__viewport">
-            <Select.Group>
-              {options.map((option, i) => (
-                <SelectItem key={i} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </Select.Group>
+            {options.map(option => (
+              <Select.Item
+                className="select__item"
+                value={option.value}
+                key={option.value}
+              >
+                <Select.ItemText>{option.label}</Select.ItemText>
+              </Select.Item>
+            ))}
           </Select.Viewport>
-          <Select.ScrollDownButton className="select__scroll-btn">
-            <ChevronDownIcon />
-          </Select.ScrollDownButton>
         </Select.Content>
       </Select.Portal>
     </Select.Root>
   );
 }
-
-const SelectItem = React.forwardRef<SelectItemRef, SelectItemProps>(
-  ({ children, ...props }, forwardedRef) => {
-    return (
-      <Select.Item
-        className="select__item d-flex cursor-pointer"
-        {...props}
-        ref={forwardedRef}
-      >
-        <Select.ItemText>{children}</Select.ItemText>
-        <Select.ItemIndicator className="d-flex-center ms-sm">
-          <CheckIcon size="1rem" />
-        </Select.ItemIndicator>
-      </Select.Item>
-    );
-  }
-);
 
 export default CustomSelect;

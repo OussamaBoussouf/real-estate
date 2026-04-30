@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-export const useClientPagination = (data: any, initialPageSize = 5) => {
+export const useClientPagination = (data: any, initialPageSize = 10) => {
   const [pagination, setPagination] = useState({
     currentPage: 1,
     pageSize: initialPageSize,

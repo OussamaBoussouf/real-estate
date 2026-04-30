@@ -80,22 +80,24 @@ function PropertiesTable({ title, data }: { title: string[]; data: any }) {
           </Table.Body>
         </Table>
       </div>
-      <ClientPagination>
-        <ClientPagination.PreviousButton
-          disabled={isFirstPage}
-          onClick={prevPage}
-        >
-          Previous
-        </ClientPagination.PreviousButton>
-        <ClientPagination.Pages
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onPageChange={page => setPage(page)}
-        />
-        <ClientPagination.NextButton disabled={isLastPage} onClick={nextPage}>
-          Next
-        </ClientPagination.NextButton>
-      </ClientPagination>
+      {totalPages > 1 && (
+        <ClientPagination>
+          <ClientPagination.PreviousButton
+            disabled={isFirstPage}
+            onClick={prevPage}
+          >
+            Previous
+          </ClientPagination.PreviousButton>
+          <ClientPagination.Pages
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onPageChange={page => setPage(page)}
+          />
+          <ClientPagination.NextButton disabled={isLastPage} onClick={nextPage}>
+            Next
+          </ClientPagination.NextButton>
+        </ClientPagination>
+      )}
     </>
   );
 }

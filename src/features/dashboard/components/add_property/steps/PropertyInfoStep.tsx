@@ -1,4 +1,5 @@
 import { FormikProps } from 'formik';
+import CustomSelect from '../../../../../shared/components/CustomSelect';
 
 type FormValues = {
   title: string;
@@ -11,6 +12,7 @@ type FormValues = {
 function PropertyInfoStep({
   values,
   handleChange,
+  setFieldValue,
   touched,
   errors,
 }: FormikProps<FormValues>) {
@@ -18,7 +20,10 @@ function PropertyInfoStep({
     <div className="grid col-2">
       {/* PROPERTY TITLE AND PRICE */}
       <div>
-        <label className='fs-xxs' htmlFor="title">Title</label> <br />
+        <label className="fs-xxs" htmlFor="title">
+          Title
+        </label>{' '}
+        <br />
         <input
           value={values.title}
           type="text"
@@ -31,7 +36,10 @@ function PropertyInfoStep({
         ) : null}
       </div>
       <div>
-        <label className='fs-xxs' htmlFor="price">Price</label> <br />
+        <label className="fs-xxs" htmlFor="price">
+          Price
+        </label>{' '}
+        <br />
         <input
           value={values.price}
           type="number"
@@ -46,22 +54,34 @@ function PropertyInfoStep({
 
       {/* PROPERTY TYPE AND SIZE */}
       <div>
-        <label className='fs-xxs' htmlFor="type">Type</label> <br />
-        <select
-          className="w-full"
+        <label className="fs-xxs" htmlFor="type">
+          Type
+        </label>{' '}
+        <br />
+        <CustomSelect
           id="type"
-          value={values.type}
-          onChange={handleChange}
-        >
-          <option value="sale">For Sale</option>
-          <option value="rent">For Rent</option>
-        </select>
+          onChange={(value) => setFieldValue('type', value)}
+          placeholder="Select Type"
+          options={[
+            {
+              value: 'sale',
+              label: 'For Sale',
+            },
+            {
+              value: 'rent',
+              label: 'For Rent',
+            },
+          ]}
+        />
         {touched.type && errors.type ? (
           <p className="text-danger fs-xxs">{errors.type}</p>
         ) : null}
       </div>
       <div>
-        <label className='fs-xxs' htmlFor="size">Size</label> <br />
+        <label className="fs-xxs" htmlFor="size">
+          Size
+        </label>{' '}
+        <br />
         <input
           className="w-full"
           value={values.size}
@@ -75,8 +95,11 @@ function PropertyInfoStep({
       </div>
 
       {/* PROPERTY DESCRIPTION */}
-      <div className='span-2'>
-        <label className='fs-xxs' htmlFor="description">Description</label> <br />
+      <div className="span-2">
+        <label className="fs-xxs" htmlFor="description">
+          Description
+        </label>{' '}
+        <br />
         <textarea
           className="w-full"
           id="description"
