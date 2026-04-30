@@ -18,7 +18,7 @@ function LeadsInboxTable({ title, data }: LeadsInboxTableProps) {
     nextPage,
     prevPage,
     currentPage,
-  } = useClientPagination(data, 4);
+  } = useClientPagination(data);
 
   return (
     <>
