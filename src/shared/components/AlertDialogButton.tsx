@@ -15,7 +15,15 @@ function AlertDialogButton({
   return (
     <AlertDialog.Root open={open} onOpenChange={setOpen}>
       <AlertDialog.Trigger asChild>
-        <button type="button" className="d-flex-center" title="Delete">
+        <button
+          onClick={e => {
+            e.stopPropagation(); // This is fine
+            // Open dialog logic
+          }}
+          type="button"
+          className="d-flex-center"
+          title="Delete"
+        >
           {children}
         </button>
       </AlertDialog.Trigger>
