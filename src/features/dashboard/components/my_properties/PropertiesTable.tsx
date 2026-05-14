@@ -70,7 +70,7 @@ function PropertiesTable({ title, data }: { title: string[]; data: any }) {
                   </Link>
                   <AlertDialogButton
                     onDelete={() => console.log('Delete')}
-                    deletedElement="property"
+                    message="This action cannot be undone. This will permanently delete property and remove your data from our servers."
                   >
                     <Trash2 size="18" color="red" />
                   </AlertDialogButton>

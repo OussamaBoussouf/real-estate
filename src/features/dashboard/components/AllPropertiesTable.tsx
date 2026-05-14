@@ -83,7 +83,7 @@ const AdminActionMenu = () => {
             className="fs-xxs dropdown__item"
           >
             <AlertDialogButton
-              deletedElement="property"
+              message= "This action cannot be undone. This will permanently delete property and remove it from the server."
               onDelete={() => console.log('Delete')}
             >
               Delete

@@ -2,12 +2,12 @@ import { AlertDialog } from 'radix-ui';
 import { useState } from 'react';
 
 function AlertDialogButton({
-  deletedElement,
+  message,
   onDelete,
   children,
 }: {
   onDelete: () => void;
-  deletedElement: string;
+  message: string;
   children: React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);
@@ -34,8 +34,7 @@ function AlertDialogButton({
             Are you absolutely sure?
           </AlertDialog.Title>
           <AlertDialog.Description className="fs-xxs mb-md">
-            This action cannot be undone. This will permanently delete your{' '}
-            {deletedElement} and remove your data from our servers.
+            {message}
           </AlertDialog.Description>
           <form
             className="alert-dialog__footer"
@@ -53,7 +52,7 @@ function AlertDialogButton({
               </button>
             </AlertDialog.Cancel>
             <button type="submit" className="btn btn--danger btn--rounded">
-              Yes, delete {deletedElement}
+              Delete
             </button>
           </form>
         </AlertDialog.Content>
