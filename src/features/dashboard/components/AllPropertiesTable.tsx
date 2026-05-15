@@ -3,7 +3,6 @@ import Badge from '../../../shared/components/Badge';
 import Table from '../../../shared/components/Table';
 import { DropdownMenu } from 'radix-ui';
 import AlertDialogButton from '../../../shared/components/AlertDialogButton';
-import { useState } from 'react';
 
 type AllPropertiesTableProps = {
   title: string[];
