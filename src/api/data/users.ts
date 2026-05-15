@@ -9,6 +9,7 @@ export const users = [
     password: '123456789',
     profileImage:
       'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80',
+    isBlocked: true,
   },
   {
     id: '2',
@@ -20,5 +21,6 @@ export const users = [
     password: '123456789',
     profileImage:
       'https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80',
+    isBlocked: false,
   },
 ];
