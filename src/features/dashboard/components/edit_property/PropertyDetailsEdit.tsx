@@ -1,6 +1,6 @@
 function PropertyDetailsEdit() {
   return (
-    <fieldset className="p-md grid col-2 border-dashed border-rounded">
+    <fieldset className="mb-lg p-md grid col-2 border-dashed border-rounded">
       <legend>Property Details</legend>
       <div>
         <label className="fs-xxs" htmlFor="bedrooms">

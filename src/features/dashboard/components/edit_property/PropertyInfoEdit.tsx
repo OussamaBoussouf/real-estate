@@ -1,6 +1,6 @@
 import CustomSelect from '../../../../shared/components/CustomSelect';
 
-function PropertyInfoForm() {
+function PropertyInfoFormEdit() {
   return (
     <fieldset className="mb-lg p-md grid col-2 border-dashed border-rounded">
       <legend>Property Info</legend>
@@ -47,4 +47,4 @@ function PropertyInfoForm() {
   );
 }
 
-export default PropertyInfoForm;
+export default PropertyInfoFormEdit;
