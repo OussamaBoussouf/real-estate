@@ -101,6 +101,10 @@
   border-radius: 50%;
 }
 
+.border-dashed {
+  border: 2px dashed $border-color;
+}
+
 //
 .img-o-fit {
   object-fit: cover;
