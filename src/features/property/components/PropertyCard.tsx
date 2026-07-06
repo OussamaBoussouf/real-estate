@@ -1,5 +1,6 @@
 import { BedDouble, MapPin, ShowerHead } from 'lucide-react';
 import Badge from '../../../shared/components/Badge';
+import PropertyImage from '../../../assets/hero_image_1.jpg';
 
 type PropertyCardProps = {
   price: number;
@@ -26,7 +27,7 @@ function PropertyCard({
           className="property-card__image"
           width="300"
           height="200"
-          src="https://rockwellcustom.com/wp-content/uploads/2019/07/new-construction-homes-1024x698.jpg"
+          src={PropertyImage}
           alt="big house"
         />
       </div>
