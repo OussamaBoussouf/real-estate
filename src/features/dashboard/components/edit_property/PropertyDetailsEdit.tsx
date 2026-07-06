@@ -1,4 +1,14 @@
-function PropertyDetailsEdit() {
+import { FormikProps } from 'formik';
+import { PropertyFormValues } from '../../../../types/property';
+
+
+function PropertyDetailsEdit({
+  values,
+  handleChange,
+  setFieldValue,
+  touched,
+  errors,
+}: FormikProps<PropertyFormValues>) {
   return (
     <fieldset className="mb-lg p-md grid col-2 border-dashed border-rounded">
       <legend>Property Details</legend>
@@ -7,34 +17,85 @@ function PropertyDetailsEdit() {
           Bedrooms
         </label>
         <br />
-        <input className="w-full" type="number" id="bedrooms" />
+        <input
+          className="w-full"
+          type="number"
+          id="bedrooms"
+          name="bedrooms"
+          value={values.bedrooms}
+          onChange={handleChange}
+        />
+        {touched.bedrooms && errors.bedrooms ? (
+          <p className="text-danger fs-xxs">{errors.bedrooms}</p>
+        ) : null}
       </div>
       <div>
         <label className="fs-xxs" htmlFor="bathrooms">
           Bathrooms
         </label>
         <br />
-        <input className="w-full" type="number" id="bathrooms" />
+        <input
+          className="w-full"
+          type="number"
+          id="bathrooms"
+          name="bathrooms"
+          value={values.bathrooms}
+          onChange={handleChange}
+        />
+        {touched.bathrooms && errors.bathrooms ? (
+          <p className="text-danger fs-xxs">{errors.bathrooms}</p>
+        ) : null}
       </div>
       <div>
         <label className="fs-xxs" htmlFor="city">
           City
         </label>
         <br />
-        <input className="w-full" type="text" id="city" />
+        <input
+          className="w-full"
+          type="text"
+          id="city"
+          name="city"
+          value={values.city}
+          onChange={handleChange}
+        />
+        {touched.city && errors.city ? (
+          <p className="text-danger fs-xxs">{errors.city}</p>
+        ) : null}
       </div>
       <div>
         <label className="fs-xxs" htmlFor="address">
           Address
         </label>
         <br />
-        <input className="w-full" type="text" id="address" />
+        <input
+          className="w-full"
+          type="text"
+          id="address"
+          name="address"
+          value={values.address}
+          onChange={handleChange}
+        />
+        {touched.address && errors.address ? (
+          <p className="text-danger fs-xxs">{errors.address}</p>
+        ) : null}
       </div>
       <div className="span-2">
         <span className="fs-xxs">Amenities</span>
         <br />
         <div className="grid col-3">
-          <AmenitiesMultiSelect amenities={AMENITIES} />
+          <AmenitiesMultiSelect
+            onCheck={(amenity: string) =>
+              setFieldValue('amenities', [...values.amenities, amenity])
+            }
+            onUncheck={(amenity: string) => {
+              const updatedAmenities = values.amenities.filter(
+                a => a !== amenity
+              );
+              setFieldValue('amenities', updatedAmenities);
+            }}
+            amenities={AMENITIES}
+          />
         </div>
       </div>
     </fieldset>
@@ -76,10 +137,25 @@ export const AMENITIES = [
 ];
 
 type AmenitiesMultiSelectProps = {
+  onCheck: (amenity: string) => void;
+  onUncheck: (amenity: string) => void;
   amenities: { label: string; value: string }[];
 };
 
-const AmenitiesMultiSelect = ({ amenities }: AmenitiesMultiSelectProps) => {
+const AmenitiesMultiSelect = ({
+  amenities,
+  onCheck,
+  onUncheck,
+}: AmenitiesMultiSelectProps) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const isChecked = event.target.checked;
+    const value = event.target.value;
+    if (isChecked) {
+      onCheck(value);
+    } else {
+      onUncheck(value);
+    }
+  };
   return (
     <>
       {amenities.map(amenity => (
@@ -92,6 +168,7 @@ const AmenitiesMultiSelect = ({ amenities }: AmenitiesMultiSelectProps) => {
             id={amenity.value}
             name="amenities"
             value={amenity.value}
+            onChange={handleChange}
           />
         </div>
       ))}

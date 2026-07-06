@@ -82,7 +82,6 @@
 
 .text-danger {
   color: $color-danger;
-  // height: 0.9rem;
 }
 
 .cursor-pointer {
@@ -99,8 +98,7 @@
 .grid-layout-images {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  row-gap: 0.75rem;
-  column-gap: 0.75rem;
+  gap: 0.75rem;
 }
 
 //BORDER RADIUS
@@ -122,8 +120,24 @@
 }
 
 //COLORS
-.clr-black {
-  color: black;
+$clr: (
+  primary: $primary,
+  secondary: $secondary,
+  neutral: $neutral,
+  light-gray: $light-gray,
+  danger-light: $color-danger-light,
+  danger: $color-danger,
+  success: $color-success,
+  warning: $color-warning,
+  info: $color-info,
+  "white": #ffff,
+  "black": #000000,
+);
+
+@each $key, $value in $clr {
+  .clr-#{$key} {
+    color: $value;
+  }
 }
 
 //WIDTH
@@ -217,7 +231,7 @@ $font-weights: (
 
 //FONT SIZES
 $font-sizes: (
-  xxs: 0.85rem,
+  xxs: 0.75rem,
   xs: 1rem,
   sm: 1.25rem,
   md: 1.75rem,
