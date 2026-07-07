@@ -1,7 +1,7 @@
 export const users = [
   {
     id: '1',
-    role: 'tenant',
+    role: 'landlord',
     fullName: 'Jack Marrow',
     email: 'jackmarrow@gmail.com',
     address: 'Hay chabab 90, 23',

@@ -4,7 +4,6 @@ import RootLayout from '../layouts/RootLayout';
 import { Homepage } from '../pages/index.ts';
 import PropertyPage from '../features/property/pages/PropertyPage';
 import SinglePropertyPage from '../features/property/pages/SinglePropertyPage';
-import DashboardLayout from '../layouts/DashboardLayout';
 import ProtectedRoute from '../features/auth/components/ProtectedRoute';
 import {
   AddPropertyPage,
@@ -16,6 +15,9 @@ import {
 } from '../features/dashboard/index.ts';
 import NotAuthorized from '../pages/NotAuthorized.tsx';
 import ProfilePage from '../features/dashboard/pages/ProfilePage.tsx';
+import Layout from '../layouts/dashboard/Layout.tsx';
+import { ROUTES } from '../constants/routes.ts';
+
 
 export const router = createBrowserRouter([
   {
@@ -23,31 +25,37 @@ export const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <Homepage /> },
-      { path: '/properties', element: <PropertyPage /> },
-      { path: '/properties/:id', element: <SinglePropertyPage /> },
+      { path: ROUTES.PROPERTY.HOME, element: <PropertyPage /> },
+      {
+        path: ROUTES.PROPERTY.SINGLE_PROPERTY,
+        element: <SinglePropertyPage />,
+      },
     ],
   },
   {
     element: <ProtectedRoute />,
     children: [
       {
-        element: <DashboardLayout />,
+        element: <Layout/>,
         children: [
-          { path: '/dashboard/profile', element: <ProfilePage /> },
+          { path: ROUTES.DASHBOARD.PROFILE, element: <ProfilePage /> },
           {
-            element: <ProtectedRoute roles={['tenant']} />,
+            element: <ProtectedRoute roles={['landlord']} />,
             children: [
-              { path: '/dashboard/add-property', element: <AddPropertyPage /> },
               {
-                path: '/dashboard/my-properties',
+                path: ROUTES.DASHBOARD.ADD_PROPERTY,
+                element: <AddPropertyPage />,
+              },
+              {
+                path: ROUTES.DASHBOARD.MY_PROPERTIES,
                 element: <MyPropertiesPage />,
               },
               {
-                path: '/dashboard/notifications',
+                path: ROUTES.DASHBOARD.NOTIFICATIONS,
                 element: <NotificationsPage />,
               },
               {
-                path: '/dashboard/edit-property/:id',
+                path: ROUTES.DASHBOARD.EDIT_PROPERTY,
                 element: <EditPropertyPage />,
               },
             ],
@@ -55,8 +63,11 @@ export const router = createBrowserRouter([
           {
             element: <ProtectedRoute roles={['admin']} />,
             children: [
-              { path: '/dashboard/users', element: <UsersPage /> },
-              { path: '/dashboard/properties', element: <PropertiesPage /> },
+              { path: ROUTES.DASHBOARD.USERS, element: <UsersPage /> },
+              {
+                path: ROUTES.DASHBOARD.PROPERTIES,
+                element: <PropertiesPage />,
+              },
             ],
           },
         ],
