@@ -11,7 +11,7 @@ const isAllowedFileType = (type : string) : type is AllowedFileType  => {
 }
 
 // Validate the Size and Type of an Image
-const validateImageFile = (file: File, maxSize: number): string | null => {
+const validateImageFile = (file: File, maxSize:number = MAX_FILE_SIZE): string | null => {
   
   if (isAllowedFileType(file.type)) {
     return 'Invalid file type. Only JPEG, PNG, and WebP are allowed.';
