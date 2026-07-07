@@ -14,7 +14,6 @@ type PropertyImage = {
 function PropertyImageEdit({
   touched,
   errors,
-  setFieldError,
   setFieldValue,
 }: FormikProps<PropertyFormValues>) {
   const [images, setImages] = useState<PropertyImage[]>([]);

@@ -9,7 +9,7 @@ import {
   PROPERTY_DETAILS_SCHEMA,
   PROPERTY_IMAGES_SCHEMA,
   PROPERTY_INFO_SCHEMA,
-} from '../../validators/property-form.schema';
+} from '../../validators/schema';
 import { PROPERTY_FORM_INITIAL_VALUES } from '../../constants/property-form';
 import FormNavigation from './FormNavigation';
 import { PropertyFormValues } from '../../../../types/property';

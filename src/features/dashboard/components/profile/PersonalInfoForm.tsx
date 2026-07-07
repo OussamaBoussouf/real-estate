@@ -3,7 +3,7 @@ import { UserInfo } from '../../../../types/user';
 import api from '../../../../app/axios';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-import { PERSONAL_IMAGE_FORM_SCHEMA } from '../../validators/profile.schema';
+import { PERSONAL_INFO_FORM_SCHEMA } from '../../validators/schema';
 
 function PersonalInfoForm({ user }: { user: UserInfo }) {
   const formik = useFormik({
@@ -13,7 +13,7 @@ function PersonalInfoForm({ user }: { user: UserInfo }) {
       phone: user.phone,
       address: user.address,
     },
-    validationSchema: PERSONAL_IMAGE_FORM_SCHEMA,
+    validationSchema: PERSONAL_INFO_FORM_SCHEMA,
     onSubmit: async (values, actions) => {
       try {
         const response = await api.put('/users/me/personal-info', values, {

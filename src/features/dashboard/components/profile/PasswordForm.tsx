@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import api from '../../../../app/axios';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-import { PASSWORD_FORM_SCHEMA } from '../../validators/profile.schema';
+import { PASSWORD_FORM_SCHEMA } from '../../validators/schema';
 
 function PasswordForm() {
   const formik = useFormik({
