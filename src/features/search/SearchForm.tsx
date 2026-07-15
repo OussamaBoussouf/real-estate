@@ -1,28 +1,14 @@
-import Button from '../../../shared/components/Button';
+import Button from '../../shared/components/Button';
 import { Label } from 'radix-ui';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { createQueryParams } from '../../../shared/utils/utils';
+import { createQueryParams } from '../../shared/utils/utils';
 import { useNavigate } from 'react-router';
-import CustomSelect from '../../../shared/components/CustomSelect';
+import CustomSelect from '../../shared/components/CustomSelect';
+import { SEARCH_SCHEMA } from './schema';
+import { CITIES } from '../../constants/geography';
+import { PROPERTY_CATEGORIES, PROPERTY_TYPES } from '../../constants/properties';
 
-const CITIES = [
-  { value: 'kenitra', label: 'Kenitra' },
-  { value: 'rabat', label: 'Rabat' },
-  { value: 'salé', label: 'Sale' },
-  { value: 'casablanca', label: 'Casablanca' },
-];
 
-const TYPE = [
-  { value: 'rent', label: 'Rent' },
-  { value: 'buy', label: 'Buy' },
-];
-
-const CATEGORY = [
-  { value: 'apartment', label: 'Apartment' },
-  { value: 'house', label: 'House' },
-  { value: 'condo', label: 'Condo' },
-];
 
 function SearchForm() {
   const navigate = useNavigate();
@@ -33,11 +19,7 @@ function SearchForm() {
       type: '',
       category: '',
     },
-    validationSchema: Yup.object({
-      city: Yup.string().required('field is required'),
-      type: Yup.string().required('field is required'),
-      category: Yup.string().required('field is required'),
-    }),
+    validationSchema: SEARCH_SCHEMA,
     onSubmit: values => {
       const query = createQueryParams(values);
       navigate(`properties?${query}`);
@@ -65,7 +47,7 @@ function SearchForm() {
           <Label.Root htmlFor="type">Type</Label.Root>
           <CustomSelect
             onChange={value => formik.setFieldValue('type', value)}
-            options={TYPE}
+            options={PROPERTY_TYPES}
             placeholder="Select a type"
             id="type"
             value={formik.values.type}
@@ -78,7 +60,7 @@ function SearchForm() {
           <Label.Root htmlFor="category">Category</Label.Root>
           <CustomSelect
             onChange={value => formik.setFieldValue('category', value)}
-            options={CATEGORY}
+            options={PROPERTY_CATEGORIES}
             placeholder="Select a category"
             id="category"
             value={formik.values.category}

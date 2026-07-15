@@ -5,6 +5,7 @@ import { filterEmptyQueryParams } from '../../../shared/utils/utils';
 import CustomRadioGroup from '../../../shared/components/CustomRadioGroup';
 import PriceSlider from './PriceSlider';
 import CustomSelect from '../../../shared/components/CustomSelect';
+import { CITIES } from '../../../constants/geography';
 
 function SidebarFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -44,28 +45,10 @@ function SidebarFilter() {
         <CustomSelect
           placeholder="Select a city..."
           value={searchParams.get('city') || ''}
-          options={[
-            { value: 'kenitra', label: 'Kenitra' },
-            { value: 'sale', label: 'Sale' },
-            { value: 'casablanca', label: 'Casablanca' },
-            { value: 'rabat', label: 'Rabat' },
-          ]}
+          options={CITIES}
           onChange={(value: string) => handleUrlParamChange({ city: value })}
           id="city"
         />
-        {/* <CustomSelect
-          value={searchParams.get('city') || ''}
-          name="city"
-          id="city"
-          placeholder="Select a city..."
-          onChange={handleUrlParamChange}
-          options={[
-            { value: 'kenitra', label: 'Kenitra' },
-            { value: 'sale', label: 'Sale' },
-            { value: 'casablanca', label: 'Casablanca' },
-            { value: 'rabat', label: 'Rabat' },
-          ]}
-        /> */}
       </fieldset>
       {/* Real Estate Type */}
       <fieldset className="fieldset">

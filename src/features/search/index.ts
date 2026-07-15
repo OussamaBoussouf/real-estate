@@ -1,1 +1,1 @@
-export { default as SearchFrom } from './components/SearchForm';
+export { default as SearchForm } from './SearchForm';

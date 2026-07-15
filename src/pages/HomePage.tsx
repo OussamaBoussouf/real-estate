@@ -1,4 +1,4 @@
-import { SearchFrom } from '../features/search';
+import { SearchForm } from '../features/search';
 
 function HomePage() {
   return (
@@ -14,7 +14,7 @@ function HomePage() {
           </p>
         </div>
         <div className="hero-section__search-form">
-          <SearchFrom />
+          <SearchForm />
         </div>
       </div>
     </main>
