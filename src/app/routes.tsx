@@ -15,7 +15,7 @@ import {
 } from '../features/dashboard/index.ts';
 import NotAuthorized from '../pages/NotAuthorized.tsx';
 import ProfilePage from '../features/dashboard/pages/ProfilePage.tsx';
-import Layout from '../layouts/dashboard/Layout.tsx';
+import DashboardLayout from '../layouts/dashboard/DashboardLayout.tsx';
 import { ROUTES } from '../constants/routes.ts';
 
 
@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
     element: <ProtectedRoute />,
     children: [
       {
-        element: <Layout/>,
+        element: <DashboardLayout />,
         children: [
           { path: ROUTES.DASHBOARD.PROFILE, element: <ProfilePage /> },
           {

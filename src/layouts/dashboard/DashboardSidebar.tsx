@@ -4,7 +4,7 @@ import { useAuthContext } from '../../context/AuthContext';
 import { useMediaQuery } from '../../shared/hooks/useMediaQuery';
 import SIDEBAR_LINKS from './sidebar-links';
 
-function Sidebar() {
+function DashboardSidebar() {
   const { user, logout } = useAuthContext();
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -63,4 +63,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default DashboardSidebar;
