@@ -13,7 +13,7 @@ export type User = {
 
 export type UserLogin = Pick<User, 'email' | 'password'>;
 
-export type UserSignup = Omit<User, 'id' | 'role' | 'profileImage'>;
+export type UserSignup = Pick<User, 'fullName' | 'email' | 'phone' | 'password'>;
 
 export type UserInfo = Pick<
   User,

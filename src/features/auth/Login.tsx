@@ -1,37 +1,30 @@
 import { useFormik } from 'formik';
 import { Dialog } from 'radix-ui';
-import * as Yup from 'yup';
 import { AxiosError } from 'axios';
-import CustomPasswordInput from '../../../shared/components/CustomPasswordInput';
+import CustomPasswordInput from '../../shared/components/CustomPasswordInput';
 import { toast } from 'react-toastify';
-import { useAuthContext } from '../../../context/AuthContext';
+import { useAuthContext } from '../../context/AuthContext';
+import { LOGIN_SCHEMA } from './schema';
 
 type LoginProps = {
   open: boolean;
-  onDialogChange: (mode: 'login' | 'signup') => void;
-  onModeChange: (mode: 'login' | 'signup') => void;
+  onChange: (mode: 'login' | 'signup') => void;
+  onClose: () => void;
 };
 
-function Login({ open, onDialogChange, onModeChange }: LoginProps) {
-  const {login } = useAuthContext();
-  
+function Login({ open, onChange, onClose }: LoginProps) {
+  const { login } = useAuthContext();
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
-    validationSchema: Yup.object({
-      email: Yup.string()
-        .email('invalid email address')
-        .required('email is required'),
-      password: Yup.string()
-        .min(8, 'password should contain at least 8 characters')
-        .required('password is required'),
-    }),
+    validationSchema: LOGIN_SCHEMA,
     onSubmit: async (values, actions) => {
       try {
         await login(values);
-        onDialogChange('login');
+        onClose();
       } catch (err) {
         const { message: errorMessage } = err as AxiosError;
         toast.error(errorMessage);
@@ -45,13 +38,21 @@ function Login({ open, onDialogChange, onModeChange }: LoginProps) {
     <Dialog.Root
       open={open}
       onOpenChange={() => {
+        onClose();
         formik.resetForm();
-        onDialogChange('login');
       }}
     >
       <Dialog.Portal>
         <Dialog.Overlay className="overlay" />
-        <Dialog.Content className="modal__content">
+        <Dialog.Content
+          onPointerDownOutside={e => {
+            const target = e.target as HTMLElement;
+            if (target?.closest('.Toastify')) {
+              e.preventDefault();
+            }
+          }}
+          className="modal__content"
+        >
           <Dialog.Title className="text-center mb-sm">Login</Dialog.Title>
           <Dialog.Description className="text-center mb-lg">
             Enter your details to get sign in to your account
@@ -110,7 +111,7 @@ function Login({ open, onDialogChange, onModeChange }: LoginProps) {
               <button
                 className="fw-bold"
                 type="button"
-                onClick={() => onModeChange('signup')}
+                onClick={() => onChange('signup')}
               >
                 Sign up
               </button>

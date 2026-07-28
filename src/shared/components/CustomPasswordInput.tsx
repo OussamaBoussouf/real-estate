@@ -18,7 +18,7 @@ function CustomPasswordInput({
   };
 
   return (
-    <div className="input">
+    <div className="input__wrapper">
       <input
         ref={inputRef}
         type="password"
