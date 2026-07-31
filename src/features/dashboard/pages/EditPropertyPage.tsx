@@ -4,7 +4,7 @@ import PropertyDetailsEdit from '../components/edit_property/PropertyDetailsEdit
 import PropertyImageEdit from '../components/edit_property/PropertyImageEdit';
 
 import { PROPERTY_FORM_INITIAL_VALUES } from '../constants/property-form';
-import { PROPERTY_EDIT_SCHEMA } from '../validators/property-edit.schema';
+import { PROPERTY_EDIT_SCHEMA } from '../validators/schema';
 import { PropertyFormValues } from '../../../types/property';
 
 function EditPropertyPage() {

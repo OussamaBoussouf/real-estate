@@ -1,6 +1,6 @@
 import { DropdownMenu } from 'radix-ui';
 import { Link } from 'react-router';
-import { UserInfo } from '../../../types/user';
+import { UserInfo } from '../../types/user';
 
 type UserMenuAvatarProps = {
   user: UserInfo;

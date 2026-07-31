@@ -1,10 +1,10 @@
 import { SquarePen, Trash2 } from 'lucide-react';
-import Badge from '../../../../shared/components/Badge';
-import Table from '../../../../shared/components/Table';
-import { formatCurrency } from '../../../../shared/utils/formatter';
-import ClientPagination from '../../../../shared/components/ClientPagination';
-import { useClientPagination } from '../../../../shared/hooks/useClientPagination';
-import AlertDialogButton from '../../../../shared/components/AlertDialogButton';
+import Badge from '../../../shared/components/Badge';
+import Table from '../../../shared/components/Table';
+import { formatCurrency } from '../../../shared/utils/formatter';
+import ClientPagination from '../../../shared/components/ClientPagination';
+import { useClientPagination } from '../../../shared/hooks/useClientPagination';
+import AlertDialogButton from '../../../shared/components/AlertDialogButton';
 import { Link } from 'react-router-dom';
 
 function PropertiesTable({ title, data }: { title: string[]; data: any }) {

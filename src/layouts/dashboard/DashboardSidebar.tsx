@@ -1,9 +1,8 @@
 import { LogOut } from 'lucide-react';
 import { Link, NavLink } from 'react-router';
-import { useAuthContext } from '../context/AuthContext';
-import { ReactNode } from 'react';
-import { sidebarLinks } from '../constants/dashboardLinks';
-import { useMediaQuery } from '../shared/hooks/useMediaQuery';
+import { useAuthContext } from '../../context/AuthContext';
+import { useMediaQuery } from '../../shared/hooks/useMediaQuery';
+import SIDEBAR_LINKS from './sidebar-links';
 
 function DashboardSidebar() {
   const { user, logout } = useAuthContext();
@@ -18,22 +17,23 @@ function DashboardSidebar() {
           </Link>
         </div>
         <div className="seprater" />
-        <div className='mobile-menu__nav-container'>
+        <div className="mobile-menu__nav-container">
           <nav>
             <ul className="mobile-menu__list">
-              {sidebarLinks[user!.role].map(
-                (link: { label: string; path: string; icon: ReactNode }) => (
-                  <li key={link.label} className='d-flex-center'>
-                    <NavLink to={link.path} className="mobile-menu__link d-flex-center">
-                      {link.icon}
-                    </NavLink>
-                  </li>
-                )
-              )}
+              {SIDEBAR_LINKS[user!.role].map(link => (
+                <li key={link.label} className="d-flex-center">
+                  <NavLink
+                    to={link.path}
+                    className="mobile-menu__link d-flex-center"
+                  >
+                    <link.icon />
+                  </NavLink>
+                </li>
+              ))}
             </ul>
           </nav>
           <button onClick={logout} type="button" className="">
-            <LogOut color="red"/>
+            <LogOut color="red" />
           </button>
         </div>
       </aside>
@@ -47,15 +47,13 @@ function DashboardSidebar() {
       </Link>
       <nav className="dashboard__nav">
         <ul className="dashboard__nav-list">
-          {sidebarLinks[user!.role].map(
-            (link: { label: string; path: string; icon: ReactNode }) => (
-              <li key={link.label}>
-                <NavLink to={link.path} className="dashboard__nav-link">
-                  {link.icon} {link.label}
-                </NavLink>
-              </li>
-            )
-          )}
+          {SIDEBAR_LINKS[user!.role].map(link => (
+            <li key={link.label}>
+              <NavLink to={link.path} className="dashboard__nav-link">
+                <link.icon /> {link.label}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </nav>
       <button onClick={logout} type="button" className="dashboard__logout">

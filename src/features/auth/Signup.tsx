@@ -1,18 +1,19 @@
 import type { AxiosError } from 'axios';
 import { useFormik } from 'formik';
 import { Dialog } from 'radix-ui';
-import * as Yup from 'yup';
-import CustomPasswordInput from '../../../shared/components/CustomPasswordInput';
+
+import CustomPasswordInput from '../../shared/components/CustomPasswordInput';
 import { toast } from 'react-toastify';
-import { useAuthContext } from '../../../context/AuthContext';
+import { useAuthContext } from '../../context/AuthContext';
+import { SIGNUP_SCHEMA } from './schema';
 
 type SignUpProps = {
   open: boolean;
-  onDialogChange: (mode: 'login' | 'signup') => void;
-  onModeChange: (mode: 'login' | 'signup') => void;
+  onChange: (mode: 'login' | 'signup') => void;
+  onClose: () => void;
 };
 
-function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
+function SignUp({ open, onChange, onClose }: SignUpProps) {
   const { signup } = useAuthContext();
 
   const formik = useFormik({
@@ -22,19 +23,7 @@ function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
       phone: '',
       password: '',
     },
-    validationSchema: Yup.object({
-      fullName: Yup.string().required('full name is required'),
-      email: Yup.string()
-        .email('invalid email address')
-        .required('email is required'),
-      phone: Yup.string()
-        .matches(/[0-9]/, 'enter a valid phone number')
-        .min(10, 'phone number should be at least 10 digits')
-        .required('phone is required'),
-      password: Yup.string()
-        .min(8, 'password should contain at least 8 characters')
-        .required('password is required'),
-    }),
+    validationSchema: SIGNUP_SCHEMA,
     onSubmit: async (values, actions) => {
       try {
         const response = await signup(values);
@@ -53,14 +42,21 @@ function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
     <Dialog.Root
       open={open}
       onOpenChange={() => {
+        onClose();
         formik.resetForm();
-        onDialogChange('signup');
       }}
     >
-      <Dialog.Trigger asChild></Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="overlay" />
-        <Dialog.Content className="modal__content">
+        <Dialog.Content
+          onPointerDownOutside={e => {
+            const target = e.target as HTMLElement;
+            if (target?.closest('.Toastify')) {
+              e.preventDefault();
+            }
+          }}
+          className="modal__content"
+        >
           <Dialog.Title className="text-center mb-sm">Sign up</Dialog.Title>
           <Dialog.Description className="text-center mb-lg">
             Create an account
@@ -161,7 +157,7 @@ function SignUp({ open, onDialogChange, onModeChange }: SignUpProps) {
               <button
                 className="fw-bold"
                 type="button"
-                onClick={() => onModeChange('login')}
+                onClick={() => onChange('login')}
               >
                 Sign in
               </button>

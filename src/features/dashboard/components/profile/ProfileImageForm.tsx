@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { validateImageFile } from '../../../../shared/utils/utils';
+import { validateImageFile } from '../../../../shared/utils/fileValidators';
 import DefaultProfileImg from '../../../../assets/default_profile.jpg';
 import api from '../../../../app/axios';
 
@@ -50,7 +50,7 @@ function ProfileImageForm({ profileImage }: { profileImage?: string }) {
 
     if (!file) return;
 
-    const validateImage = validateImageFile(file, 1 * 1024 * 1024);
+    const validateImage = validateImageFile(file);
 
     if (validateImage) {
       setClientError(validateImage);

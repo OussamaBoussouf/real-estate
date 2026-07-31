@@ -1,6 +1,7 @@
 import { FormikProps } from 'formik';
 import { PropertyFormValues } from '../../../../types/property';
-
+import AmenitiesMultiSelect from '../../../../shared/components/AmenitiesMultiSelect';
+import { AMENITIES } from '../../../../constants/properties';
 
 function PropertyDetailsEdit({
   values,
@@ -83,20 +84,18 @@ function PropertyDetailsEdit({
       <div className="span-2">
         <span className="fs-xxs">Amenities</span>
         <br />
-        <div className="grid col-3">
-          <AmenitiesMultiSelect
-            onCheck={(amenity: string) =>
-              setFieldValue('amenities', [...values.amenities, amenity])
-            }
-            onUncheck={(amenity: string) => {
-              const updatedAmenities = values.amenities.filter(
-                a => a !== amenity
-              );
-              setFieldValue('amenities', updatedAmenities);
-            }}
-            amenities={AMENITIES}
-          />
-        </div>
+        <AmenitiesMultiSelect
+          onCheck={(amenity: string) =>
+            setFieldValue('amenities', [...values.amenities, amenity])
+          }
+          onUncheck={(amenity: string) => {
+            const updatedAmenities = values.amenities.filter(
+              a => a !== amenity
+            );
+            setFieldValue('amenities', updatedAmenities);
+          }}
+          options={AMENITIES}
+        />
       </div>
     </fieldset>
   );
@@ -104,74 +103,5 @@ function PropertyDetailsEdit({
 
 export default PropertyDetailsEdit;
 
-export const AMENITIES = [
-  { label: 'Pool', value: 'pool' },
-  { label: 'Gym', value: 'gym' },
-  { label: 'Parking', value: 'parking' },
-  { label: 'Elevator', value: 'elevator' },
-  { label: 'Garden', value: 'garden' },
-  { label: 'Balcony', value: 'balcony' },
-  { label: 'Terrace', value: 'terrace' },
-  { label: 'Air Conditioning', value: 'air_conditioning' },
-  { label: 'Heating', value: 'heating' },
-  { label: 'WiFi', value: 'wifi' },
-  { label: 'Security System', value: 'security_system' },
-  { label: 'CCTV', value: 'cctv' },
-  { label: 'Fireplace', value: 'fireplace' },
-  { label: 'Furnished', value: 'furnished' },
-  { label: 'Kitchen Equipped', value: 'kitchen_equipped' },
-  { label: 'Refrigerator', value: 'refrigerator' },
-  { label: 'Washing Machine', value: 'washing_machine' },
-  { label: 'Dishwasher', value: 'dishwasher' },
-  { label: 'Microwave', value: 'microwave' },
-  { label: 'Storage Room', value: 'storage_room' },
-  { label: 'Basement', value: 'basement' },
-  {
-    label: 'Wheelchair Accessible',
-    value: 'wheelchair_accessible',
-  },
-  { label: 'Concierge', value: 'concierge' },
-  { label: 'Playground', value: 'playground' },
-  { label: 'BBQ Area', value: 'bbq_area' },
-  { label: 'Solar Panels', value: 'solar_panels' },
-];
 
-type AmenitiesMultiSelectProps = {
-  onCheck: (amenity: string) => void;
-  onUncheck: (amenity: string) => void;
-  amenities: { label: string; value: string }[];
-};
 
-const AmenitiesMultiSelect = ({
-  amenities,
-  onCheck,
-  onUncheck,
-}: AmenitiesMultiSelectProps) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const isChecked = event.target.checked;
-    const value = event.target.value;
-    if (isChecked) {
-      onCheck(value);
-    } else {
-      onUncheck(value);
-    }
-  };
-  return (
-    <>
-      {amenities.map(amenity => (
-        <div className="multi-select d-flex-between" key={amenity.value}>
-          <label className="fs-xxs w-full" htmlFor={amenity.value}>
-            {amenity.label}
-          </label>
-          <input
-            type="checkbox"
-            id={amenity.value}
-            name="amenities"
-            value={amenity.value}
-            onChange={handleChange}
-          />
-        </div>
-      ))}
-    </>
-  );
-};

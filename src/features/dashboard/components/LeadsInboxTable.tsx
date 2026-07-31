@@ -1,12 +1,14 @@
-import ClientPagination from '../../../../shared/components/ClientPagination';
-import CustomSelect from '../../../../shared/components/CustomSelect';
-import Table from '../../../../shared/components/Table';
-import { useClientPagination } from '../../../../shared/hooks/useClientPagination';
+import ClientPagination from '../../../shared/components/ClientPagination';
+import CustomSelect from '../../../shared/components/CustomSelect';
+import Table from '../../../shared/components/Table';
+import { useClientPagination } from '../../../shared/hooks/useClientPagination';
 
 type LeadsInboxTableProps = {
   title: string[];
   data: any;
 };
+
+
 
 function LeadsInboxTable({ title, data }: LeadsInboxTableProps) {
   const {

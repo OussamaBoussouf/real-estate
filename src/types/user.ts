@@ -1,4 +1,4 @@
-export type Role = 'tenant' | 'admin';
+export type Role = 'landlord' | 'admin';
 
 export type User = {
   id: string;
@@ -13,7 +13,7 @@ export type User = {
 
 export type UserLogin = Pick<User, 'email' | 'password'>;
 
-export type UserSignup = Omit<User, 'id' | 'role' | 'profileImage'>;
+export type UserSignup = Pick<User, 'fullName' | 'email' | 'phone' | 'password'>;
 
 export type UserInfo = Pick<
   User,

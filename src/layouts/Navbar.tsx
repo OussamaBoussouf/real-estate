@@ -1,22 +1,28 @@
-import { NavLink } from 'react-router';
+import { NavLink, useSearchParams } from 'react-router';
 import { Login } from '../features/auth';
-import SignUp from '../features/auth/components/Signup';
+import SignUp from '../features/auth/Signup';
 import { useState } from 'react';
 import { useAuthContext } from '../context/AuthContext';
-import UserMenuAvatar from '../features/auth/components/UserMenuAvatar';
+import UserMenuAvatar from '../shared/components/UserMenuAvatar';
 
 function Navbar() {
-  const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [open, setOpen] = useState(false);
-  const { user, logout} = useAuthContext();
+  const { user, logout } = useAuthContext();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleModeChange = (newMode: 'login' | 'signup') => {
-    setMode(newMode);
+  const handleDialogOpen = (mode: 'login' | 'signup') => {
+    setSearchParams({ auth: mode });
+    if (!open) setOpen(true);
   };
 
+  const handleDialogClose = () => {
+    setSearchParams('');
+    setOpen(false);
+  };
+
+  //Keep the dialog open while changing from login to sign up and vice versa
   const handleDialogChange = (mode: 'login' | 'signup') => {
-    setMode(mode);
-    setOpen(!open);
+    setSearchParams({ auth: mode });
   };
 
   return (
@@ -30,14 +36,14 @@ function Navbar() {
           {!user && (
             <>
               <button
-                onClick={() => handleDialogChange('login')}
+                onClick={() => handleDialogOpen('login')}
                 type="button"
                 className="btn btn--rounded btn--primary mx-sm"
               >
                 Login
               </button>
               <button
-                onClick={() => handleDialogChange('signup')}
+                onClick={() => handleDialogOpen('signup')}
                 type="button"
                 className="btn btn--rounded btn--secondary mx-sm"
               >
@@ -45,19 +51,20 @@ function Navbar() {
               </button>
             </>
           )}
-          {mode === 'login' ? (
+          {searchParams.get('auth') === 'login' ? (
             <Login
               open={open}
-              onDialogChange={handleDialogChange}
-              onModeChange={handleModeChange}
+              onClose={handleDialogClose}
+              onChange={handleDialogChange}
             />
-          ) : (
+          ) : null}
+          {searchParams.get('auth') === 'signup' ? (
             <SignUp
               open={open}
-              onDialogChange={handleDialogChange}
-              onModeChange={handleModeChange}
+              onClose={handleDialogClose}
+              onChange={handleDialogChange}
             />
-          )}
+          ) : null}
         </div>
       </div>
     </header>

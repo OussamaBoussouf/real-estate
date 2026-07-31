@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { createPortal } from 'react-dom';
 import { RouterProvider } from 'react-router';
 import { ToastContainer } from 'react-toastify';
 import { router } from './routes';
@@ -22,7 +23,10 @@ createRoot(document.getElementById('root')!).render(
           <RouterProvider router={router} />
         </AuthContextProvider>
       </ImageKitProvider>
-      <ToastContainer position="top-right" autoClose={2500} />
     </QueryClientProvider>
+    {createPortal(
+      <ToastContainer position="top-right" autoClose={2500} />,
+      document.body
+    )}
   </StrictMode>
 );
