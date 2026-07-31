@@ -1,7 +1,8 @@
 import { FormikProps } from 'formik';
 import { AMENITIES } from '../../../constants/property-form';
-import MultiSelectPicker from '../MultiSelectPicker';
+// import MultiSelectPicker from '../MultiSelectPicker';
 import { useCallback } from 'react';
+import AmenitiesMultiSelect from '../../../../../shared/components/AmenitiesMultiSelect';
 
 type FormValues = {
   bedrooms: string;
@@ -18,12 +19,6 @@ function PropertyDetailsStep({
   handleChange,
   setFieldValue,
 }: FormikProps<FormValues>) {
-  const handleAmenitySelect = useCallback(
-    (amenities: string[]) => {
-      setFieldValue('amenities', amenities);
-    },
-    [setFieldValue]
-  );
 
   return (
     <div className="grid col-2">
@@ -99,10 +94,18 @@ function PropertyDetailsStep({
       {/* PROPERTY AMENITIES */}
       <fieldset className="span-2 reset-fieldset">
         <legend className="fs-xxs mb-sm">Select amenities</legend>
-        <MultiSelectPicker
-          options={AMENITIES}
+        <AmenitiesMultiSelect
+          onCheck={(amenity: string) =>
+            setFieldValue('amenities', [...values.amenities, amenity])
+          }
+          onUncheck={(amenity: string) => {
+            const updatedAmenities = values.amenities.filter(
+              a => a !== amenity
+            );
+            setFieldValue('amenities', updatedAmenities);
+          }}
           selectedValues={values.amenities}
-          onSelect={handleAmenitySelect}
+          options={AMENITIES}
         />
       </fieldset>
     </div>

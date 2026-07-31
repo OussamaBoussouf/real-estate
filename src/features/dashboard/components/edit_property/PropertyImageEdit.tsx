@@ -18,8 +18,6 @@ function PropertyImageEdit({
 }: FormikProps<PropertyFormValues>) {
   const [images, setImages] = useState<PropertyImage[]>([]);
 
-  console.log(errors.images);
-
   const handleImageSelection = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
 
@@ -75,7 +73,6 @@ function PropertyImageEdit({
   useEffect(() => {
     return () => {
       images.forEach(image => URL.revokeObjectURL(image.src));
-      console.log('revoked all object URLs');
     };
   }, []);
 

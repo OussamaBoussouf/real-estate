@@ -1,5 +1,5 @@
 import { properties } from '../../../api/data/properties';
-import PropertiesTable from '../components/my_properties/PropertiesTable';
+import PropertiesTable from '../components/PropertiesTable';
 
 const TITLES = [
   'property',
