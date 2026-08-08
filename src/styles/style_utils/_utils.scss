@@ -95,6 +95,13 @@
   column-gap: 1.2rem;
 }
 
+.property-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  row-gap: 1.2rem;
+  column-gap: 1.2rem;
+}
+
 .grid-layout-images {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));

@@ -34,7 +34,7 @@ function PropertyList() {
 
   if (isPending)
     return (
-      <div className="grid-layout">
+      <div className="property-grid-layout">
         {Array(9)
           .fill(0)
           .map((_, index) => (
@@ -64,17 +64,19 @@ function PropertyList() {
 
   return (
     <>
-      <div className="grid-layout">
+      <div className="property-grid-layout">
         {data?.properties &&
           data?.properties.map((propertie: Property) => (
             <PropertyCard
               key={propertie.id}
+              id={propertie.id}
               city={propertie.location.city}
               price={propertie.price}
               title={propertie.title}
               bedrooms={propertie.bedrooms}
               bathrooms={propertie.bathrooms}
               propertyType={propertie.propertyType}
+              type={propertie.type}
             />
           ))}
       </div>
