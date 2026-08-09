@@ -1,10 +1,12 @@
+import Skeleton from "../../../shared/components/Skeleton";
+
 function PropertyImageGallerySkeleton() {
   return (
-    <ul className="gallery-skeleton">
-      <li className="pulsate"></li>
-      <li className="pulsate"></li>
-      <li className="pulsate"></li>
-    </ul>
+    <div className="gallery-skeleton">
+      <Skeleton borderRadius="5px"/>
+      <Skeleton borderRadius="5px"/>
+      <Skeleton borderRadius="5px"/>
+    </div>
   );
 }
 

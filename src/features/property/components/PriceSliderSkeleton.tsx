@@ -1,12 +1,14 @@
+import Skeleton from '../../../shared/components/Skeleton';
+
 function PriceSliderSkeleton() {
   return (
     <div>
-      <div className="pulsate w-md h-xs mb-sm"></div>
+      <Skeleton borderRadius="5px" className="w-md h-xs mb-sm" />
       <div className="d-flex-between mb-sm">
-        <span className="pulsate w-sm h-xs "></span>
-        <span className="pulsate w-sm h-xs"></span>
+        <Skeleton borderRadius="5px" className="w-sm h-xs" />
+        <Skeleton borderRadius="5px" className="w-sm h-xs" />
       </div>
-      <div className="pulsate w-full h-xxs"></div>
+      <Skeleton borderRadius="5px" className="w-full h-xxs" />
     </div>
   );
 }

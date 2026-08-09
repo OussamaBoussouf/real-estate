@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router';
 import Pagination from './Pagination';
 import { usePagination } from '../../../shared/hooks/usePagination';
 import { useScrollTop } from '../../../shared/hooks/useScrollTop';
-import PropertySkeleton from './PropertySkeleton';
+import PropertyCardSkeleton from './PropertyCardSkeleton';
 import NotFoundImg from '../../../assets/not_found.svg';
 
 function PropertyList() {
@@ -38,7 +38,7 @@ function PropertyList() {
         {Array(9)
           .fill(0)
           .map((_, index) => (
-            <PropertySkeleton key={index} />
+            <PropertyCardSkeleton key={index} />
           ))}
       </div>
     );
