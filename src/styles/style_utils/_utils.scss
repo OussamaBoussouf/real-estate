@@ -399,7 +399,7 @@ $gap-sizes: (
 //GRID
 .grid {
   display: grid;
-  gap: 1.275rem;
+  gap: .5rem;
 
   @include tablet {
     @for $i from 1 through 3 {
@@ -440,6 +440,7 @@ $gap-sizes: (
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
 }
 
 .fieldset {
@@ -448,9 +449,8 @@ $gap-sizes: (
   margin: 0;
 
   &-legend {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    margin-bottom: .5rem;
   }
 }
 

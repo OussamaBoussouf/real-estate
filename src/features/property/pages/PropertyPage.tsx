@@ -1,22 +1,18 @@
 import PropertyList from '../components/PropertyList';
 import SidebarFilter from '../components/SidebarFilter';
 
-function PropertyPage() {  
-
+function PropertyPage() {
   return (
-    <main className="property-page my-xl">
-      <div className="container px-md">
-        <div className="property-page__layout">
-          {/* Sidebar */}
-          <div className="property-page__layout-sidebar">
-            <SidebarFilter />
-          </div>
-          {/* Content */}
-          <div className="property-page__layout-main">
-            <PropertyList />
-          </div>
-        </div>
+    <main className="property-page container px-md my-xl">
+      {/* Content */}
+      <div className="property-page__header">
+        <h1 className="fs-sm">Available Properties</h1>
+        <SidebarFilter />
       </div>
+      <div className="property-page__layout-main">
+        <PropertyList />
+      </div>
+      {/* </div> */}
     </main>
   );
 }

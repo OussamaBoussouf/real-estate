@@ -3,6 +3,7 @@ import { capitalizeWord } from '../utils/utils';
 
 type CustomCheckboxGroupProps = {
   checkboxValues: string[];
+  className?: string;
   name: string;
   values: string[];
   onChange: (val: Record<string, any>) => void;
@@ -10,43 +11,42 @@ type CustomCheckboxGroupProps = {
 
 function CustomCheckboxGroup({
   checkboxValues,
+  className,
   values = [],
   name,
   onChange,
 }: CustomCheckboxGroupProps) {
-  const [currentVal, setCurrentVal] = useState<string[]>(values);
-
+  
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
+    
+    let newValues = new Set([...values]);
 
-    let updatedValues = [...values];
-
-    if (checked && !updatedValues.includes(value)) {
-      updatedValues.push(value);
+    if (checked && !newValues.has(value)) {
+      newValues.add(value);
     } else {
-      updatedValues = updatedValues.filter(item => item !== value);
+      newValues.delete(value);
     }
-
-    setCurrentVal(updatedValues);
-    onChange({ [name]: updatedValues });
+    
+    onChange({ [name]: [...newValues] });
   };
 
   return (
-    <>
+    <div className={className}>
       {checkboxValues.map((val, index) => (
         <div key={index} className="checkbox-group__item">
           <input
             type="checkbox"
             className="checkbox-group__item-checkbox"
             onChange={handleCheckboxChange}
-            checked={currentVal.includes(val)}
+            checked={values.includes(val)}
             id={val}
             value={val}
           />
           <label htmlFor={val}>{capitalizeWord(val)}</label>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 

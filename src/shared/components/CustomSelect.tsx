@@ -1,6 +1,6 @@
 import { ChevronDownIcon } from 'lucide-react';
 import { Select } from 'radix-ui';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 type CustomSelectProps = {
   placeholder: string;
@@ -19,16 +19,17 @@ function CustomSelect({
   value,
   width = '100%',
 }: CustomSelectProps) {
-  const [selectedValue, setSelectedValue] = useState(value || '');
-
   const handleValueChange = (value: string) => {
-    setSelectedValue(value);
     onChange?.(value);
-  }
+  };
 
   return (
-    <Select.Root value={selectedValue} onValueChange={handleValueChange}>
-      <Select.Trigger style={{ width: width }} className="select__trigger" id={id}>
+    <Select.Root value={value} onValueChange={handleValueChange}>
+      <Select.Trigger
+        style={{ width: width }}
+        className="select__trigger"
+        id={id}
+      >
         <Select.Value placeholder={placeholder} />
         <Select.Icon className="d-flex-center">
           <ChevronDownIcon size="16" />

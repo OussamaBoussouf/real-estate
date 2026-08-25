@@ -1,0 +1,30 @@
+@use '../style_settings/sizes' as *;
+@use '../style_utils/mixins' as *;
+
+.sidebar-filter {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 80%;
+  background-color: white;
+  z-index: 100;
+  padding: $size-md;
+  overflow-y: auto;
+
+  @include desktop {
+    width: 35%;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.275rem;
+  }
+
+  &__form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+}
