@@ -3,7 +3,8 @@
 
 .property-card {
   border-radius: $size-sm;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border: 1.5px solid $border-color;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 8px 0px;
   overflow: hidden;
 }
 
@@ -11,6 +12,7 @@
   position: relative;
   aspect-ratio: 7 / 5;
 }
+
 
 .property-card__image {
   object-fit: cover;
@@ -22,6 +24,19 @@
 .property-card__content {
   padding: 0.75rem 1rem;
   background-color: white;
+}
+
+.property-card__amenities {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  & > li {
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: $secondary;
+  }
 }
 
 .property-card__favorite {
@@ -39,44 +54,35 @@
 }
 
 .property-card__header {
-  margin-bottom: $size-lg;
-  &-price {
-    color: black;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: $size-xs;
-  }
+  margin-bottom: $size-md;
+  border-bottom: 1px solid $border-color;
+  padding-bottom: $size-md;
+}
 
-  &-title {
-    color: black;
-    font-size: 1rem;
-    margin-bottom: $size-xs;
-  }
+.property-card__title {
+  color: black;
+  font-size: 1rem;
+  margin-bottom: $size-xs;
+}
 
-  &-city {
-    display: inline-flex;
-    gap: $size-xs;
-  }
+.property-card__city {
+  display: inline-flex;
+  font-size: 0.9rem;
+  align-items: center;
+  gap: $size-xs;
 }
 
 .property-card__header > h4 {
   font-size: 0.9rem;
 }
 
-.property-card__details > ul {
+.property-card__footer {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
 }
 
-.property-card__details > ul li {
-  font-size: 0.8rem;
-  display: inline-flex;
-  border: 1.5px solid $secondary;
-  border-radius: $size-md;
-  padding: $size-xs $size-sm;
-  align-items: center;
-  gap: 0.3rem;
+.property-card__type {
+  font-size: 0.75rem;
+  color: $secondary;
 }

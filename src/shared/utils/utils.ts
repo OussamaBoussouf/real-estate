@@ -14,10 +14,10 @@ export const createQueryParams = (
 export const filterEmptyQueryParams = (
   urlParams: Record<string, string | string[]>
 ) => {
-  const params: Record<string, string | string[]> = urlParams;
+  const params: Record<string, string | string[]> = {...urlParams };
 
-  for (const [key, value] of Object.entries(urlParams)) {
-    if (value === '') {
+  for (const [key, value] of Object.entries(params)) {
+    if (value === '' || (Array.isArray(value) && value.length === 0)) {
       delete params[key];
     }
   }

@@ -1,5 +1,4 @@
 .radio-group {
-  
   &__container.row {
     display: flex;
     align-items: center;
@@ -12,8 +11,8 @@
     gap: 0.5rem;
     margin-bottom: 0.6rem;
 
-    & input[type='radio'] {
-      transform: scale(1.3);
+    & label {
+      font-size: 0.8rem;
     }
   }
 }

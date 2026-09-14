@@ -6,7 +6,7 @@ type CustomRadioGroupProps = {
   name: string;
   selectedValue: string;
   direction?: 'row' | 'column';
-  onChange: (val: Record<string, any>) => void;
+  onChange: (val: string) => void;
 };
 
 function CustomRadioGroup({
@@ -19,14 +19,14 @@ function CustomRadioGroup({
 }: CustomRadioGroupProps) {
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    onChange({ [name]: value });
+    onChange(value);
   };
 
   return (
     <div
-      className={`radio-group__container ${
+      className={`radio-group__container mt-sm ${
         direction === 'column' ? 'column' : 'row'
-      }`}
+      } `}
     >
       {labelValues.map((val: string, index: number) => (
         <div key={index} className="radio-group__item">
@@ -39,7 +39,9 @@ function CustomRadioGroup({
             id={`${name}-${values[index]}`}
             value={values[index]}
           />
-          <label htmlFor={`${name}-${values[index]}`}>{capitalizeWord(val)}</label>
+          <label htmlFor={`${name}-${values[index]}`}>
+            {capitalizeWord(val)}
+          </label>
         </div>
       ))}
     </div>
@@ -47,3 +49,22 @@ function CustomRadioGroup({
 }
 
 export default CustomRadioGroup;
+
+
+
+
+type CustomRadioGroupWithLabelProps = {
+  label: string;
+} & CustomRadioGroupProps;
+
+export const CustomRadioGroupWithLabel = ({
+  label,
+  ...rest
+}: CustomRadioGroupWithLabelProps) => {
+  return (
+    <div className="fieldset">
+      <label className="fs-xxs">{label}</label>
+      <CustomRadioGroup {...rest} />
+    </div>
+  );
+};

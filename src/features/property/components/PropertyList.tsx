@@ -1,44 +1,25 @@
 import PropertyCard from './PropertyCard';
 import type { Property } from '../../../types/property';
-import { useProperties } from '../hooks/useProperties';
-import { useSearchParams } from 'react-router';
-import Pagination from './Pagination';
-import { usePagination } from '../../../shared/hooks/usePagination';
-import { useScrollTop } from '../../../shared/hooks/useScrollTop';
-import PropertySkeleton from './PropertySkeleton';
+import PropertyCardSkeleton from './PropertyCardSkeleton';
 import NotFoundImg from '../../../assets/not_found.svg';
 
-function PropertyList() {
-  const [searchParams] = useSearchParams();
+type PropertyListProps = {
+  data: Property[] | undefined;
+  isPending: boolean;
+  isError: boolean;
+  error: Error | null;
+};
 
-  const filter = {
-    type: searchParams.get('type') || '',
-    category: searchParams.getAll('category') || [],
-    city: searchParams.get('city') || '',
-    bathrooms: searchParams.get('bathrooms') || '',
-    bedrooms: searchParams.get('bedrooms') || '',
-    low_price: searchParams.get('low_price') || '',
-    high_price: searchParams.get('high_price') || '',
-  };
-
-  const { currentPage, handlePageChange } = usePagination();
-  const { data, isPending, isError, error } = useProperties({
-    page: currentPage,
-    ...filter,
-  });
-
-  useScrollTop([currentPage]);
-
-  const totalPages = data?.totalPages;
-  const hasProperties = data?.properties && data.properties.length > 0;
+function PropertyList({ data, isPending, isError, error }: PropertyListProps) {
+  const hasProperties = data && data.length > 0;
 
   if (isPending)
     return (
-      <div className="grid-layout">
+      <div className="property-grid-layout">
         {Array(9)
           .fill(0)
           .map((_, index) => (
-            <PropertySkeleton key={index} />
+            <PropertyCardSkeleton key={index} />
           ))}
       </div>
     );
@@ -64,25 +45,27 @@ function PropertyList() {
 
   return (
     <>
-      <div className="grid-layout">
-        {data?.properties &&
-          data?.properties.map((propertie: Property) => (
+      <div className="property-grid-layout">
+        {data &&
+          data.map((propertie: Property) => (
             <PropertyCard
               key={propertie.id}
+              id={propertie.id}
               city={propertie.location.city}
               price={propertie.price}
               title={propertie.title}
               bedrooms={propertie.bedrooms}
               bathrooms={propertie.bathrooms}
               propertyType={propertie.propertyType}
+              type={propertie.type}
             />
           ))}
       </div>
-      <Pagination
+      {/* <Pagination
         onPageChange={handlePageChange}
         totalPages={totalPages}
         currentPage={currentPage}
-      />
+      /> */}
     </>
   );
 }

@@ -4,8 +4,9 @@ type CustomDoubleThumbSliderProps = {
   min: number;
   max: number;
   step?: number;
-  currentValue: number[] | undefined;
-  handleValueChange: (val: number[]) => void;
+  currentValue: [number, number] | undefined;
+  onChange: (val: [number, number]) => void;
+  onValueCommit: (val: [number, number]) => void;
 };
 
 function CustomDoubleThumbSlider({
@@ -13,14 +14,16 @@ function CustomDoubleThumbSlider({
   max,
   step = 1,
   currentValue,
-  handleValueChange,
+  onChange,
+  onValueCommit
 }: CustomDoubleThumbSliderProps) {
   return (
     <Slider.Root
       className="slider"
       value={currentValue ?? [min, max]}
       minStepsBetweenThumbs={1}
-      onValueChange={handleValueChange}
+      onValueChange={onChange}
+      onValueCommit={onValueCommit}
       min={min}
       max={max}
       step={step}

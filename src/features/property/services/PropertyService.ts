@@ -31,13 +31,9 @@ export async function getPropertyById(id: string): Promise<any> {
   }
 }
 
-export async function getPropertyPriceRange(
-  filter: Record<string, string | number | string[]>
-): Promise<[number, number]> {
+export async function getPropertyPriceRange(): Promise<[number, number]> {
   try {
-    const { data } = await api.get('/properties/price-range', {
-      params: { ...filter },
-    });
+    const { data } = await api.get('/properties/price-range');
     
     return [ data[0], data[1] ];
   } catch (error) {

@@ -19,8 +19,8 @@ adapter.onGet('/properties').reply(config => {
   const bedrooms = params?.bedrooms;
   const bathrooms = params?.bathrooms;
   const page = parseInt(params?.page) || 1;
-  const priceMax = parseInt(params?.high_price);
-  const priceMin = parseInt(params?.low_price);
+  const priceMax = parseInt(params?.max_price);
+  const priceMin = parseInt(params?.min_price);
 
   if (city) {
     filteredProperties = filteredProperties.filter(
@@ -64,6 +64,20 @@ adapter.onGet('/properties').reply(config => {
     );
   }
 
+  // Get the max and min price of the filtered properties
+  let maxPrice = 0;
+  let minPrice = Infinity;
+
+  properties.forEach(property => {
+    if (property.price > maxPrice) {
+      maxPrice = property.price;
+    }
+    if (property.price < minPrice) {
+      minPrice = property.price;
+    }
+  });
+
+  // Paginate the filtered properties
   const total = filteredProperties.length;
   const start = (page - 1) * limit;
   const end = page * limit;
@@ -72,54 +86,20 @@ adapter.onGet('/properties').reply(config => {
   return [
     200,
     {
-      properties: filteredProperties,
+      data: filteredProperties,
+      min_price: minPrice === Infinity ? 0 : minPrice,
+      max_price: maxPrice,
       totalPages: Math.ceil(total / limit),
     },
   ];
 });
 
-// Get the price range based on the filter
-adapter.onGet('/properties/price-range').reply(config => {
-  const params = config.params;
-
-  const city = params?.city;
-  const type = params?.type;
-  const category = params?.category;
-  const bedrooms = params?.bedrooms;
-
-  let filteredProperties = properties;
-
-  if (city) {
-    filteredProperties = filteredProperties.filter(
-      properties => properties.location.city.toLowerCase() === city
-    );
-  }
-
-  if (type) {
-    filteredProperties = filteredProperties.filter(
-      properties => properties.type.toLowerCase() === type
-    );
-  }
-
-  if (bedrooms) {
-    filteredProperties = filteredProperties.filter(properties => {
-      if (bedrooms === '4') {
-        return properties.bedrooms >= 4;
-      }
-      return properties.bedrooms === parseInt(bedrooms);
-    });
-  }
-
-  if (category.length > 0) {
-    filteredProperties = filteredProperties.filter(properties =>
-      category.includes(properties.propertyType.toLowerCase())
-    );
-  }
-
+// Get the base price range
+adapter.onGet('/properties/price-range').reply(() => {
   let maxPrice = 0;
   let minPrice = Infinity;
 
-  filteredProperties.forEach(property => {
+  properties.forEach(property => {
     if (property.price > maxPrice) {
       maxPrice = property.price;
     }
@@ -241,7 +221,6 @@ adapter.onPut('/users/me/personal-info').reply(config => {
   user.email = email;
   user.phone = phone;
   user.address = address;
-
 
   return [201, { message: 'Profile info has been updated successfully' }];
 });

@@ -1,53 +1,70 @@
-import { useState, type ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 import { capitalizeWord } from '../utils/utils';
 
 type CustomCheckboxGroupProps = {
   checkboxValues: string[];
-  name: string;
+  className?: string;
   values: string[];
-  onChange: (val: Record<string, any>) => void;
+  onChange: (val: string[]) => void;
 };
 
 function CustomCheckboxGroup({
   checkboxValues,
-  values = [],
-  name,
+  className,
+  values=[],
   onChange,
 }: CustomCheckboxGroupProps) {
-  const [currentVal, setCurrentVal] = useState<string[]>(values);
-
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
 
-    let updatedValues = [...values];
+    let newValues = new Set([...values]);
 
-    if (checked && !updatedValues.includes(value)) {
-      updatedValues.push(value);
+    if (checked && !newValues.has(value)) {
+      newValues.add(value);
     } else {
-      updatedValues = updatedValues.filter(item => item !== value);
+      newValues.delete(value);
     }
 
-    setCurrentVal(updatedValues);
-    onChange({ [name]: updatedValues });
+    onChange([...newValues]);
   };
 
   return (
-    <>
+    <div className={`${className} mt-sm`}>
       {checkboxValues.map((val, index) => (
         <div key={index} className="checkbox-group__item">
           <input
             type="checkbox"
             className="checkbox-group__item-checkbox"
             onChange={handleCheckboxChange}
-            checked={currentVal.includes(val)}
+            checked={values.includes(val)}
             id={val}
             value={val}
           />
           <label htmlFor={val}>{capitalizeWord(val)}</label>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 
 export default CustomCheckboxGroup;
+
+
+
+
+
+type CustomCheckboxGroupWithLabelProps = {
+  label: string;
+} & CustomCheckboxGroupProps;
+
+export const CustomCheckboxGroupWithLabel = ({
+  label,
+  ...rest
+}: CustomCheckboxGroupWithLabelProps) => {
+  return (
+    <div className="fieldset">
+      <label className="fs-xxs">{label}</label>
+      <CustomCheckboxGroup {...rest} />
+    </div>
+  );
+};
