@@ -1,7 +1,5 @@
 import { FormikProps } from 'formik';
 import { AMENITIES } from '../../../constants/property-form';
-// import MultiSelectPicker from '../MultiSelectPicker';
-import { useCallback } from 'react';
 import AmenitiesMultiSelect from '../../../../../shared/components/AmenitiesMultiSelect';
 
 type FormValues = {

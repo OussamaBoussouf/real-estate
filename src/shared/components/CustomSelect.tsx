@@ -9,6 +9,7 @@ type CustomSelectProps = {
   id?: string;
   value?: string;
   width?: string;
+  name?: string;
 };
 
 function CustomSelect({
@@ -27,7 +28,7 @@ function CustomSelect({
     <Select.Root value={value} onValueChange={handleValueChange}>
       <Select.Trigger
         style={{ width: width }}
-        className="select__trigger"
+        className="select__trigger mt-sm"
         id={id}
       >
         <Select.Value placeholder={placeholder} />
@@ -55,3 +56,18 @@ function CustomSelect({
 }
 
 export default CustomSelect;
+
+type CustomSelectWithLabelProps = {
+  label: string;
+} & CustomSelectProps;
+
+export const CustomSelectWithLabel = ({label, id, ...rest} : CustomSelectWithLabelProps) => {
+  return (
+    <div className="fieldset">
+      <label className="fs-xxs" htmlFor={id}>
+        {label}
+      </label>
+      <CustomSelect id={id} {...rest} />
+    </div>
+  );
+};

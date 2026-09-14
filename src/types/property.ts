@@ -19,8 +19,21 @@ export type Property = {
 };
 
 export type PaginatedProperty = {
-  properties: Property[];
+  data: Property[];
+  min_price: number;
+  max_price: number;
   totalPages: number;
+};
+
+export type PropertyFilter = {
+  type: string;
+  category: string[];
+  city: string;
+  bathrooms: string;
+  bedrooms: string;
+  min_price: string;
+  max_price: string;
+  page: string;
 };
 
 export type FileObject = { id: string; file: File };

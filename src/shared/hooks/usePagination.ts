@@ -15,7 +15,7 @@ export const usePagination = () => {
     }
 
     setSearchParams(newParams);
-  }, [searchParams, searchParams]);
+  }, [searchParams]);
 
   return {
     currentPage: Number(searchParams.get('page')) || 1,

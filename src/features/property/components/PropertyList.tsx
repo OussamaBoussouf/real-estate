@@ -1,36 +1,17 @@
 import PropertyCard from './PropertyCard';
 import type { Property } from '../../../types/property';
-import { useProperties } from '../hooks/useProperties';
-import { useSearchParams } from 'react-router';
-import Pagination from './Pagination';
-import { usePagination } from '../../../shared/hooks/usePagination';
-import { useScrollTop } from '../../../shared/hooks/useScrollTop';
 import PropertyCardSkeleton from './PropertyCardSkeleton';
 import NotFoundImg from '../../../assets/not_found.svg';
 
-function PropertyList() {
-  const [searchParams] = useSearchParams();
+type PropertyListProps = {
+  data: Property[] | undefined;
+  isPending: boolean;
+  isError: boolean;
+  error: Error | null;
+};
 
-  const filter = {
-    type: searchParams.get('type') || '',
-    category: searchParams.getAll('category') || [],
-    city: searchParams.get('city') || '',
-    bathrooms: searchParams.get('bathrooms') || '',
-    bedrooms: searchParams.get('bedrooms') || '',
-    low_price: searchParams.get('low_price') || '',
-    high_price: searchParams.get('high_price') || '',
-  };
-
-  const { currentPage, handlePageChange } = usePagination();
-  const { data, isPending, isError, error } = useProperties({
-    page: currentPage,
-    ...filter,
-  });
-
-  useScrollTop([currentPage]);
-
-  const totalPages = data?.totalPages;
-  const hasProperties = data?.properties && data.properties.length > 0;
+function PropertyList({ data, isPending, isError, error }: PropertyListProps) {
+  const hasProperties = data && data.length > 0;
 
   if (isPending)
     return (
@@ -65,8 +46,8 @@ function PropertyList() {
   return (
     <>
       <div className="property-grid-layout">
-        {data?.properties &&
-          data?.properties.map((propertie: Property) => (
+        {data &&
+          data.map((propertie: Property) => (
             <PropertyCard
               key={propertie.id}
               id={propertie.id}
@@ -80,11 +61,11 @@ function PropertyList() {
             />
           ))}
       </div>
-      <Pagination
+      {/* <Pagination
         onPageChange={handlePageChange}
         totalPages={totalPages}
         currentPage={currentPage}
-      />
+      /> */}
     </>
   );
 }

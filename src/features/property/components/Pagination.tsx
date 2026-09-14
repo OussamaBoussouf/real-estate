@@ -1,17 +1,14 @@
+import { usePagination } from "../../../shared/hooks/usePagination";
 
 type PaginationProps = {
-  totalPages: number | undefined;
-  currentPage: number;
-  onPageChange: (page: number) => void;
+  totalPages: number;
 };
 
 function Pagination({
   totalPages,
-  currentPage,
-  onPageChange,
 }: PaginationProps) {
 
-  if (!totalPages || totalPages <= 1) return null;
+  const {currentPage, handlePageChange} = usePagination();
 
   return (
     <nav aria-label="Pagination" className="pagination">
@@ -21,7 +18,7 @@ function Pagination({
           return (
             <li key={pageNumber}>
               <button
-                onClick={() => onPageChange(pageNumber)}
+                onClick={() => handlePageChange(pageNumber)}
                 aria-current={currentPage === pageNumber ? 'page' : undefined}
                 aria-label={`Go to page ${pageNumber}`}
                 type="button"

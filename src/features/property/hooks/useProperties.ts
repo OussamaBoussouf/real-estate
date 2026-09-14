@@ -1,26 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { getProperties } from '../services/PropertyService';
+import { PropertyFilter } from '../../../types/property';
 
-export const useProperties = function (
-  filter: Record<string, string | number | string[]>
-) {
-  const { data, isPending, isError, error } = useQuery({
-    queryKey: [
-      'properties',
-      filter.page,
-      filter.type,
-      filter.category,
-      filter.city,
-      filter.bedrooms,
-      filter.bathrooms,
-      filter.low_price,
-      filter.high_price,
-    ],
+export const useProperties = function (filter: Partial<PropertyFilter>) {
+  const {
+    data: properties,
+    isPending,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['properties', filter],
     queryFn: () => getProperties(filter),
   });
 
   return {
-    data,
+    properties,
     isPending,
     isError,
     error,

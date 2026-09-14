@@ -1,159 +1,206 @@
-import CustomCheckboxGroup from '../../../shared/components/CustomCheckboxGroup';
-import { useSearchParams } from 'react-router';
-import { filterEmptyQueryParams } from '../../../shared/utils/utils';
-import CustomRadioGroup from '../../../shared/components/CustomRadioGroup';
+import { CustomCheckboxGroupWithLabel } from '../../../shared/components/CustomCheckboxGroup';
+import { CustomRadioGroupWithLabel } from '../../../shared/components/CustomRadioGroup';
 import PriceSlider from './PriceSlider';
-import CustomSelect from '../../../shared/components/CustomSelect';
+import { CustomSelectWithLabel } from '../../../shared/components/CustomSelect';
 import { CITIES } from '../../../constants/geography';
-import { useState } from 'react';
-import { SlidersHorizontal } from 'lucide-react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useReducer,
+  useState,
+} from 'react';
 import Overlay from '../../../shared/components/Overlay';
+import { createPortal } from 'react-dom';
+import { PropertyFilter } from '../../../types/property';
+import { filterReducer } from '../../../reducer/filterReducer';
 
-function SidebarFilter() {
+type SidebarFilterContextType = {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const SidebarFilterContext = createContext<SidebarFilterContextType>({
+  isOpen: false,
+  setIsOpen: () => {},
+});
+
+function SidebarFilter({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const contextValue = {
+    isOpen,
+    setIsOpen,
+  };
+
   return (
-    <>
-      <button
-        onClick={() => setIsOpen(prev => !prev)}
-        type="button"
-        className="btn btn--info btn--rounded d-flex-center gap-sm"
-      >
-        Filter <SlidersHorizontal size={18} />
-      </button>
-      {isOpen ? (
-        <Sidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      ) : null}
-    </>
+    <SidebarFilterContext.Provider value={contextValue}>
+      {children}
+    </SidebarFilterContext.Provider>
   );
 }
 
-export default SidebarFilter;
+function Trigger({ children }: { children: ReactNode }) {
+  const { setIsOpen } = useContext(SidebarFilterContext);
 
-type SidebarProps = {
-  isOpen: boolean;
-  onClose: () => void;
+  return (
+    <button
+      onClick={() => setIsOpen(prev => !prev)}
+      type="button"
+      className="btn btn--info btn--rounded d-flex-center gap-sm"
+    >
+      {children}
+    </button>
+  );
+}
+
+function Content({ children }: { children: ReactNode }) {
+  const { isOpen } = useContext(SidebarFilterContext);
+
+  if (!isOpen) return null;
+
+  return <>{children}</>;
+}
+
+type AsideProps = {
+  minPrice: number | undefined;
+  maxPrice: number | undefined;
+  initialFilter: PropertyFilter;
+  onSubmit: (args: Partial<PropertyFilter>) => void;
 };
 
-const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [queryParams, setQueryParams] = useState<Record<string, any>>({
-    type: searchParams.get('type') || '',
-    city: searchParams.get('city') || '',
-    category: searchParams.getAll('category') || [],
-    bedrooms: searchParams.get('bedrooms') || '',
-    bathrooms: searchParams.get('bathrooms') || '',
-  });
+function Aside({ minPrice, maxPrice, initialFilter, onSubmit }: AsideProps) {
+  const { setIsOpen } = useContext(SidebarFilterContext);
+  const [state, dispatch] = useReducer(filterReducer, initialFilter);
 
-  const handleQueryParamChange = (newParams: Record<string, any>) => {
-    setQueryParams(prev => ({ ...prev, ...newParams }));
+  const handleApplyFilter = () => {
+    onSubmit(state);
+    setIsOpen(false);
   };
 
-  const handleFilterReset = () => {
-    setQueryParams({
+  const handleResetFilter = () => {
+    onSubmit({
       type: '',
       city: '',
       category: [],
       bedrooms: '',
       bathrooms: '',
+      min_price: '',
+      max_price: '',
     });
+    setIsOpen(false);
   };
 
-  const handleApplyFilters = () => {
-    setSearchParams(filterEmptyQueryParams({ ...queryParams }));
-    onClose();
-  };
-
-  return (
+  return createPortal(
     <>
-      <Overlay isVisible={isOpen} onClick={onClose} />
+      <Overlay isVisible={true} onClick={() => setIsOpen(false)} />
       <aside className="sidebar-filter">
         <form className="sidebar-filter__form">
           {/* Buy or Rent */}
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">type</legend>
-            <CustomSelect
-              placeholder="Select a type..."
-              value={queryParams.type}
-              options={[
-                { label: 'Buy', value: 'buy' },
-                { label: 'Rent', value: 'rent' },
-              ]}
-              onChange={(value: string) =>
-                handleQueryParamChange({ type: value })
-              }
-              id="type"
-            />
-          </fieldset>
-          {/* Cities */}
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">cities</legend>
-            <CustomSelect
-              placeholder="Select a city..."
-              value={queryParams.city}
-              options={CITIES}
-              onChange={(value: string) =>
-                handleQueryParamChange({ city: value })
-              }
-              id="city"
-            />
-          </fieldset>
+          <CustomSelectWithLabel
+            label="type"
+            placeholder="Select a type..."
+            value={state.type}
+            options={[
+              { label: 'Buy', value: 'buy' },
+              { label: 'Rent', value: 'rent' },
+            ]}
+            onChange={(value: string) =>
+              dispatch({ type: 'UPDATE_FILTER', payload: { type: value } })
+            }
+            id="type"
+          />
+          {/* City */}
+          <CustomSelectWithLabel
+            label="city"
+            placeholder="Select a city..."
+            value={state.city}
+            options={CITIES}
+            onChange={(value: string) =>
+              dispatch({ type: 'UPDATE_FILTER', payload: { city: value } })
+            }
+            id="city"
+          />
+
           {/* Real Estate Type */}
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">property type</legend>
-            <CustomCheckboxGroup
-              className="grid col-3"
-              values={queryParams.category}
-              name="category"
-              checkboxValues={[
-                'house',
-                'apartment',
-                'condo',
-                'loft',
-                'studio',
-                'cabin',
-              ]}
-              onChange={handleQueryParamChange}
-            />
-          </fieldset>
+          <CustomCheckboxGroupWithLabel
+            className="grid col-3"
+            label="property type"
+            checkboxValues={[
+              'house',
+              'apartment',
+              'condo',
+              'loft',
+              'studio',
+              'cabin',
+            ]}
+            onChange={(values: string[]) => {
+              dispatch({
+                type: 'UPDATE_FILTER',
+                payload: { category: values },
+              });
+            }}
+            values={state.category}
+          />
           {/* Bedrooms */}
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">bedrooms</legend>
-            <CustomRadioGroup
-              direction="row"
-              onChange={handleQueryParamChange}
-              selectedValue={queryParams.bedrooms}
-              labelValues={['1', '2', '3', '4 plus']}
-              values={['1', '2', '3', '4']}
-              name="bedrooms"
-            />
-          </fieldset>
+          <CustomRadioGroupWithLabel
+            label="bedrooms"
+            direction="row"
+            onChange={(value: string) => {
+              dispatch({
+                type: 'UPDATE_FILTER',
+                payload: { bedrooms: value },
+              });
+            }}
+            selectedValue={state.bedrooms}
+            labelValues={['1', '2', '3 plus']}
+            values={['1', '2', '3']}
+            name="bedrooms"
+          />
+
           {/* Bathrooms */}
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend">bathrooms</legend>
-            <CustomRadioGroup
-              direction="row"
-              onChange={handleQueryParamChange}
-              selectedValue={queryParams.bathrooms}
-              labelValues={['1', '2', '3 plus']}
-              values={['1', '2', '3']}
-              name="bathrooms"
-            />
-          </fieldset>
+          <CustomRadioGroupWithLabel
+            label="bathrooms"
+            direction="row"
+            onChange={(value: string) => {
+              dispatch({
+                type: 'UPDATE_FILTER',
+                payload: { bathrooms: value },
+              });
+            }}
+            selectedValue={state.bathrooms}
+            labelValues={['1', '2', '3 plus']}
+            values={['1', '2', '3']}
+            name="bathrooms"
+          />
           {/* Range Slider */}
-          <PriceSlider onChange={handleQueryParamChange} />
+          {minPrice && maxPrice ? (
+            <PriceSlider
+              onValueCommit={([minPrice, maxPrice]: [number, number]) => {
+                dispatch({
+                  type: 'UPDATE_PRICE',
+                  payload: [minPrice.toString(), maxPrice.toString()],
+                });
+              }}
+              minPrice={minPrice}
+              maxPrice={maxPrice}
+              currentMinPrice={parseInt(state.min_price ?? '0')}
+              currentMaxPrice={parseInt(state.max_price ?? '0')}
+            />
+          ) : null}
+
           {/* Apply and Reset Buttons */}
           <div className="sidebar-filter__form-actions">
             <button
               type="button"
-              onClick={handleApplyFilters}
+              onClick={handleApplyFilter}
               className="btn btn--info"
             >
               Apply Filters
             </button>
             <button
               type="button"
-              onClick={handleFilterReset}
+              onClick={handleResetFilter}
               className="btn btn--primary"
             >
               Reset Filters
@@ -161,6 +208,13 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
           </div>
         </form>
       </aside>
-    </>
+    </>,
+    document.body
   );
-};
+}
+
+SidebarFilter.Trigger = Trigger;
+SidebarFilter.Content = Content;
+SidebarFilter.Aside = Aside;
+
+export default SidebarFilter;

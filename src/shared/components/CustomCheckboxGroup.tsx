@@ -1,25 +1,22 @@
-import { useState, type ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 import { capitalizeWord } from '../utils/utils';
 
 type CustomCheckboxGroupProps = {
   checkboxValues: string[];
   className?: string;
-  name: string;
   values: string[];
-  onChange: (val: Record<string, any>) => void;
+  onChange: (val: string[]) => void;
 };
 
 function CustomCheckboxGroup({
   checkboxValues,
   className,
-  values = [],
-  name,
+  values=[],
   onChange,
 }: CustomCheckboxGroupProps) {
-  
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
-    
+
     let newValues = new Set([...values]);
 
     if (checked && !newValues.has(value)) {
@@ -27,12 +24,12 @@ function CustomCheckboxGroup({
     } else {
       newValues.delete(value);
     }
-    
-    onChange({ [name]: [...newValues] });
+
+    onChange([...newValues]);
   };
 
   return (
-    <div className={className}>
+    <div className={`${className} mt-sm`}>
       {checkboxValues.map((val, index) => (
         <div key={index} className="checkbox-group__item">
           <input
@@ -51,3 +48,23 @@ function CustomCheckboxGroup({
 }
 
 export default CustomCheckboxGroup;
+
+
+
+
+
+type CustomCheckboxGroupWithLabelProps = {
+  label: string;
+} & CustomCheckboxGroupProps;
+
+export const CustomCheckboxGroupWithLabel = ({
+  label,
+  ...rest
+}: CustomCheckboxGroupWithLabelProps) => {
+  return (
+    <div className="fieldset">
+      <label className="fs-xxs">{label}</label>
+      <CustomCheckboxGroup {...rest} />
+    </div>
+  );
+};
