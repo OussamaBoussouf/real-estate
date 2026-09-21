@@ -6,15 +6,23 @@ import CustomPasswordInput from '../../shared/components/CustomPasswordInput';
 import { toast } from 'react-toastify';
 import { useAuthContext } from '../../context/AuthContext';
 import { SIGNUP_SCHEMA } from './schema';
+import { useState } from 'react';
 
 type SignUpProps = {
-  open: boolean;
-  onChange: (mode: 'login' | 'signup') => void;
-  onClose: () => void;
+  className: string;
+  children: React.ReactNode;
 };
 
-function SignUp({ open, onChange, onClose }: SignUpProps) {
+function SignUp({ children, className }: SignUpProps) {
   const { signup } = useAuthContext();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDialog = () => {
+    setIsOpen(prev => !prev);
+    formik.resetForm();
+  };
+  
 
   const formik = useFormik({
     initialValues: {
@@ -40,12 +48,12 @@ function SignUp({ open, onChange, onClose }: SignUpProps) {
 
   return (
     <Dialog.Root
-      open={open}
-      onOpenChange={() => {
-        onClose();
-        formik.resetForm();
-      }}
+      open={isOpen}
+      onOpenChange={toggleDialog}
     >
+      <Dialog.Trigger asChild>
+        <button className={`${className}`}>{children}</button>
+      </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="overlay" />
         <Dialog.Content
@@ -146,22 +154,12 @@ function SignUp({ open, onChange, onClose }: SignUpProps) {
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className={`modal__submit-btn btn btn--primary btn--rounded ${
+              className={`modal__submit-btn btn btn--primary btn--rounded mt-md ${
                 formik.isSubmitting && 'btn--disabled'
               }`}
             >
               {formik.isSubmitting ? 'Processing...' : 'Create an account'}
             </button>
-            <p className="fs-xxs text-center">
-              Have an account?{' '}
-              <button
-                className="fw-bold"
-                type="button"
-                onClick={() => onChange('login')}
-              >
-                Sign in
-              </button>
-            </p>
           </form>
         </Dialog.Content>
       </Dialog.Portal>

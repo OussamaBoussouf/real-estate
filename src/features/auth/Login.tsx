@@ -5,15 +5,21 @@ import CustomPasswordInput from '../../shared/components/CustomPasswordInput';
 import { toast } from 'react-toastify';
 import { useAuthContext } from '../../context/AuthContext';
 import { LOGIN_SCHEMA } from './schema';
+import { useState } from 'react';
 
 type LoginProps = {
-  open: boolean;
-  onChange: (mode: 'login' | 'signup') => void;
-  onClose: () => void;
+  children: React.ReactNode;
+  className?: string;
 };
 
-function Login({ open, onChange, onClose }: LoginProps) {
+function Login({ children, className }: LoginProps) {
   const { login } = useAuthContext();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDialog = () => {
+    setIsOpen(prev => !prev);
+    formik.resetForm();
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -24,7 +30,7 @@ function Login({ open, onChange, onClose }: LoginProps) {
     onSubmit: async (values, actions) => {
       try {
         await login(values);
-        onClose();
+        toggleDialog();
       } catch (err) {
         const { message: errorMessage } = err as AxiosError;
         toast.error(errorMessage);
@@ -36,12 +42,14 @@ function Login({ open, onChange, onClose }: LoginProps) {
 
   return (
     <Dialog.Root
-      open={open}
+      open={isOpen}
       onOpenChange={() => {
-        onClose();
-        formik.resetForm();
+        toggleDialog();
       }}
     >
+      <Dialog.Trigger asChild>
+        <button className={`${className}`}>{children}</button>
+      </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="overlay" />
         <Dialog.Content
@@ -100,22 +108,12 @@ function Login({ open, onChange, onClose }: LoginProps) {
             <button
               disabled={formik.isSubmitting}
               type="submit"
-              className={`btn btn--primary btn--rounded ${
+              className={`btn btn--primary btn--rounded mt-md ${
                 formik.isSubmitting && 'btn--disabled'
               }`}
             >
-              {formik.isSubmitting ? 'Processing...' : 'Sign up'}
+              {formik.isSubmitting ? 'Processing...' : 'Sign in'}
             </button>
-            <p className="fs-xxs text-center">
-              Don't have an account?{' '}
-              <button
-                className="fw-bold"
-                type="button"
-                onClick={() => onChange('signup')}
-              >
-                Sign up
-              </button>
-            </p>
           </form>
         </Dialog.Content>
       </Dialog.Portal>
