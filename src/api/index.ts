@@ -2,6 +2,7 @@ import api from '../app/axios';
 import MockAdapter from 'axios-mock-adapter';
 import { properties } from './data/properties';
 import { users } from './data/users';
+import { leads } from './data/leads';
 
 const adapter = new MockAdapter(api, { delayResponse: 1000 });
 
@@ -64,7 +65,7 @@ adapter.onGet('/properties').reply(config => {
     );
   }
 
-  // Get the max and min price of the filtered properties
+  //& Get the max and min price of the filtered properties
   let maxPrice = 0;
   let minPrice = Infinity;
 
@@ -94,7 +95,7 @@ adapter.onGet('/properties').reply(config => {
   ];
 });
 
-// Get the base price range
+//& Get the base price range
 adapter.onGet('/properties/price-range').reply(() => {
   let maxPrice = 0;
   let minPrice = Infinity;
@@ -114,7 +115,7 @@ adapter.onGet('/properties/price-range').reply(() => {
   return [200, [minPrice, maxPrice]];
 });
 
-// Get a property based on the id
+//& Get a property based on the id
 adapter.onGet(/\/properties\/\d+/).reply(config => {
   const id = config.url?.split('/')[2];
 
@@ -185,7 +186,19 @@ adapter.onPost('/auth/sign-up').reply(config => {
   return [201, { message: 'User has been created successfully' }];
 });
 
-//Update user profile
+adapter.onPost('/send-message').reply(config => {
+  const data = config.data;
+  const { message, client_name, ...rest} = JSON.parse(data);
+
+  if (!message) {
+    return [400, { message: 'message is required' }];
+  }
+
+
+  return [200, { message: 'Your message has been delivered successfuly' }];
+});
+
+//& Update user profile
 
 // Update user profile image
 adapter.onPut('/users/me/avatar').reply(config => {
