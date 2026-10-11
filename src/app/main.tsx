@@ -1,6 +1,5 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createPortal } from 'react-dom';
 import { RouterProvider } from 'react-router';
 import { ToastContainer } from 'react-toastify';
 import { router } from './routes';
@@ -15,16 +14,15 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-  <QueryClientProvider client={queryClient}>
-    <ImageKitProvider urlEndpoint={import.meta.env.VITE_IMAGEKIT_URL_ENDPOINT}>
-      <AuthContextProvider>
-        <RouterProvider router={router} />
-      </AuthContextProvider>
-    </ImageKitProvider>
-    {createPortal(
-      <ToastContainer position="top-right" autoClose={2500} />,
-      document.body
-    )}
-  </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <ImageKitProvider
+        urlEndpoint={import.meta.env.VITE_IMAGEKIT_URL_ENDPOINT}
+      >
+        <AuthContextProvider>
+          <RouterProvider router={router} />
+        </AuthContextProvider>
+      </ImageKitProvider>
+      <ToastContainer position="top-right" autoClose={2500} />
+    </QueryClientProvider>
   </StrictMode>
 );
