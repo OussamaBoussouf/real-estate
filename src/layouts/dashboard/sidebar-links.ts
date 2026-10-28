@@ -2,7 +2,7 @@ import {
   CirclePlus,
   House,
   LucideProps,
-  MessageSquareMore,
+  Inbox,
   UserPen,
   UsersRound,
 } from 'lucide-react';
@@ -14,6 +14,7 @@ export type SidebarLink = {
   label: string;
   path: string;
   icon: ComponentType<LucideProps>;
+  isInbox?: boolean;
 };
 
 const landlordLinks: SidebarLink[] = [
@@ -24,9 +25,10 @@ const landlordLinks: SidebarLink[] = [
   },
   { label: 'My Properties', path: ROUTES.DASHBOARD.MY_PROPERTIES, icon: House },
   {
-    label: 'Lead Inbox',
+    label: 'Inbox',
     path: ROUTES.DASHBOARD.NOTIFICATIONS,
-    icon: MessageSquareMore,
+    icon: Inbox,
+    isInbox: true
   },
   { label: 'Profile', path: ROUTES.DASHBOARD.PROFILE, icon: UserPen },
 ];

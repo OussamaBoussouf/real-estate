@@ -1,24 +1,26 @@
-import { LogOut } from 'lucide-react';
 import { Link, NavLink } from 'react-router';
 import { useAuthContext } from '../../context/AuthContext';
 import { useMediaQuery } from '../../shared/hooks/useMediaQuery';
 import SIDEBAR_LINKS from './sidebar-links';
+import DashboardUserAvatar from '../../shared/components/DashboardUserAvatar';
 
 function DashboardSidebar() {
   const { user, logout } = useAuthContext();
   const isMobile = useMediaQuery('(max-width: 768px)');
 
+  if (!user) {
+    return null;
+  }
+
   if (isMobile) {
     return (
       <aside className="mobile-menu">
-        <div className="mobile-menu__logo-wrapper d-flex-center">
-          <Link to="/" className="mobile-menu__logo">
-            D
-          </Link>
+        <div className="logo px-md">
+          <Link to="/">.D</Link>
         </div>
-        <div className="seprater" />
-        <div className="mobile-menu__nav-container">
-          <nav>
+        <div className="separator" />
+        
+          <nav className="mobile-menu__nav">
             <ul className="mobile-menu__list">
               {SIDEBAR_LINKS[user!.role].map(link => (
                 <li key={link.label} className="d-flex-center">
@@ -31,21 +33,19 @@ function DashboardSidebar() {
                 </li>
               ))}
             </ul>
+            <DashboardUserAvatar user={user} logout={logout} />
           </nav>
-          <button onClick={logout} type="button" className="">
-            <LogOut color="red" />
-          </button>
-        </div>
       </aside>
     );
   }
 
   return (
     <aside className="dashboard__sidebar">
-      <Link to="/" className="dashboard__logo">
-        DOORZA
-      </Link>
-      <nav className="dashboard__nav">
+      <div className="logo px-md py-sm">
+        <Link to="/">.Doorza</Link>
+      </div>
+      <div className="separator"></div>
+      <nav className="dashboard__nav px-md">
         <ul className="dashboard__nav-list">
           {SIDEBAR_LINKS[user!.role].map(link => (
             <li key={link.label}>
@@ -55,10 +55,8 @@ function DashboardSidebar() {
             </li>
           ))}
         </ul>
+        <DashboardUserAvatar user={user} logout={logout} />
       </nav>
-      <button onClick={logout} type="button" className="dashboard__logout">
-        <LogOut /> Logout
-      </button>
     </aside>
   );
 }
