@@ -11,6 +11,7 @@
 
 .d-flex {
   display: flex;
+  align-items: center;
 }
 
 .flex-wrap {
@@ -263,38 +264,39 @@ $m-sizes: (
   md: $size-md,
   lg: $size-lg,
   xl: $size-xl,
+  aut: auto,
 );
 
 //MARGIN ALL SIDES
-@each $key, $value in $p-sizes {
+@each $key, $value in $m-sizes {
   .m-#{$key} {
     margin: $value;
   }
 }
 
 //MARGIN LEFT SIDE
-@each $key, $value in $p-sizes {
+@each $key, $value in $m-sizes {
   .ml-#{$key} {
     margin-left: $value;
   }
 }
 
 //MARGIN RIGHT SIDE
-@each $key, $value in $p-sizes {
+@each $key, $value in $m-sizes {
   .mr-#{$key} {
     margin-right: $value;
   }
 }
 
 //MARGIN TOP SIDE
-@each $key, $value in $p-sizes {
+@each $key, $value in $m-sizes {
   .mt-#{$key} {
     margin-top: $value;
   }
 }
 
 //MARGIN BOTTOM SIDE
-@each $key, $value in $p-sizes {
+@each $key, $value in $m-sizes {
   .mb-#{$key} {
     margin-bottom: $value;
   }
@@ -434,7 +436,7 @@ $gap-sizes: (
   border-radius: 10px;
 }
 
-.seprater {
+.separator {
   height: 1px;
   width: 100%;
   background-color: $border-color;
