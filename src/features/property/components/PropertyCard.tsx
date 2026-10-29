@@ -44,7 +44,7 @@ function PropertyCard({
       </div>
       <div className="property-card__content">
         <div className="property-card__header">
-          <p className="property-card__title">{title}</p>
+          <p className="property-card__title fw-bold">{title}</p>
           <p className="property-card__city">
             <MapPin size="15" />
             {city}
