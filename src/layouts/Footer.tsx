@@ -5,7 +5,7 @@ function Footer() {
     <footer className="footer">
       <div className="container footer__top">
         <div className='footer__left'>
-          <Link to="/" className="footer__logo">
+          <Link to="/" className="footer__logo f-bricolage">
             .Doorza
           </Link>
           <p className="fs-xxs">

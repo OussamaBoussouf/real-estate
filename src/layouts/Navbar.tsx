@@ -11,8 +11,8 @@ function Navbar() {
   return (
     <header className="navigation">
       <div className="container navigation__wrapper">
-        <div className="logo">
-          <NavLink to="/">DOORZA</NavLink>
+        <div className="logo f-bricolage">
+          <NavLink to="/">.Doorza</NavLink>
         </div>
         <div className="navigation__auth-group">
           {user && <UserMenuAvatar user={user} onLogout={logout} />}
